@@ -1,0 +1,6 @@
+node_modules/
+.cache/
+*.log
+
+# dist/ 要进版本库：jsDelivr / raw 的备用分发路径依赖它
+# （GitHub Pages 直接从仓库内容发布，jsDelivr 也只读仓库里的文件）

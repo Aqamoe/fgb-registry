@@ -1,0 +1,8 @@
+{
+  "title": "FaceGaze Bridge 模块库",
+  "description": "FaceGaze Bridge 原生模块的公开索引，数据来自各模块自己的 GitHub Release。",
+  "siteUrl": "https://fgb-registry.pages.dev",
+  "maxReleasePages": 3,
+  "maxAssetBytes": 67108864,
+  "cdnBase": "https://cdn.jsdelivr.net/gh/Aqamoe/fgb-registry@main/dist"
+}

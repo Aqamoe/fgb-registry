@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-31T10:26:10.720Z",
+  "generator": "fgb-registry",
+  "title": "FaceGaze Bridge 模块库",
+  "count": 1,
+  "modules": [
+    {
+      "ModuleId": "com.picogaze.pico-connect-face",
+      "ModuleName": "PICO Connect Face",
+      "AuthorName": "Aqamoe (光水)",
+      "Version": "0.1.0",
+      "ModuleDescription": "PICO 4 Pro/Enterprise face tracking straight from PICO Connect over UDP: 52 ARKit blendshapes mapped to Unified Expressions, plus eye openness and per-eye gaze. No VRCFT and no process injection required.",
+      "UsageInstructions": "1. 在 PICO 互联的 settings.json 中把 faceTrackingMode 设为 1、faceTrackingTransferProtocol 设为 2（旧版 VRCFT 用 1），改完重启 PICO 互联。2. 关闭 VRCFT：它和本模块抢同一个 UDP 端口。3. 在「模块」页把本模块设为启动并重启引擎；连接头显后模块卡片应显示活跃。",
+      "ModulePageUrl": "https://github.com/Aqamoe/FGB-PicoFaceModule",
+      "DownloadUrl": "https://github.com/Aqamoe/FGB-PicoFaceModule/releases/download/v0.1.0/pico-connect-face-0.1.0.zip",
+      "DllFileName": "pico-connect-face.dll",
+      "LastUpdated": "2026-10-31T08:56:27Z",
+      "Downloads": 2,
+      "AbiVersion": 2,
+      "Capabilities": "expression,eyes",
+      "RoleHint": "expression",
+      "Sha256": "cd7522527cbcd76675a7392d430dabbfdcc1dd33a9b10d74403df195b5f51c43",
+      "SizeBytes": 99131,
+      "Repo": "Aqamoe/FGB-PicoFaceModule",
+      "IconUrl": "https://cdn.jsdelivr.net/gh/Aqamoe/FGB-PicoFaceModule@main/module/icon.svg",
+      "Stars": 0,
+      "UpdatedAt": "2026-10-31T08:55:30Z",
+      "Prerelease": 0,
+      "Featured": 1
+    }
+  ]
+}

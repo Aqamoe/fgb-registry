@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FaceGaze Bridge 模块库</title>
+<style>
+  :root {
+    --bg: #f6f5f2;
+    --panel: #ffffff;
+    --text: #24242a;
+    --muted: #6b6b75;
+    --line: #e3e1da;
+    --accent: #185fa5;
+    --accent-soft: #e6f1fb;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 14px/1.6 -apple-system, "Segoe UI", "Microsoft YaHei", Roboto, sans-serif;
+  }
+  header {
+    padding: 28px 24px 18px;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  h1 { font-size: 20px; font-weight: 600; margin: 0 0 6px; }
+  .sub { color: var(--muted); font-size: 13px; }
+  .toolbar {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 18px 0 0;
+  }
+  input[type="search"], select {
+    padding: 8px 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--panel);
+    color: var(--text);
+    font: inherit;
+    outline: none;
+  }
+  input[type="search"] { flex: 1 1 260px; }
+  input[type="search"]:focus { border-color: var(--accent); }
+  main {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 24px 60px;
+    display: grid;
+    gap: 14px;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .card-top { display: flex; gap: 12px; align-items: flex-start; }
+  .icon {
+    width: 40px; height: 40px; flex: 0 0 40px;
+    border-radius: 8px;
+    background: var(--accent-soft);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .icon img { width: 100%; height: 100%; object-fit: contain; }
+  .name { font-weight: 600; font-size: 15px; }
+  .byline { color: var(--muted); font-size: 12px; }
+  .desc {
+    color: #46464f;
+    font-size: 13px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .meta {
+    display: flex; flex-wrap: wrap; gap: 6px 14px;
+    color: var(--muted); font-size: 12px;
+  }
+  .meta b { color: var(--text); font-weight: 600; }
+  .chips { display: flex; gap: 6px; flex-wrap: wrap; }
+  .chip {
+    background: var(--accent-soft);
+    color: #0c447c;
+    border-radius: 999px;
+    padding: 1px 9px;
+    font-size: 11px;
+  }
+  .actions { display: flex; gap: 10px; margin-top: auto; padding-top: 4px; }
+  a.btn {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 13px;
+    padding: 6px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    color: var(--text);
+  }
+  a.btn.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+  .state {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--muted);
+    padding: 40px 0;
+  }
+  footer {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+    color: var(--muted);
+    font-size: 12px;
+  }
+  code { background: #efeee9; padding: 1px 5px; border-radius: 4px; font-size: 12px; }
+</style>
+</head>
+<body>
+<header>
+  <h1 id="title">FaceGaze Bridge 模块库</h1>
+  <div class="sub" id="sub">每个条目都直接链到模块作者自己的 GitHub Release，下载计数取自 GitHub。</div>
+  <div class="toolbar">
+    <input id="q" type="search" placeholder="搜索模块名、作者、描述…" autocomplete="off">
+    <select id="sort">
+      <option value="downloads">按下载量</option>
+      <option value="updated">按更新时间</option>
+      <option value="name">按名称</option>
+    </select>
+  </div>
+</header>
+
+<main id="list"><div class="state">正在读取模块清单…</div></main>
+
+<footer>
+  安装：在 FaceGaze Bridge 里打开「模块库 → 原生模块」，或直接下载 zip 后手动安装。
+  开发者在 <code>modules/</code> 提交一个 JSON 就能上架，详见仓库 README。
+</footer>
+
+<script>
+const list = document.getElementById('list');
+const q = document.getElementById('q');
+const sort = document.getElementById('sort');
+let all = [];
+let meta = {};
+
+const fmt = (n) => (n >= 10000 ? (n / 10000).toFixed(1) + ' 万' : String(n ?? 0));
+const day = (iso) => {
+  if (!iso) return '—';
+  const d = new Date(iso);
+  return Number.isNaN(d.getTime()) ? '—' : d.toLocaleDateString('zh-CN');
+};
+
+function card(m) {
+  const el = document.createElement('article');
+  el.className = 'card';
+
+  const top = document.createElement('div');
+  top.className = 'card-top';
+
+  const icon = document.createElement('div');
+  icon.className = 'icon';
+  if (m.IconUrl) {
+    const img = document.createElement('img');
+    img.src = m.IconUrl;
+    img.alt = '';
+    img.loading = 'lazy';
+    img.onerror = () => { icon.textContent = (m.ModuleName || '?').slice(0, 1); };
+    icon.appendChild(img);
+  } else {
+    icon.textContent = (m.ModuleName || '?').slice(0, 1);
+  }
+
+  const head = document.createElement('div');
+  const name = document.createElement('div');
+  name.className = 'name';
+  name.textContent = m.ModuleName;
+  const by = document.createElement('div');
+  by.className = 'byline';
+  by.textContent = `${m.AuthorName} · v${m.Version}`;
+  head.append(name, by);
+  top.append(icon, head);
+
+  const desc = document.createElement('div');
+  desc.className = 'desc';
+  desc.textContent = m.ModuleDescription || '';
+
+  const metaEl = document.createElement('div');
+  metaEl.className = 'meta';
+  metaEl.innerHTML =
+    `<span>下载 <b>${fmt(m.Downloads)}</b></span>` +
+    `<span>更新 <b>${day(m.LastUpdated)}</b></span>` +
+    (m.SizeBytes ? `<span><b>${Math.round(m.SizeBytes / 1024)}</b> KB</span>` : '') +
+    (m.Stars ? `<span>★ <b>${m.Stars}</b></span>` : '');
+
+  const chips = document.createElement('div');
+  chips.className = 'chips';
+  for (const c of String(m.Capabilities || '').split(',').filter(Boolean)) {
+    const chip = document.createElement('span');
+    chip.className = 'chip';
+    chip.textContent = c;
+    chips.appendChild(chip);
+  }
+
+  const actions = document.createElement('div');
+  actions.className = 'actions';
+  const dl = document.createElement('a');
+  dl.className = 'btn primary';
+  dl.href = m.DownloadUrl;
+  dl.textContent = '下载';
+  const page = document.createElement('a');
+  page.className = 'btn';
+  page.href = m.ModulePageUrl;
+  page.textContent = '项目页';
+  page.rel = 'noopener';
+  actions.append(dl, page);
+
+  el.append(top, desc, metaEl, chips, actions);
+  return el;
+}
+
+function render() {
+  const kw = q.value.trim().toLowerCase();
+  const rows = all.filter((m) => {
+    if (!kw) return true;
+    return [m.ModuleName, m.AuthorName, m.ModuleDescription, m.Capabilities]
+      .join(' ').toLowerCase().includes(kw);
+  });
+
+  const by = sort.value;
+  rows.sort((a, b) => {
+    if (by === 'updated') return String(b.UpdatedAt || b.LastUpdated || '').localeCompare(String(a.UpdatedAt || a.LastUpdated || ''));
+    if (by === 'name') return String(a.ModuleName).localeCompare(String(b.ModuleName), 'zh');
+    return (b.Downloads ?? 0) - (a.Downloads ?? 0);
+  });
+
+  list.replaceChildren();
+  if (rows.length === 0) {
+    const empty = document.createElement('div');
+    empty.className = 'state';
+    empty.textContent = kw ? '没有匹配的模块' : '模块库还是空的';
+    list.appendChild(empty);
+    return;
+  }
+  for (const m of rows) list.appendChild(card(m));
+}
+
+fetch('./registry.json', { cache: 'no-cache' })
+  .then((r) => { if (!r.ok) throw new Error(r.status + ' ' + r.statusText); return r.json(); })
+  .then((data) => {
+    meta = data;
+    all = Array.isArray(data.modules) ? data.modules : [];
+    if (data.title) {
+      document.title = data.title;
+      document.getElementById('title').textContent = data.title;
+    }
+    if (data.generatedAt) {
+      document.getElementById('sub').textContent =
+        `每个条目都直接链到模块作者自己的 GitHub Release。快照时间 ${new Date(data.generatedAt).toLocaleString('zh-CN')}`;
+    }
+    render();
+  })
+  .catch((err) => {
+    list.replaceChildren();
+    const box = document.createElement('div');
+    box.className = 'state';
+    box.textContent = '读取 registry.json 失败：' + err.message;
+    list.appendChild(box);
+  });
+
+q.addEventListener('input', render);
+sort.addEventListener('change', render);
+</script>
+</body>
+</html>

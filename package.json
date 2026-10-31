@@ -1,0 +1,15 @@
+{
+  "name": "fgb-registry",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "FaceGaze Bridge 模块库：GitHub Release 聚合为宿主可直接消费的静态 JSON",
+  "scripts": {
+    "build": "node scripts/build-registry.mjs",
+    "build:strict": "node scripts/build-registry.mjs --strict",
+    "serve": "node scripts/serve.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

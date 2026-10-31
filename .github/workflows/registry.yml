@@ -1,0 +1,75 @@
+name: registry
+
+# 触发器分三类：
+#   schedule          兜底，每 6 小时对齐一次（Actions 的 cron 会延迟几分钟到十几分钟，别指望准点）
+#   repository_dispatch  模块发版 workflow 主动打过来，实时上架新版本
+#   push               改了清单/脚本/网页就立刻重建
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+  repository_dispatch:
+    types: [module-released]
+  push:
+    branches: [main]
+    paths:
+      - "modules/**"
+      - "scripts/**"
+      - "site/**"
+      - "config.json"
+      - ".github/workflows/registry.yml"
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: registry
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: 聚合 GitHub Release → dist/
+        env:
+          # 有 REGISTRY_TOKEN 就用它（5000 次/小时，且能读 private 仓库）；
+          # 没配就退回仓库自带的 GITHUB_TOKEN
+          GITHUB_TOKEN: ${{ secrets.REGISTRY_TOKEN || secrets.GITHUB_TOKEN }}
+        run: node scripts/build-registry.mjs --strict
+
+      - name: 把产物提交回仓库
+        id: commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dist
+          if git diff --cached --quiet; then
+            echo "产物没有变化"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            git commit -m "chore(registry): refresh [skip ci]"
+            git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
