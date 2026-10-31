@@ -45,5 +45,5 @@ createServer((req, res) => {
   createReadStream(target).pipe(res);
 }).listen(PORT, '127.0.0.1', () => {
   console.log(`registry 预览：http://127.0.0.1:${PORT}/`);
-  console.log(`宿主可用：FGB_MODULE_REGISTRY=http://127.0.0.1:${PORT}/modules.json`);
+  console.log(`宿主可用：FGB_MODULE_REGISTRY=http://127.0.0.1:${PORT}/registry.json`);
 });

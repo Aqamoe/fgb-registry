@@ -13,6 +13,8 @@
     --line: #e3e1da;
     --accent: #185fa5;
     --accent-soft: #e6f1fb;
+    --beta: #854f0b;
+    --beta-soft: #faeeda;
   }
   * { box-sizing: border-box; }
   body {
@@ -21,19 +23,10 @@
     color: var(--text);
     font: 14px/1.6 -apple-system, "Segoe UI", "Microsoft YaHei", Roboto, sans-serif;
   }
-  header {
-    padding: 28px 24px 18px;
-    max-width: 1080px;
-    margin: 0 auto;
-  }
+  header { padding: 28px 24px 16px; max-width: 1080px; margin: 0 auto; }
   h1 { font-size: 20px; font-weight: 600; margin: 0 0 6px; }
   .sub { color: var(--muted); font-size: 13px; }
-  .toolbar {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin: 18px 0 0;
-  }
+  .toolbar { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
   input[type="search"], select {
     padding: 8px 12px;
     border: 1px solid var(--line);
@@ -43,15 +36,15 @@
     font: inherit;
     outline: none;
   }
-  input[type="search"] { flex: 1 1 260px; }
-  input[type="search"]:focus { border-color: var(--accent); }
+  input[type="search"] { flex: 1 1 240px; }
+  input[type="search"]:focus, select:focus { border-color: var(--accent); }
   main {
     max-width: 1080px;
     margin: 0 auto;
     padding: 0 24px 60px;
     display: grid;
     gap: 14px;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   }
   .card {
     background: var(--panel);
@@ -69,22 +62,15 @@
     background: var(--accent-soft);
     display: flex; align-items: center; justify-content: center;
     overflow: hidden;
+    font-size: 16px;
+    color: var(--accent);
   }
   .icon img { width: 100%; height: 100%; object-fit: contain; }
   .name { font-weight: 600; font-size: 15px; }
   .byline { color: var(--muted); font-size: 12px; }
-  .desc {
-    color: #46464f;
-    font-size: 13px;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  .meta {
-    display: flex; flex-wrap: wrap; gap: 6px 14px;
-    color: var(--muted); font-size: 12px;
-  }
+  .byline a { color: inherit; text-decoration: none; border-bottom: 1px dotted var(--line); }
+  .desc { color: #46464f; font-size: 13px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 6px 14px; color: var(--muted); font-size: 12px; }
   .meta b { color: var(--text); font-weight: 600; }
   .chips { display: flex; gap: 6px; flex-wrap: wrap; }
   .chip {
@@ -93,6 +79,27 @@
     border-radius: 999px;
     padding: 1px 9px;
     font-size: 11px;
+  }
+  .chip.tag { background: #f1efe8; color: #5f5e5a; }
+  .chip.beta { background: var(--beta-soft); color: var(--beta); }
+  .chip.warn { background: #fcebeb; color: #a32d2d; }
+  details.versions { font-size: 12px; color: var(--muted); }
+  details.versions summary { cursor: pointer; color: var(--accent); }
+  .vrow {
+    display: flex; gap: 10px; align-items: baseline;
+    padding: 4px 0; border-top: 1px solid var(--line);
+  }
+  .vrow a { color: var(--accent); text-decoration: none; margin-left: auto; }
+  .notes {
+    white-space: pre-wrap;
+    font-size: 12px;
+    color: #5f5e5a;
+    background: #faf9f6;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 8px 10px;
+    max-height: 140px;
+    overflow: auto;
   }
   .actions { display: flex; gap: 10px; margin-top: auto; padding-top: 4px; }
   a.btn {
@@ -104,37 +111,33 @@
     border: 1px solid var(--line);
     color: var(--text);
   }
-  a.btn.primary {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #fff;
-  }
-  .state {
-    grid-column: 1 / -1;
-    text-align: center;
-    color: var(--muted);
-    padding: 40px 0;
-  }
-  footer {
-    max-width: 1080px;
-    margin: 0 auto;
-    padding: 0 24px 40px;
-    color: var(--muted);
-    font-size: 12px;
-  }
+  a.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .state { grid-column: 1 / -1; text-align: center; color: var(--muted); padding: 40px 0; }
+  footer { max-width: 1080px; margin: 0 auto; padding: 0 24px 40px; color: var(--muted); font-size: 12px; }
   code { background: #efeee9; padding: 1px 5px; border-radius: 4px; font-size: 12px; }
 </style>
 </head>
 <body>
 <header>
   <h1 id="title">FaceGaze Bridge 模块库</h1>
-  <div class="sub" id="sub">每个条目都直接链到模块作者自己的 GitHub Release，下载计数取自 GitHub。</div>
+  <div class="sub" id="sub">每个条目都直接链到模块作者自己的 GitHub Release。</div>
   <div class="toolbar">
-    <input id="q" type="search" placeholder="搜索模块名、作者、描述…" autocomplete="off">
+    <input id="q" type="search" placeholder="搜索模块名、作者、标签…" autocomplete="off">
+    <select id="cap">
+      <option value="">全部能力</option>
+      <option value="expression">expression</option>
+      <option value="eyes">eyes</option>
+      <option value="gaze">gaze</option>
+      <option value="head">head</option>
+    </select>
     <select id="sort">
       <option value="downloads">按下载量</option>
       <option value="updated">按更新时间</option>
       <option value="name">按名称</option>
+    </select>
+    <select id="lang">
+      <option value="zh-CN">中文</option>
+      <option value="en">English</option>
     </select>
   </div>
 </header>
@@ -142,143 +145,184 @@
 <main id="list"><div class="state">正在读取模块清单…</div></main>
 
 <footer>
-  安装：在 FaceGaze Bridge 里打开「模块库 → 原生模块」，或直接下载 zip 后手动安装。
-  开发者在 <code>modules/</code> 提交一个 JSON 就能上架，详见仓库 README。
+  安装：在 FaceGaze Bridge 里打开「模块库」，或下载 zip 后手动安装。数据由
+  <code>registry.json</code> 提供，包用 SHA-256 校验。开发者提交 <code>modules/*.json</code> 即可上架，详见 README。
 </footer>
 
 <script>
 const list = document.getElementById('list');
-const q = document.getElementById('q');
-const sort = document.getElementById('sort');
-let all = [];
-let meta = {};
+const qEl = document.getElementById('q');
+const capEl = document.getElementById('cap');
+const sortEl = document.getElementById('sort');
+const langEl = document.getElementById('lang');
+
+let modules = [];
+let generatedAt = '';
+let lang = 'zh-CN';
 
 const fmt = (n) => (n >= 10000 ? (n / 10000).toFixed(1) + ' 万' : String(n ?? 0));
 const day = (iso) => {
   if (!iso) return '—';
   const d = new Date(iso);
-  return Number.isNaN(d.getTime()) ? '—' : d.toLocaleDateString('zh-CN');
+  return Number.isNaN(d.getTime()) ? '—' : d.toLocaleDateString(lang === 'en' ? 'en-US' : 'zh-CN');
 };
+const kb = (bytes) => (bytes ? `${Math.max(1, Math.round(bytes / 1024))} KB` : '');
+
+function text(m, field) {
+  if (lang !== 'zh-CN') {
+    const v = m.i18n?.[lang]?.[field];
+    if (v) return v;
+  }
+  return m[field] || '';
+}
+
+function el(tag, className, content) {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (content != null) node.textContent = content;
+  return node;
+}
+
+function versionRow(v) {
+  const row = el('div', 'vrow');
+  row.append(el('span', null, 'v' + v.version));
+  if (v.channel === 'beta') row.append(el('span', 'chip beta', 'beta'));
+  row.append(el('span', null, day(v.publishedAt)));
+  row.append(el('span', null, fmt(v.downloads) + ' 次'));
+  const a = el('a', null, '下载');
+  a.href = v.downloadUrl;
+  row.append(a);
+  return row;
+}
 
 function card(m) {
-  const el = document.createElement('article');
-  el.className = 'card';
+  const node = el('article', 'card');
 
-  const top = document.createElement('div');
-  top.className = 'card-top';
-
-  const icon = document.createElement('div');
-  icon.className = 'icon';
-  if (m.IconUrl) {
+  const top = el('div', 'card-top');
+  const icon = el('div', 'icon', m.icon ? null : (m.name || '?').slice(0, 1));
+  if (m.icon) {
     const img = document.createElement('img');
-    img.src = m.IconUrl;
+    img.src = m.icon;
     img.alt = '';
     img.loading = 'lazy';
-    img.onerror = () => { icon.textContent = (m.ModuleName || '?').slice(0, 1); };
-    icon.appendChild(img);
-  } else {
-    icon.textContent = (m.ModuleName || '?').slice(0, 1);
+    img.onerror = () => { img.remove(); icon.textContent = (m.name || '?').slice(0, 1); };
+    icon.append(img);
   }
 
-  const head = document.createElement('div');
-  const name = document.createElement('div');
-  name.className = 'name';
-  name.textContent = m.ModuleName;
-  const by = document.createElement('div');
-  by.className = 'byline';
-  by.textContent = `${m.AuthorName} · v${m.Version}`;
-  head.append(name, by);
+  const head = el('div');
+  head.append(el('div', 'name', m.name));
+  const by = el('div', 'byline');
+  if (m.author?.url) {
+    const a = el('a', null, m.author.name);
+    a.href = m.author.url;
+    a.rel = 'noopener';
+    by.append(a);
+  } else {
+    by.append(document.createTextNode(m.author?.name || ''));
+  }
+  by.append(document.createTextNode(` · v${m.latest.version}`));
+  head.append(by);
   top.append(icon, head);
 
-  const desc = document.createElement('div');
-  desc.className = 'desc';
-  desc.textContent = m.ModuleDescription || '';
+  node.append(top);
+  node.append(el('div', 'desc', text(m, 'summary') || text(m, 'description')));
 
-  const metaEl = document.createElement('div');
-  metaEl.className = 'meta';
-  metaEl.innerHTML =
-    `<span>下载 <b>${fmt(m.Downloads)}</b></span>` +
-    `<span>更新 <b>${day(m.LastUpdated)}</b></span>` +
-    (m.SizeBytes ? `<span><b>${Math.round(m.SizeBytes / 1024)}</b> KB</span>` : '') +
-    (m.Stars ? `<span>★ <b>${m.Stars}</b></span>` : '');
+  const meta = el('div', 'meta');
+  const push = (label, value) => {
+    const span = el('span');
+    span.append(document.createTextNode(label + ' '));
+    span.append(el('b', null, value));
+    meta.append(span);
+  };
+  push('下载', fmt(m.stats?.downloads));
+  push('更新', day(m.latest.publishedAt));
+  if (m.latest.size) push('大小', kb(m.latest.size));
+  push('ABI', String(m.requires?.abi ?? '—'));
+  node.append(meta);
 
-  const chips = document.createElement('div');
-  chips.className = 'chips';
-  for (const c of String(m.Capabilities || '').split(',').filter(Boolean)) {
-    const chip = document.createElement('span');
-    chip.className = 'chip';
-    chip.textContent = c;
-    chips.appendChild(chip);
+  const chips = el('div', 'chips');
+  for (const c of m.capabilities || []) chips.append(el('span', 'chip', c));
+  if (m.channel === 'beta') chips.append(el('span', 'chip beta', 'beta'));
+  if (!m.verified) chips.append(el('span', 'chip warn', '未审核'));
+  if (m.archived) chips.append(el('span', 'chip warn', '已归档'));
+  for (const t of (m.tags || []).slice(0, 4)) chips.append(el('span', 'chip tag', t));
+  node.append(chips);
+
+  if (m.latest.notes) node.append(el('div', 'notes', m.latest.notes));
+
+  if (Array.isArray(m.versions) && m.versions.length > 1) {
+    const details = el('details', 'versions');
+    details.append(el('summary', null, `历史版本（${m.versions.length}）`));
+    for (const v of m.versions) details.append(versionRow(v));
+    node.append(details);
   }
 
-  const actions = document.createElement('div');
-  actions.className = 'actions';
-  const dl = document.createElement('a');
-  dl.className = 'btn primary';
-  dl.href = m.DownloadUrl;
-  dl.textContent = '下载';
-  const page = document.createElement('a');
-  page.className = 'btn';
-  page.href = m.ModulePageUrl;
-  page.textContent = '项目页';
+  const actions = el('div', 'actions');
+  const dl = el('a', 'btn primary', lang === 'en' ? 'Download' : '下载');
+  dl.href = m.latest.downloadUrl;
+  const page = el('a', 'btn', lang === 'en' ? 'Project' : '项目页');
+  page.href = m.homepage || `https://github.com/${m.repo}`;
   page.rel = 'noopener';
   actions.append(dl, page);
+  node.append(actions);
 
-  el.append(top, desc, metaEl, chips, actions);
-  return el;
+  return node;
 }
 
 function render() {
-  const kw = q.value.trim().toLowerCase();
-  const rows = all.filter((m) => {
+  const kw = qEl.value.trim().toLowerCase();
+  const cap = capEl.value;
+  const rows = modules.filter((m) => {
+    if (cap && !(m.capabilities || []).includes(cap)) return false;
     if (!kw) return true;
-    return [m.ModuleName, m.AuthorName, m.ModuleDescription, m.Capabilities]
+    return [m.name, m.author?.name, m.summary, m.description, (m.tags || []).join(' '), (m.capabilities || []).join(' ')]
       .join(' ').toLowerCase().includes(kw);
   });
 
-  const by = sort.value;
+  const by = sortEl.value;
   rows.sort((a, b) => {
-    if (by === 'updated') return String(b.UpdatedAt || b.LastUpdated || '').localeCompare(String(a.UpdatedAt || a.LastUpdated || ''));
-    if (by === 'name') return String(a.ModuleName).localeCompare(String(b.ModuleName), 'zh');
-    return (b.Downloads ?? 0) - (a.Downloads ?? 0);
+    if (a.featured !== b.featured) return a.featured ? -1 : 1;
+    if (by === 'updated') return String(b.latest.publishedAt || '').localeCompare(String(a.latest.publishedAt || ''));
+    if (by === 'name') return String(a.name).localeCompare(String(b.name), lang === 'en' ? 'en' : 'zh');
+    return (b.stats?.downloads ?? 0) - (a.stats?.downloads ?? 0);
   });
 
   list.replaceChildren();
   if (rows.length === 0) {
-    const empty = document.createElement('div');
-    empty.className = 'state';
-    empty.textContent = kw ? '没有匹配的模块' : '模块库还是空的';
-    list.appendChild(empty);
+    list.append(el('div', 'state', kw || cap ? '没有匹配的模块' : '模块库还是空的'));
     return;
   }
-  for (const m of rows) list.appendChild(card(m));
+  for (const m of rows) list.append(card(m));
 }
 
 fetch('./registry.json', { cache: 'no-cache' })
   .then((r) => { if (!r.ok) throw new Error(r.status + ' ' + r.statusText); return r.json(); })
   .then((data) => {
-    meta = data;
-    all = Array.isArray(data.modules) ? data.modules : [];
-    if (data.title) {
-      document.title = data.title;
-      document.getElementById('title').textContent = data.title;
+    if (data.schemaVersion !== 2) throw new Error('不认识的 schemaVersion: ' + data.schemaVersion);
+    modules = data.modules || [];
+    generatedAt = data.generatedAt || '';
+    if (data.registry?.title) {
+      document.title = data.registry.title;
+      document.getElementById('title').textContent = data.registry.title;
     }
-    if (data.generatedAt) {
-      document.getElementById('sub').textContent =
-        `每个条目都直接链到模块作者自己的 GitHub Release。快照时间 ${new Date(data.generatedAt).toLocaleString('zh-CN')}`;
-    }
+    const when = generatedAt ? new Date(generatedAt).toLocaleString(lang === 'en' ? 'en-US' : 'zh-CN') : '';
+    document.getElementById('sub').textContent =
+      `每个条目都直接链到模块作者自己的 GitHub Release，安装前用 SHA-256 校验。快照时间 ${when}`;
     render();
   })
   .catch((err) => {
     list.replaceChildren();
-    const box = document.createElement('div');
-    box.className = 'state';
-    box.textContent = '读取 registry.json 失败：' + err.message;
-    list.appendChild(box);
+    list.append(el('div', 'state', '读取 registry.json 失败：' + err.message));
   });
 
-q.addEventListener('input', render);
-sort.addEventListener('change', render);
+qEl.addEventListener('input', render);
+capEl.addEventListener('change', render);
+sortEl.addEventListener('change', render);
+langEl.addEventListener('change', () => {
+  lang = langEl.value;
+  document.documentElement.lang = lang;
+  render();
+});
 </script>
 </body>
 </html>

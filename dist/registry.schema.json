@@ -1,0 +1,167 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://aqamoe.github.io/fgb-registry/registry.schema.json",
+  "title": "FaceGaze Bridge 原生模块库",
+  "description": "由 fgb-registry 的 Actions 生成。宿主读这个文件渲染模块库页面，并按 sha256 校验下载包。",
+  "type": "object",
+  "required": ["schemaVersion", "generatedAt", "modules"],
+  "additionalProperties": true,
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": {
+      "const": 2,
+      "description": "结构版本。不认识的版本应当整体拒绝，而不是猜着解析。"
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "快照时间。内容没有变化时保持不变。"
+    },
+    "generator": { "type": "string" },
+    "registry": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "homepage": { "type": "string" }
+      }
+    },
+    "moduleCount": { "type": "integer" },
+    "modules": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/module" }
+    }
+  },
+  "definitions": {
+    "semver": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(?:-[0-9A-Za-z.-]+)?$",
+      "description": "严格 semver。宿主用语义比较判断「有没有更新」，不要比字符串。"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "下载包的 SHA-256（小写十六进制）。安装前必须校验，不匹配就中止。"
+    },
+    "version": {
+      "type": "object",
+      "required": ["version", "channel", "downloadUrl", "sha256", "size", "abiVersion"],
+      "additionalProperties": false,
+      "properties": {
+        "version": { "$ref": "#/definitions/semver" },
+        "channel": {
+          "enum": ["stable", "beta"],
+          "description": "beta 对应 GitHub 的 prerelease。宿主可以只显示 stable。"
+        },
+        "publishedAt": { "type": "string", "format": "date-time" },
+        "fileName": { "type": "string", "description": "资产文件名，用于展示和落盘命名。" },
+        "downloadUrl": { "type": "string", "format": "uri", "description": "https 直链。" },
+        "size": { "type": "integer", "minimum": 0, "description": "字节数，用于进度条。" },
+        "sha256": { "$ref": "#/definitions/sha256" },
+        "abiVersion": {
+          "type": "integer",
+          "description": "包内 fgb-native.json 的 AbiVersion。宿主据此判断能不能加载。"
+        },
+        "downloads": { "type": "integer", "minimum": 0 },
+        "notes": {
+          "type": "string",
+          "description": "该 Release 的更新说明（截断后的 markdown），可以直接显示在更新弹窗里。"
+        },
+        "releaseUrl": { "type": "string", "format": "uri" }
+      }
+    },
+    "localizedText": {
+      "type": "object",
+      "description": "按 BCP-47 语言标签覆盖 summary / description / usage。缺省回退到顶层字段。",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "summary": { "type": "string" },
+          "description": { "type": "string" },
+          "usage": { "type": "string" }
+        }
+      }
+    },
+    "module": {
+      "type": "object",
+      "required": ["id", "name", "author", "repo", "requires", "latest", "versions"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "必须与包内 fgb-native.json 的 ModuleId 一致；安装时用它判定「已安装」与「升级」。"
+        },
+        "name": { "type": "string" },
+        "author": {
+          "type": "object",
+          "required": ["name"],
+          "additionalProperties": false,
+          "properties": {
+            "name": { "type": "string" },
+            "url": { "type": "string", "format": "uri" }
+          }
+        },
+        "summary": { "type": "string", "description": "一句话，列表页用。" },
+        "description": { "type": "string", "description": "详情页用，允许 markdown。" },
+        "usage": { "type": "string", "description": "安装后怎么用、要注意什么。" },
+        "homepage": { "type": "string", "format": "uri" },
+        "repo": { "type": "string", "pattern": "^[\\w.-]+/[\\w.-]+$" },
+        "license": { "type": "string" },
+        "icon": { "type": "string", "format": "uri" },
+        "screenshots": { "type": "array", "items": { "type": "string", "format": "uri" } },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "capabilities": {
+          "type": "array",
+          "items": { "enum": ["expression", "eyes", "gaze", "head"] },
+          "description": "模块能提供的数据能力。宿主用它做角色分配与「选了它就不用再选别的」提示。"
+        },
+        "defaultRole": { "enum": ["expression", "eyes", "gaze", "head"] },
+        "requires": {
+          "type": "object",
+          "required": ["abi", "os", "arch"],
+          "additionalProperties": false,
+          "properties": {
+            "abi": { "type": "integer", "description": "宿主 ABI 版本，必须相等才能加载。" },
+            "minHostVersion": {
+              "type": "string",
+              "description": "宿主最低版本（semver）。不满足时列表里应显示「需要更新宿主」。"
+            },
+            "os": { "type": "array", "items": { "type": "string" }, "description": "如 [\"windows\"]" },
+            "arch": { "type": "array", "items": { "type": "string" }, "description": "如 [\"x64\"]" }
+          }
+        },
+        "channel": {
+          "enum": ["stable", "beta"],
+          "description": "latest 所在通道。宿主默认装 stable，用户勾选「接收测试版」后再看 beta。"
+        },
+        "featured": { "type": "boolean", "description": "编辑推荐，列表置顶。" },
+        "verified": {
+          "type": "boolean",
+          "description": "是否经过本库审核。false 表示来源可信度自负，宿主应给出提示。"
+        },
+        "archived": { "type": "boolean", "description": "上游仓库已归档，不再更新。" },
+        "stats": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "downloads": {
+              "type": "integer",
+              "description": "GitHub 的累计资产下载数。含构建自身校验下载，不精确等于安装量。"
+            },
+            "stars": { "type": "integer" }
+          }
+        },
+        "publishedAt": { "type": "string", "format": "date-time", "description": "最早可获取的版本时间。" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "仓库最近一次推送时间。" },
+        "latest": { "$ref": "#/definitions/version" },
+        "versions": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/version" },
+          "description": "按版本号倒序，最多 maxVersions 条。用于降级/回滚与 beta 选择。"
+        },
+        "i18n": { "$ref": "#/definitions/localizedText" }
+      }
+    }
+  }
+}
