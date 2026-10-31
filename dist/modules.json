@@ -11,6 +11,7 @@
     "DllFileName": "pico-connect-face.dll",
     "LastUpdated": "2026-10-31T08:56:27Z",
     "Downloads": 2,
+    "FileHash": "2727f8bf0c88ba3fb08eb39cc845c9bc",
     "AbiVersion": 2,
     "Capabilities": "expression,eyes",
     "RoleHint": "expression",
