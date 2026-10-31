@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-31T10:31:41.475Z",
+  "generatedAt": "2026-10-31T10:39:47.029Z",
   "generator": "fgb-registry",
   "title": "FaceGaze Bridge 模块库",
   "count": 1,
@@ -16,7 +16,7 @@
       "DownloadUrl": "https://github.com/Aqamoe/FGB-PicoFaceModule/releases/download/v0.1.0/pico-connect-face-0.1.0.zip",
       "DllFileName": "pico-connect-face.dll",
       "LastUpdated": "2026-10-31T08:56:27Z",
-      "Downloads": 2,
+      "Downloads": 4,
       "FileHash": "2727f8bf0c88ba3fb08eb39cc845c9bc",
       "AbiVersion": 2,
       "Capabilities": "expression,eyes",
