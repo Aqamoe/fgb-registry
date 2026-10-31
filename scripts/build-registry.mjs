@@ -347,6 +347,7 @@ async function main() {
   }
 
   let previousEntries = [];
+  let previousGeneratedAt = '';
   const previousPath = path.join(DIST, 'modules.json');
   if (existsSync(previousPath)) {
     try {
@@ -354,6 +355,15 @@ async function main() {
       if (Array.isArray(parsed)) previousEntries = parsed;
     } catch {
       // 上一版产物坏了就当没有，重新算哈希
+    }
+  }
+  const previousRegistryPath = path.join(DIST, 'registry.json');
+  if (existsSync(previousRegistryPath)) {
+    try {
+      const parsed = await readJson(previousRegistryPath);
+      if (parsed && typeof parsed.generatedAt === 'string') previousGeneratedAt = parsed.generatedAt;
+    } catch {
+      // 同上
     }
   }
   const hashCache = buildHashCache(previousEntries);
@@ -403,6 +413,14 @@ async function main() {
 
   await mkdir(DIST, { recursive: true });
 
+  // 内容没变就不动 generatedAt —— 否则每 6 小时的定时任务都会产出一个
+  // 只改了时间戳的空提交，把仓库历史灌满。
+  const unchanged =
+    previousEntries.length > 0 &&
+    JSON.stringify(previousEntries) === JSON.stringify(entries);
+  const generatedAt = unchanged && previousGeneratedAt ? previousGeneratedAt : new Date().toISOString();
+  if (unchanged) console.log('内容与上一版一致，保留 generatedAt（不会产生新提交）');
+
   const arrayJson = `${JSON.stringify(entries, null, 2)}\n`;
   await writeFile(path.join(DIST, 'modules.json'), arrayJson, 'utf8');
   await writeFile(path.join(DIST, 'modules'), arrayJson, 'utf8');
@@ -411,7 +429,7 @@ async function main() {
     `${JSON.stringify(
       {
         schemaVersion: 1,
-        generatedAt: new Date().toISOString(),
+        generatedAt,
         generator: 'fgb-registry',
         title: config.title ?? 'Module registry',
         count: entries.length,
