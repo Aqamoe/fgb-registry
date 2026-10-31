@@ -1,0 +1,9 @@
+# 统一用 LF：CI 跑在 Linux，本地是 Windows。
+# 不加这条的话，Windows 上的 autocrlf 会让每次改脚本都出现整文件 diff。
+* text=auto eol=lf
+
+# 别让 git 碰二进制
+*.zip binary
+*.dll binary
+*.png binary
+*.ico binary
