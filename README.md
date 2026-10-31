@@ -2,6 +2,9 @@
 
 FaceGaze Bridge 的**公开模块库索引**。纯 GitHub 仓库实现，不需要服务器、数据库或自建站点。
 
+- 线上地址：<https://aqamoe.github.io/fgb-registry/>
+- 宿主消费的接口：<https://aqamoe.github.io/fgb-registry/modules.json>
+
 它做的事只有一件：把 `modules/*.json` 里登记的 GitHub 仓库，聚合为一份宿主可以直接消费的
 静态 JSON，发布到 GitHub Pages。
 
@@ -127,8 +130,9 @@ $env:FGB_MODULE_REGISTRY = "https://fgb-registry.pages.dev/modules.json"
 "哈希不一致"直接拒绝安装。GitHub 只给 sha256 的 `digest`，所以 MD5 必须把资产下载下来算一次
 （脚本会用上一版 `dist/modules.json` 里的结果复用，不会每轮重复下）。
 
-**模块对象里不能有数组或嵌套对象。** 宿主的解析器是"对象套扁平标量"，遇到数组会让整条记录解析失败。
-所以 `capabilities` 在产物里被拼成 `"expression,eyes"`。
+**模块对象里只放扁平标量，别放数组或嵌套对象。** 宿主的解析器（`parse_registry_json`）遇到
+数组/对象会整段跳过、读不到内容，所以 `capabilities` 在产物里被拼成 `"expression,eyes"`。
+这一条是实现细节，不是协议限制，但保持扁平最省事。
 
 **`Downloads` 是累计快照，不等于安装量。** 通过 `releases/latest/download/...` 的跳转下载也会计入；
 但用户从第三方镜像拿包不会计入。真要统计安装量，得让客户端上报，那就需要后端了。
