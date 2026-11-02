@@ -1,0 +1,52 @@
+{
+  "id": "com.fgbbridge.meowface",
+  "name": "MeowFace",
+  "author": {
+    "name": "Aqamoe (光水)",
+    "url": "https://github.com/Aqamoe"
+  },
+  "repo": "Aqamoe/FGB-MeowFaceModule",
+  "homepage": "https://github.com/Aqamoe/FGB-MeowFaceModule",
+  "license": "Apache-2.0",
+  "summary": "MeowFace 手机面捕，直接读它发出的 UDP JSON，不需要 VRCFT。",
+  "description": "直接接收 MeowFace App 发到本机 12345 端口的 UDP JSON，输出 Unified Expressions 表情、睁眼度与逐眼方向。49 个 ARKit 风格系数按通用表映射，MeowFace 特有的近似项（微笑同时喂 CheekSquint、Dimple 等）单独列出。不注入任何进程，也不需要管理员权限。**本模块为社区未验证实现**，真机验收仍在进行。",
+  "usage": "1. 手机装好 MeowFace，在 App 里填这台 PC 的局域网 IP，端口默认 12345。2. 关闭 VRCFaceTracking：它和本模块抢同一个端口。3. 在「模块」页把 MeowFace 设为启动（角色 expression + eyes）并重启引擎。4. 未验证：请在 issue 里附手机型号、MeowFace 版本与现象，尤其是左右眼极化是否正确。",
+  "capabilities": [
+    "expression",
+    "eyes"
+  ],
+  "defaultRole": "expression",
+  "requires": {
+    "abi": 2,
+    "minHostVersion": "1.0.8",
+    "os": [
+      "windows"
+    ],
+    "arch": [
+      "x64"
+    ]
+  },
+  "tags": [
+    "meowface",
+    "android",
+    "ios",
+    "face-tracking",
+    "udp",
+    "untested",
+    "experimental"
+  ],
+  "entry": "meowface.dll",
+  "icon": "module/icon.svg",
+  "iconBranch": "main",
+  "tagPrefix": "v",
+  "assetPattern": "^meowface-.*\\.zip$",
+  "featured": false,
+  "verified": false,
+  "i18n": {
+    "en": {
+      "summary": "MeowFace face tracking straight over UDP — no VRCFT needed.",
+      "description": "Reads MeowFace's UDP JSON stream on port 12345 and outputs Unified Expressions shapes, eye openness and per-eye gaze. 49 ARKit-style coefficients go through the shared mapping table; MeowFace's own approximations are listed separately. No process injection, no admin rights. **Community-untested** — hardware acceptance is still pending.",
+      "usage": "1. Point MeowFace on your phone at this PC's LAN address (port 12345). 2. Quit VRCFaceTracking — it fights this module for the same port. 3. Set MeowFace as a startup instance (expression + eyes) and restart the engine. 4. Untested: please file an issue with phone model, MeowFace version and what you saw, especially left/right eye polarity."
+    }
+  }
+}

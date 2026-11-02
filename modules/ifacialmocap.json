@@ -1,0 +1,51 @@
+{
+  "id": "com.fgbbridge.ifacialmocap",
+  "name": "iFacialMocap",
+  "author": {
+    "name": "Aqamoe (光水)",
+    "url": "https://github.com/Aqamoe"
+  },
+  "repo": "Aqamoe/FGB-iFacialMocapModule",
+  "homepage": "https://github.com/Aqamoe/FGB-iFacialMocapModule",
+  "license": "Apache-2.0",
+  "summary": "iFacialMocap（iPhone）面捕，直接读 UDP 文本流并自动回握手包，不需要 VRCFT。",
+  "description": "接收 iFacialMocap App 发到本机 49983 端口的 ASCII 数据报，输出 Unified Expressions 表情、睁眼度与逐眼方向。上游按镜像视角命名，`*_L` 对应我们的右侧，模块在写映射表之前先归一到统一口径；收到来源地址后会按协议回一次握手包。52 个 ARKit 系数走通用映射，眼动角度存在时用真实角度覆盖方向。不注入进程，也不需要管理员权限。**本模块为社区未验证实现**。",
+  "usage": "1. iPhone 与 PC 在同一 WiFi，在 iFacialMocap 里填 PC 的局域网 IP，端口 49983。2. 关闭 VRCFaceTracking：它和本模块抢同一个端口。3. 在「模块」页把 iFacialMocap 设为启动并重启引擎；卡片应提示「已向 <IP> 回握手包」。4. 未验证：特别请确认真眨左眼时动的是哪一路的睁眼度，反了请提 issue。",
+  "capabilities": [
+    "expression",
+    "eyes"
+  ],
+  "defaultRole": "expression",
+  "requires": {
+    "abi": 2,
+    "minHostVersion": "1.0.8",
+    "os": [
+      "windows"
+    ],
+    "arch": [
+      "x64"
+    ]
+  },
+  "tags": [
+    "ifacialmocap",
+    "iphone",
+    "face-tracking",
+    "udp",
+    "untested",
+    "experimental"
+  ],
+  "entry": "ifacialmocap.dll",
+  "icon": "module/icon.svg",
+  "iconBranch": "main",
+  "tagPrefix": "v",
+  "assetPattern": "^ifacialmocap-.*\\.zip$",
+  "featured": false,
+  "verified": false,
+  "i18n": {
+    "en": {
+      "summary": "iFacialMocap (iPhone) over UDP, handshake included — no VRCFT needed.",
+      "description": "Reads iFacialMocap's ASCII UDP stream on port 49983 and outputs Unified Expressions shapes, eye openness and per-eye gaze. The source names its shapes mirrored (`*_L` is our right side), so the module normalises that before mapping, and replies with the protocol handshake once a sender appears. 52 ARKit coefficients go through the shared table; real eye angles override the inferred direction when present. **Community-untested.**",
+      "usage": "1. Put the iPhone and PC on the same Wi-Fi and point iFacialMocap at this PC's LAN address (port 49983). 2. Quit VRCFaceTracking — same port. 3. Enable iFacialMocap as a startup instance and restart the engine; the card should report the handshake reply. 4. Untested: check which eye's openness moves when you blink your left eye, and file an issue if it's flipped."
+    }
+  }
+}

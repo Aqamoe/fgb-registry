@@ -1,0 +1,52 @@
+{
+  "id": "com.fgbbridge.livelink",
+  "name": "LiveLink",
+  "author": {
+    "name": "Aqamoe (光水)",
+    "url": "https://github.com/Aqamoe"
+  },
+  "repo": "Aqamoe/FGB-LiveLinkModule",
+  "homepage": "https://github.com/Aqamoe/FGB-LiveLinkModule",
+  "license": "Apache-2.0",
+  "summary": "Unreal LiveLink Face（iPhone）面捕，直接读 UDP 大端 float，不需要 VRCFT。",
+  "description": "接收 LiveLink Face App 发到本机 11111 端口的数据报，取包尾 244 字节按大端解出 float 序列，映射成 Unified Expressions 表情、睁眼度与逐眼方向。字段名表按上游顺序建立，识别数不符时整帧拒绝并在日志里说明，不会字段错位后静默输出错表情；变长包头、截断包与 NaN 都有明确处理。眼动角度字段存在时用真实角度覆盖方向（置信度 0.85）。头姿已解析但本期不输出（单位与轴向未确认）。**本模块为社区未验证实现**。",
+  "usage": "1. iPhone 上用 Unreal LiveLink Face App，把 PC 的局域网 IP 填进去（端口 11111）。2. 关闭 VRCFaceTracking：它和本模块抢同一个端口。3. 在「模块」页把 LiveLink 设为启动并重启引擎。4. 未验证：头姿暂不输出；请在 issue 里附 iPhone 机型、App 与 Unreal 版本。",
+  "capabilities": [
+    "expression",
+    "eyes"
+  ],
+  "defaultRole": "expression",
+  "requires": {
+    "abi": 2,
+    "minHostVersion": "1.0.8",
+    "os": [
+      "windows"
+    ],
+    "arch": [
+      "x64"
+    ]
+  },
+  "tags": [
+    "livelink",
+    "unreal",
+    "iphone",
+    "face-tracking",
+    "udp",
+    "untested",
+    "experimental"
+  ],
+  "entry": "livelink.dll",
+  "icon": "module/icon.svg",
+  "iconBranch": "main",
+  "tagPrefix": "v",
+  "assetPattern": "^livelink-.*\\.zip$",
+  "featured": false,
+  "verified": false,
+  "i18n": {
+    "en": {
+      "summary": "Unreal LiveLink Face (iPhone) over UDP big-endian floats — no VRCFT needed.",
+      "description": "Reads LiveLink Face packets on port 11111, parses the trailing 244 bytes as big-endian floats and outputs Unified Expressions shapes, eye openness and per-eye gaze. The field table follows the upstream order and rejects a whole frame when the parsed count doesn't match, so misaligned fields never silently become wrong shapes. Variable-length headers, short packets and NaNs are handled explicitly. Real eye angles override the inferred direction when present (confidence 0.85). Head pose is parsed but not emitted yet (units and axes unconfirmed). **Community-untested.**",
+      "usage": "1. In LiveLink Face on your iPhone, point at this PC's LAN address (port 11111). 2. Quit VRCFaceTracking — same port. 3. Enable LiveLink as a startup instance and restart the engine. 4. Untested: head pose is intentionally not emitted; please include iPhone model and App/Unreal versions in issues."
+    }
+  }
+}
