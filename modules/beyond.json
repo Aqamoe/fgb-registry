@@ -1,0 +1,51 @@
+{
+  "id": "com.fgbbridge.beyond",
+  "name": "Bigscreen Beyond",
+  "author": {
+    "name": "Aqamoe (光水)",
+    "url": "https://github.com/Aqamoe"
+  },
+  "repo": "Aqamoe/FGB-BeyondModule",
+  "homepage": "https://github.com/Aqamoe/FGB-BeyondModule",
+  "license": "Apache-2.0",
+  "summary": "Bigscreen Beyond 眼追，读官方眼动应用写的 VRCFT 兼容共享内存，不需要 VRCFT。",
+  "description": "结构按 pack 8 共 64 字节：9 个 float 的双眼/合成方向、Confidence、int64 时间戳、int32 IsValid、左右闭眼量。该格式无官方文档、属社区逆向，字段语义与各实现间分歧都写进 docs/protocol.md 并逐项标注。IsValid≠1 时零输出、绝不伪造 (0,0,-1)；置信度不参与「写不写」的裁决，只有 IsValid 参与。",
+  "usage": "1. 装 Bigscreen 官方眼追应用并勾选 VRCFT 接收。2. 关闭 VRCFaceTracking。3. 设为启动，gaze 给渲染、eyes 给头像。4. 未验证：z 符号、时间戳基准、Confidence 量程。",
+  "capabilities": [
+    "eyes",
+    "gaze"
+  ],
+  "defaultRole": "eyes",
+  "requires": {
+    "abi": 2,
+    "minHostVersion": "1.0.8",
+    "os": [
+      "windows"
+    ],
+    "arch": [
+      "x64"
+    ]
+  },
+  "tags": [
+    "bigscreen",
+    "beyond",
+    "eye-tracking",
+    "shared-memory",
+    "untested",
+    "experimental"
+  ],
+  "entry": "beyond.dll",
+  "icon": "module/icon.svg",
+  "iconBranch": "main",
+  "tagPrefix": "v",
+  "assetPattern": "^beyond-.*\\.zip$",
+  "featured": false,
+  "verified": false,
+  "i18n": {
+    "en": {
+      "summary": "Bigscreen Beyond eye tracking via the VRCFT-compatible memory its official app writes — no VRCFT.",
+      "description": "A 64-byte pack-8 layout: nine floats of direction, confidence, int64 timestamp, int32 IsValid and per-eye closure. There is no official spec — this is community reverse engineering, so meanings and disagreements between implementations are recorded per item. Nothing is emitted unless IsValid is 1, and only IsValid decides emission, never confidence.",
+      "usage": "1. Install Bigscreen's eye-tracking app and tick the VRCFT receiver. 2. Quit VRCFaceTracking. 3. Enable the module. 4. Untested: z sign, timestamp clock base, confidence range."
+    }
+  }
+}
