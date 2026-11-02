@@ -1,0 +1,52 @@
+{
+  "id": "com.fgbbridge.alvr",
+  "name": "ALVR",
+  "author": {
+    "name": "Aqamoe (光水)",
+    "url": "https://github.com/Aqamoe"
+  },
+  "repo": "Aqamoe/FGB-ALVRModule",
+  "homepage": "https://github.com/Aqamoe/FGB-ALVRModule",
+  "license": "Apache-2.0",
+  "summary": "ALVR 串流的 Quest 眼动/面捕，直接读它发出的 UDP 追踪包，不需要 VRCFT。",
+  "description": "接收 ALVR 服务端按 VRCFT 兼容格式发到本机 41463 端口的追踪包：8 字节前缀 + 小端 float 数组（EyesQuat / CombQuat / Face2Fb / FacePico / EyesHtc / LipHtc）。字段长度与含义按 ALVR 发送端源码逐项核对，与老接收端不一致的地方（FacePico 实为 52 项、接收端按 72 读）以发送端为准，多余字节不猜、不伪造。不注入进程，也不需要管理员权限。",
+  "usage": "1. ALVR 服务端设置里把 Eye and face tracking 设为 VRCFaceTracking。2. 关闭 VRCFaceTracking：它和本模块抢同一个 UDP 端口。3. 在「模块」页把 ALVR 设为启动并重启引擎。4. 未验证：真机极化与平滑未逐项比对，异常请附 ALVR 版本与头显型号。",
+  "capabilities": [
+    "expression",
+    "eyes"
+  ],
+  "defaultRole": "expression",
+  "requires": {
+    "abi": 2,
+    "minHostVersion": "1.0.8",
+    "os": [
+      "windows"
+    ],
+    "arch": [
+      "x64"
+    ]
+  },
+  "tags": [
+    "alvr",
+    "quest",
+    "openxr",
+    "face-tracking",
+    "udp",
+    "untested",
+    "experimental"
+  ],
+  "entry": "alvr.dll",
+  "icon": "module/icon.svg",
+  "iconBranch": "main",
+  "tagPrefix": "v",
+  "assetPattern": "^alvr-.*\\.zip$",
+  "featured": false,
+  "verified": false,
+  "i18n": {
+    "en": {
+      "summary": "ALVR eye/face tracking straight over UDP — no VRCFT needed.",
+      "description": "Reads ALVR server's VRCFT-compatible packets on port 41463: an 8-byte ASCII prefix followed by little-endian floats (EyesQuat / CombQuat / Face2Fb / FacePico / EyesHtc / LipHtc). Field lengths were checked against ALVR's sending side, so where the older receiver disagrees (FacePico is 52 values, the receiver reads 72) this follows the sender and never invents the extra bytes. No injection, no admin rights.",
+      "usage": "1. In ALVR's settings set Eye and face tracking to VRCFaceTracking. 2. Quit VRCFaceTracking — it uses the same UDP port. 3. Enable ALVR as a startup instance and restart the engine. 4. Untested: eye polarity and smoothing aren't device-verified; include your ALVR version and headset when reporting issues."
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "id": "com.fgbbridge.foxyface",
+  "name": "FoxyFace",
+  "author": {
+    "name": "Aqamoe (光水)",
+    "url": "https://github.com/Aqamoe"
+  },
+  "repo": "Aqamoe/FGB-FoxyFaceModule",
+  "homepage": "https://github.com/Aqamoe/FGB-FoxyFaceModule",
+  "license": "Apache-2.0",
+  "summary": "用摄像头面捕的 FoxyFace，直接读它的 UDP JSON 输出，不需要 VRCFT。",
+  "description": "接收 FoxyFace 的 VRCFT 输出（UDP JSON，默认 127.0.0.1:25747）。它的键名就是 Unified Expressions 形状名，模块按名向宿主查下标后直接写入，不硬编码顺序；未知键跳过并计数。能识别 FoxyFace 空闲时发的 PingPacket 心跳，不会把它当成表情数据，也不会误判成断流。Head* 字段单位未确认，本期不接入。",
+  "usage": "1. 在 FoxyFace 的 VRCFT 输出里把目标填 127.0.0.1、端口 25747（它靠监听 57130 广播自动发现，FaceGaze Bridge 不广播，所以要手填）。2. 关闭 VRCFaceTracking 避免抢端口。3. 在「模块」页设为启动并重启引擎。4. 未验证：EyeX/EyeY 的值域上限与极化仍需真机确认。",
+  "capabilities": [
+    "expression",
+    "eyes"
+  ],
+  "defaultRole": "expression",
+  "requires": {
+    "abi": 2,
+    "minHostVersion": "1.0.8",
+    "os": [
+      "windows"
+    ],
+    "arch": [
+      "x64"
+    ]
+  },
+  "tags": [
+    "foxyface",
+    "webcam",
+    "face-tracking",
+    "udp",
+    "json",
+    "untested",
+    "experimental"
+  ],
+  "entry": "foxyface.dll",
+  "icon": "module/icon.svg",
+  "iconBranch": "main",
+  "tagPrefix": "v",
+  "assetPattern": "^foxyface-.*\\.zip$",
+  "featured": false,
+  "verified": false,
+  "i18n": {
+    "en": {
+      "summary": "FoxyFace webcam tracking over UDP JSON — no VRCFT needed.",
+      "description": "Reads FoxyFace's VRCFT output (UDP JSON, 127.0.0.1:25747 by default). Its keys already are Unified Expressions shape names, so the module resolves them by name instead of hardcoding order, and unknown keys are counted and skipped. FoxyFace's idle PingPacket heartbeat is recognised — it neither becomes expression data nor a false stall. Head* fields are parsed but not emitted because their units are unconfirmed.",
+      "usage": "1. Set FoxyFace's VRCFT target to 127.0.0.1 port 25747 manually — it auto-discovers via a 57130 broadcast listener, and FaceGaze Bridge does not broadcast. 2. Quit VRCFaceTracking (same port). 3. Enable the module and restart the engine. 4. Untested: EyeX/EyeY range and polarity still need hardware checks."
+    }
+  }
+}

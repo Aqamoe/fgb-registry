@@ -1,0 +1,54 @@
+{
+  "id": "com.fgbbridge.steamlink",
+  "name": "Steam Link",
+  "author": {
+    "name": "Aqamoe (光水)",
+    "url": "https://github.com/Aqamoe"
+  },
+  "repo": "Aqamoe/FGB-SteamLinkModule",
+  "homepage": "https://github.com/Aqamoe/FGB-SteamLinkModule",
+  "license": "Apache-2.0",
+  "summary": "Steam Link 在 Meta Quest 上的眼动/面捕，直接读它转发的 OSC，不需要 VRCFT。",
+  "description": "接收本机 Steam Link PC 客户端转发的 OSC（UDP 9015，仅绑 127.0.0.1）。56 条 /sl/xrfb/facew 地址映射到 Unified Expressions；EyesClosedL/R 与 LidTightener 给睁眼度；/sl/eyeTrackedGazePoint 是 **3 float 的三维注视点**（不是 2D 屏幕点），归一化成 -Z 前的方向射线，因此从不置 FGB_ATTR_POINT_VIEWPORT。Valve 未公开该协议，字段来自逆向，且「分包」表现为多个各自完整可解析的 bundle，靠跨包逐地址累积重组。",
+  "usage": "1. Steam Link 里启用眼动/面捕并允许 VRCFT 数据格式。2. 关闭 VRCFaceTracking（同端口）。3. 在「模块」页设为启动，渲染注视给 gaze、头像眼睛给 eyes。4. 未验证：注视点的绝对坐标系与单位、facew 值域、facec 语义与 Tongue 扩展均需真机确认。",
+  "capabilities": [
+    "expression",
+    "eyes",
+    "gaze"
+  ],
+  "defaultRole": "expression",
+  "requires": {
+    "abi": 2,
+    "minHostVersion": "1.0.8",
+    "os": [
+      "windows"
+    ],
+    "arch": [
+      "x64"
+    ]
+  },
+  "tags": [
+    "steam-link",
+    "quest",
+    "face-tracking",
+    "eye-tracking",
+    "osc",
+    "udp",
+    "untested",
+    "experimental"
+  ],
+  "entry": "steamlink.dll",
+  "icon": "module/icon.svg",
+  "iconBranch": "main",
+  "tagPrefix": "v",
+  "assetPattern": "^steamlink-.*\\.zip$",
+  "featured": false,
+  "verified": false,
+  "i18n": {
+    "en": {
+      "summary": "Steam Link eye and face tracking on Meta Quest, read straight from its OSC forwarder.",
+      "description": "Reads OSC forwarded by the local Steam Link PC client (UDP 9015, bound to 127.0.0.1 only). 56 /sl/xrfb/facew addresses map onto Unified Expressions; EyesClosedL/R plus LidTightener drive openness; /sl/eyeTrackedGazePoint turns out to be a **3-float 3D gaze point**, not a 2D screen point, so it is normalised into a -Z-forward ray and FGB_ATTR_POINT_VIEWPORT is never set. Valve documents none of this: the fields are reverse-engineered, and 'splitting' arrives as several independently parseable bundles reassembled per address.",
+      "usage": "1. In Steam Link enable eye/face tracking and allow the VRCFT data format. 2. Quit VRCFaceTracking (same port). 3. Enable the module; give gaze to the render channel and eyes to the avatar. 4. Untested: the gaze point's absolute frame and units, the facew value range, facec semantics and the Tongue extension all need hardware verification."
+    }
+  }
+}

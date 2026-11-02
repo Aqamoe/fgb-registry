@@ -1,0 +1,52 @@
+{
+  "id": "com.fgbbridge.etvr",
+  "name": "EyeTrackVR",
+  "author": {
+    "name": "Aqamoe (光水)",
+    "url": "https://github.com/Aqamoe"
+  },
+  "repo": "Aqamoe/FGB-ETVRModule",
+  "homepage": "https://github.com/Aqamoe/FGB-ETVRModule",
+  "license": "Apache-2.0",
+  "summary": "EyeTrackVR 自制眼追的 OSC 输出，直接进 eyes / gaze 通道，不需要 VRCFT。",
+  "description": "接收 EyeTrackVR 的 OSC 数据（默认监听 8889）。眼动单位是 VRCFT 的归一化 tan 空间（+x 右、+y 上，±1 为标定 FOV 边缘），不是角度；openness 由来源直接给出，不做 1-blink 反推。只声明真正确认能填的通道：表情是模拟值、头姿与视口标定都没有，所以都不声明；某字段这帧没收到就不置属性位，绝不伪造正前方。含与上游参数一致的 1€ 滤波。",
+  "usage": "1. 在 EyeTrackVR 里把 OSC 输出目标设为本机 IP，端口 8889（VRCFT 默认发 9000，需对齐）。2. 关闭 VRCFaceTracking。3. 在「模块」页设为启动，渲染注视角色给 gaze，头像眼睛给 eyes。4. 未验证：±1 对应的真实标定半角、V1 双眼共享 Y 在快速垂直眼动下的表现均需确认。",
+  "capabilities": [
+    "eyes",
+    "gaze"
+  ],
+  "defaultRole": "eyes",
+  "requires": {
+    "abi": 2,
+    "minHostVersion": "1.0.8",
+    "os": [
+      "windows"
+    ],
+    "arch": [
+      "x64"
+    ]
+  },
+  "tags": [
+    "etvr",
+    "eye-tracking",
+    "open-source-hardware",
+    "osc",
+    "udp",
+    "untested",
+    "experimental"
+  ],
+  "entry": "etvr.dll",
+  "icon": "module/icon.svg",
+  "iconBranch": "main",
+  "tagPrefix": "v",
+  "assetPattern": "^etvr-.*\\.zip$",
+  "featured": false,
+  "verified": false,
+  "i18n": {
+    "en": {
+      "summary": "EyeTrackVR open-source eye tracking over OSC, feeding the eyes and gaze channels.",
+      "description": "Reads EyeTrackVR's OSC stream (listens on 8889 by default). Angles arrive in VRCFT's normalised tan space (+x right, +y up, ±1 at the calibration FOV edge), not degrees, and openness comes from the source directly rather than as 1-blink. Only channels this module can genuinely fill are declared — simulated expressions, head pose and viewport calibration are not. A field absent from a packet leaves its attribute unset instead of faking forward gaze. Includes a 1€ filter matching upstream parameters.",
+      "usage": "1. Point EyeTrackVR's OSC output at this PC on port 8889 (it defaults to 9000, so align them). 2. Quit VRCFaceTracking. 3. Enable the module; assign gaze to the render channel and eyes to the avatar. 4. Untested: what ±1 maps to in your calibration, and V1's shared vertical value under fast eye movement, both need verification."
+    }
+  }
+}

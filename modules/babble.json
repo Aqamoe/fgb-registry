@@ -1,0 +1,53 @@
+{
+  "id": "com.fgbbridge.babble",
+  "name": "Project Babble",
+  "author": {
+    "name": "Aqamoe (光水)",
+    "url": "https://github.com/Aqamoe"
+  },
+  "repo": "Aqamoe/FGB-BabbleModule",
+  "homepage": "https://github.com/Aqamoe/FGB-BabbleModule",
+  "license": "Apache-2.0",
+  "summary": "Project Babble / Baballonia 摄像头面捕，直接读 OSC，不需要 VRCFT。",
+  "description": "接收 Baballonia 的 OSC over UDP 输出（默认 127.0.0.1:8888），支持单消息与 #bundle 分包。45 条面部地址映射到 Unified Expressions；眼通道是 Baballonia 独有的 PascalCase /LeftEyeX、/LeftEyeY、/LeftEyeLid 等 6 条。归档的 VRCFT-Babble 并不发送这些眼地址，因此本模块以活跃上游 Baballonia 为准，风险已在仓库 README 说明。头姿与瞳孔不提供。",
+  "usage": "1. 在 Baballonia 里启用 VRCFT / OSC 输出，目标填本机地址与端口 8888。2. 关闭 VRCFaceTracking 避免抢端口。3. 在「模块」页设为启动并重启引擎。4. 未验证：眼动地址的极化仅由代码推断，gaze 置信度压到 0.5，请真机确认。",
+  "capabilities": [
+    "expression",
+    "eyes"
+  ],
+  "defaultRole": "expression",
+  "requires": {
+    "abi": 2,
+    "minHostVersion": "1.0.8",
+    "os": [
+      "windows"
+    ],
+    "arch": [
+      "x64"
+    ]
+  },
+  "tags": [
+    "babble",
+    "baballonia",
+    "webcam",
+    "face-tracking",
+    "osc",
+    "udp",
+    "untested",
+    "experimental"
+  ],
+  "entry": "babble.dll",
+  "icon": "module/icon.svg",
+  "iconBranch": "main",
+  "tagPrefix": "v",
+  "assetPattern": "^babble-.*\\.zip$",
+  "featured": false,
+  "verified": false,
+  "i18n": {
+    "en": {
+      "summary": "Project Babble / Baballonia webcam tracking over OSC — no VRCFT needed.",
+      "description": "Reads Baballonia's OSC-over-UDP output (127.0.0.1:8888 by default) including #bundle splitting. 45 face addresses map onto Unified Expressions; the eye channel uses Baballonia's own PascalCase addresses (/LeftEyeX, /LeftEyeY, /LeftEyeLid, ...). The archived VRCFT-Babble module never sent those eye addresses, so this follows the active upstream and the risk is documented in the repo README. No head pose, no pupil.",
+      "usage": "1. Enable VRCFT / OSC output in Baballonia, pointed at this PC on port 8888. 2. Quit VRCFaceTracking (same port). 3. Enable the module and restart the engine. 4. Untested: eye address polarity is inferred from code only, confidence capped at 0.5 — please confirm on hardware."
+    }
+  }
+}
