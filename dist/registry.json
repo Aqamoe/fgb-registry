@@ -1,14 +1,14 @@
 {
   "$schema": "registry.schema.json",
   "schemaVersion": 2,
-  "generatedAt": "2026-10-31T21:42:54.379Z",
+  "generatedAt": "2026-11-02T09:43:53.758Z",
   "generator": "fgb-registry/2.0.0",
   "registry": {
     "title": "FaceGaze Bridge 模块库",
     "description": "FaceGaze Bridge 原生模块的公开索引，数据来自各模块自己的 GitHub Release。",
     "homepage": "https://aqamoe.github.io/fgb-registry/"
   },
-  "moduleCount": 1,
+  "moduleCount": 4,
   "modules": [
     {
       "id": "com.picogaze.pico-connect-face",
@@ -88,6 +88,257 @@
           "summary": "PICO 4 Pro/Enterprise face tracking straight from PICO Connect over UDP — no VRCFT needed.",
           "description": "Reads the UDP face-tracking stream that PICO Connect already sends, and outputs Unified Expressions shapes plus eye openness and per-eye gaze. 52 ARKit coefficients map to 58 shapes. No process injection, no admin rights.",
           "usage": "1. In PICO Connect's settings.json set faceTrackingMode to 1 and faceTrackingTransferProtocol to 2 (use 1 for the legacy VRCFT protocol), then restart PICO Connect. 2. Quit VRCFaceTracking — it fights this module for the same UDP port. 3. Set the module as active on the Modules page and restart the engine; the card should turn active once the headset is connected."
+        }
+      }
+    },
+    {
+      "id": "com.fgbbridge.ifacialmocap",
+      "name": "iFacialMocap",
+      "author": {
+        "name": "Aqamoe (光水)",
+        "url": "https://github.com/Aqamoe"
+      },
+      "summary": "iFacialMocap（iPhone）面捕，直接读 UDP 文本流并自动回握手包，不需要 VRCFT。",
+      "description": "接收 iFacialMocap App 发到本机 49983 端口的 ASCII 数据报，输出 Unified Expressions 表情、睁眼度与逐眼方向。上游按镜像视角命名，`*_L` 对应我们的右侧，模块在写映射表之前先归一到统一口径；收到来源地址后会按协议回一次握手包。52 个 ARKit 系数走通用映射，眼动角度存在时用真实角度覆盖方向。不注入进程，也不需要管理员权限。**本模块为社区未验证实现**。",
+      "usage": "1. iPhone 与 PC 在同一 WiFi，在 iFacialMocap 里填 PC 的局域网 IP，端口 49983。2. 关闭 VRCFaceTracking：它和本模块抢同一个端口。3. 在「模块」页把 iFacialMocap 设为启动并重启引擎；卡片应提示「已向 <IP> 回握手包」。4. 未验证：特别请确认真眨左眼时动的是哪一路的睁眼度，反了请提 issue。",
+      "homepage": "https://github.com/Aqamoe/FGB-iFacialMocapModule",
+      "repo": "Aqamoe/FGB-iFacialMocapModule",
+      "license": "Apache-2.0",
+      "icon": "https://cdn.jsdelivr.net/gh/Aqamoe/FGB-iFacialMocapModule@main/module/icon.svg",
+      "tags": [
+        "ifacialmocap",
+        "iphone",
+        "face-tracking",
+        "udp",
+        "untested",
+        "experimental"
+      ],
+      "capabilities": [
+        "expression",
+        "eyes"
+      ],
+      "defaultRole": "expression",
+      "requires": {
+        "abi": 2,
+        "minHostVersion": "1.0.8",
+        "os": [
+          "windows"
+        ],
+        "arch": [
+          "x64"
+        ]
+      },
+      "channel": "stable",
+      "featured": false,
+      "verified": false,
+      "archived": false,
+      "stats": {
+        "downloads": 0,
+        "stars": 0
+      },
+      "publishedAt": "2026-11-02T09:34:11Z",
+      "updatedAt": "2026-11-02T09:32:53Z",
+      "latest": {
+        "version": "0.1.0",
+        "channel": "stable",
+        "publishedAt": "2026-11-02T09:34:11Z",
+        "fileName": "ifacialmocap-0.1.0.zip",
+        "downloadUrl": "https://github.com/Aqamoe/FGB-iFacialMocapModule/releases/download/v0.1.0/ifacialmocap-0.1.0.zip",
+        "size": 158352,
+        "sha256": "1fe772f1f3096a02d0827766c8db1bcc2f7930702d33f61e19953f5fdfc427b0",
+        "abiVersion": 2,
+        "downloads": 0,
+        "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-iFacialMocapModule/commits/v0.1.0",
+        "releaseUrl": "https://github.com/Aqamoe/FGB-iFacialMocapModule/releases/tag/v0.1.0"
+      },
+      "versions": [
+        {
+          "version": "0.1.0",
+          "channel": "stable",
+          "publishedAt": "2026-11-02T09:34:11Z",
+          "fileName": "ifacialmocap-0.1.0.zip",
+          "downloadUrl": "https://github.com/Aqamoe/FGB-iFacialMocapModule/releases/download/v0.1.0/ifacialmocap-0.1.0.zip",
+          "size": 158352,
+          "sha256": "1fe772f1f3096a02d0827766c8db1bcc2f7930702d33f61e19953f5fdfc427b0",
+          "abiVersion": 2,
+          "downloads": 0,
+          "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-iFacialMocapModule/commits/v0.1.0",
+          "releaseUrl": "https://github.com/Aqamoe/FGB-iFacialMocapModule/releases/tag/v0.1.0"
+        }
+      ],
+      "i18n": {
+        "en": {
+          "summary": "iFacialMocap (iPhone) over UDP, handshake included — no VRCFT needed.",
+          "description": "Reads iFacialMocap's ASCII UDP stream on port 49983 and outputs Unified Expressions shapes, eye openness and per-eye gaze. The source names its shapes mirrored (`*_L` is our right side), so the module normalises that before mapping, and replies with the protocol handshake once a sender appears. 52 ARKit coefficients go through the shared table; real eye angles override the inferred direction when present. **Community-untested.**",
+          "usage": "1. Put the iPhone and PC on the same Wi-Fi and point iFacialMocap at this PC's LAN address (port 49983). 2. Quit VRCFaceTracking — same port. 3. Enable iFacialMocap as a startup instance and restart the engine; the card should report the handshake reply. 4. Untested: check which eye's openness moves when you blink your left eye, and file an issue if it's flipped."
+        }
+      }
+    },
+    {
+      "id": "com.fgbbridge.livelink",
+      "name": "LiveLink",
+      "author": {
+        "name": "Aqamoe (光水)",
+        "url": "https://github.com/Aqamoe"
+      },
+      "summary": "Unreal LiveLink Face（iPhone）面捕，直接读 UDP 大端 float，不需要 VRCFT。",
+      "description": "接收 LiveLink Face App 发到本机 11111 端口的数据报，取包尾 244 字节按大端解出 float 序列，映射成 Unified Expressions 表情、睁眼度与逐眼方向。字段名表按上游顺序建立，识别数不符时整帧拒绝并在日志里说明，不会字段错位后静默输出错表情；变长包头、截断包与 NaN 都有明确处理。眼动角度字段存在时用真实角度覆盖方向（置信度 0.85）。头姿已解析但本期不输出（单位与轴向未确认）。**本模块为社区未验证实现**。",
+      "usage": "1. iPhone 上用 Unreal LiveLink Face App，把 PC 的局域网 IP 填进去（端口 11111）。2. 关闭 VRCFaceTracking：它和本模块抢同一个端口。3. 在「模块」页把 LiveLink 设为启动并重启引擎。4. 未验证：头姿暂不输出；请在 issue 里附 iPhone 机型、App 与 Unreal 版本。",
+      "homepage": "https://github.com/Aqamoe/FGB-LiveLinkModule",
+      "repo": "Aqamoe/FGB-LiveLinkModule",
+      "license": "Apache-2.0",
+      "icon": "https://cdn.jsdelivr.net/gh/Aqamoe/FGB-LiveLinkModule@main/module/icon.svg",
+      "tags": [
+        "livelink",
+        "unreal",
+        "iphone",
+        "face-tracking",
+        "udp",
+        "untested",
+        "experimental"
+      ],
+      "capabilities": [
+        "expression",
+        "eyes"
+      ],
+      "defaultRole": "expression",
+      "requires": {
+        "abi": 2,
+        "minHostVersion": "1.0.8",
+        "os": [
+          "windows"
+        ],
+        "arch": [
+          "x64"
+        ]
+      },
+      "channel": "stable",
+      "featured": false,
+      "verified": false,
+      "archived": false,
+      "stats": {
+        "downloads": 0,
+        "stars": 0
+      },
+      "publishedAt": "2026-11-02T09:39:10Z",
+      "updatedAt": "2026-11-02T09:37:20Z",
+      "latest": {
+        "version": "0.1.0",
+        "channel": "stable",
+        "publishedAt": "2026-11-02T09:39:10Z",
+        "fileName": "livelink-0.1.0.zip",
+        "downloadUrl": "https://github.com/Aqamoe/FGB-LiveLinkModule/releases/download/v0.1.0/livelink-0.1.0.zip",
+        "size": 147582,
+        "sha256": "4ea8c6fe18b896cc1178513e72fdca2a309c00bb73f735b2136da2020871fa07",
+        "abiVersion": 2,
+        "downloads": 0,
+        "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-LiveLinkModule/commits/v0.1.0",
+        "releaseUrl": "https://github.com/Aqamoe/FGB-LiveLinkModule/releases/tag/v0.1.0"
+      },
+      "versions": [
+        {
+          "version": "0.1.0",
+          "channel": "stable",
+          "publishedAt": "2026-11-02T09:39:10Z",
+          "fileName": "livelink-0.1.0.zip",
+          "downloadUrl": "https://github.com/Aqamoe/FGB-LiveLinkModule/releases/download/v0.1.0/livelink-0.1.0.zip",
+          "size": 147582,
+          "sha256": "4ea8c6fe18b896cc1178513e72fdca2a309c00bb73f735b2136da2020871fa07",
+          "abiVersion": 2,
+          "downloads": 0,
+          "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-LiveLinkModule/commits/v0.1.0",
+          "releaseUrl": "https://github.com/Aqamoe/FGB-LiveLinkModule/releases/tag/v0.1.0"
+        }
+      ],
+      "i18n": {
+        "en": {
+          "summary": "Unreal LiveLink Face (iPhone) over UDP big-endian floats — no VRCFT needed.",
+          "description": "Reads LiveLink Face packets on port 11111, parses the trailing 244 bytes as big-endian floats and outputs Unified Expressions shapes, eye openness and per-eye gaze. The field table follows the upstream order and rejects a whole frame when the parsed count doesn't match, so misaligned fields never silently become wrong shapes. Variable-length headers, short packets and NaNs are handled explicitly. Real eye angles override the inferred direction when present (confidence 0.85). Head pose is parsed but not emitted yet (units and axes unconfirmed). **Community-untested.**",
+          "usage": "1. In LiveLink Face on your iPhone, point at this PC's LAN address (port 11111). 2. Quit VRCFaceTracking — same port. 3. Enable LiveLink as a startup instance and restart the engine. 4. Untested: head pose is intentionally not emitted; please include iPhone model and App/Unreal versions in issues."
+        }
+      }
+    },
+    {
+      "id": "com.fgbbridge.meowface",
+      "name": "MeowFace",
+      "author": {
+        "name": "Aqamoe (光水)",
+        "url": "https://github.com/Aqamoe"
+      },
+      "summary": "MeowFace 手机面捕，直接读它发出的 UDP JSON，不需要 VRCFT。",
+      "description": "直接接收 MeowFace App 发到本机 12345 端口的 UDP JSON，输出 Unified Expressions 表情、睁眼度与逐眼方向。49 个 ARKit 风格系数按通用表映射，MeowFace 特有的近似项（微笑同时喂 CheekSquint、Dimple 等）单独列出。不注入任何进程，也不需要管理员权限。**本模块为社区未验证实现**，真机验收仍在进行。",
+      "usage": "1. 手机装好 MeowFace，在 App 里填这台 PC 的局域网 IP，端口默认 12345。2. 关闭 VRCFaceTracking：它和本模块抢同一个端口。3. 在「模块」页把 MeowFace 设为启动（角色 expression + eyes）并重启引擎。4. 未验证：请在 issue 里附手机型号、MeowFace 版本与现象，尤其是左右眼极化是否正确。",
+      "homepage": "https://github.com/Aqamoe/FGB-MeowFaceModule",
+      "repo": "Aqamoe/FGB-MeowFaceModule",
+      "license": "Apache-2.0",
+      "icon": "https://cdn.jsdelivr.net/gh/Aqamoe/FGB-MeowFaceModule@main/module/icon.svg",
+      "tags": [
+        "meowface",
+        "android",
+        "ios",
+        "face-tracking",
+        "udp",
+        "untested",
+        "experimental"
+      ],
+      "capabilities": [
+        "expression",
+        "eyes"
+      ],
+      "defaultRole": "expression",
+      "requires": {
+        "abi": 2,
+        "minHostVersion": "1.0.8",
+        "os": [
+          "windows"
+        ],
+        "arch": [
+          "x64"
+        ]
+      },
+      "channel": "stable",
+      "featured": false,
+      "verified": false,
+      "archived": false,
+      "stats": {
+        "downloads": 0,
+        "stars": 0
+      },
+      "publishedAt": "2026-11-02T09:34:05Z",
+      "updatedAt": "2026-11-02T09:32:47Z",
+      "latest": {
+        "version": "0.1.0",
+        "channel": "stable",
+        "publishedAt": "2026-11-02T09:34:05Z",
+        "fileName": "meowface-0.1.0.zip",
+        "downloadUrl": "https://github.com/Aqamoe/FGB-MeowFaceModule/releases/download/v0.1.0/meowface-0.1.0.zip",
+        "size": 164162,
+        "sha256": "b5674783dafe7020d47e5a5f839bb801007362b01b2ba38282c1b2148db11df9",
+        "abiVersion": 2,
+        "downloads": 0,
+        "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-MeowFaceModule/commits/v0.1.0",
+        "releaseUrl": "https://github.com/Aqamoe/FGB-MeowFaceModule/releases/tag/v0.1.0"
+      },
+      "versions": [
+        {
+          "version": "0.1.0",
+          "channel": "stable",
+          "publishedAt": "2026-11-02T09:34:05Z",
+          "fileName": "meowface-0.1.0.zip",
+          "downloadUrl": "https://github.com/Aqamoe/FGB-MeowFaceModule/releases/download/v0.1.0/meowface-0.1.0.zip",
+          "size": 164162,
+          "sha256": "b5674783dafe7020d47e5a5f839bb801007362b01b2ba38282c1b2148db11df9",
+          "abiVersion": 2,
+          "downloads": 0,
+          "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-MeowFaceModule/commits/v0.1.0",
+          "releaseUrl": "https://github.com/Aqamoe/FGB-MeowFaceModule/releases/tag/v0.1.0"
+        }
+      ],
+      "i18n": {
+        "en": {
+          "summary": "MeowFace face tracking straight over UDP — no VRCFT needed.",
+          "description": "Reads MeowFace's UDP JSON stream on port 12345 and outputs Unified Expressions shapes, eye openness and per-eye gaze. 49 ARKit-style coefficients go through the shared mapping table; MeowFace's own approximations are listed separately. No process injection, no admin rights. **Community-untested** — hardware acceptance is still pending.",
+          "usage": "1. Point MeowFace on your phone at this PC's LAN address (port 12345). 2. Quit VRCFaceTracking — it fights this module for the same port. 3. Set MeowFace as a startup instance (expression + eyes) and restart the engine. 4. Untested: please file an issue with phone model, MeowFace version and what you saw, especially left/right eye polarity."
         }
       }
     }
