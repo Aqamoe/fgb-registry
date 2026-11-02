@@ -1,0 +1,52 @@
+{
+  "id": "com.fgbbridge.cymple",
+  "name": "Cymple Face Tracking",
+  "author": {
+    "name": "Aqamoe (光水)",
+    "url": "https://github.com/Aqamoe"
+  },
+  "repo": "Aqamoe/FGB-CympleModule",
+  "homepage": "https://github.com/Aqamoe/FGB-CympleModule",
+  "license": "Apache-2.0",
+  "summary": "Project Cymple 面捕/眼追的定长 UDP 包，直接解析，不需要 VRCFT。",
+  "description": "接收 Project Cymple 发到本机 22999 端口的 292 字节定长包（魔数 0xFFFFFFFD 小端 + 大端 Flags + msgType/payloadSize + 70 个小端 float）。魔数、msgType、payloadSize 与字节序逐项校验，任一不符整包拒收，不做「猜一个能解出来的解释」。嘴/眼两个域位各自决定这一帧声明哪些通道，域位没亮就不提交那一路。眼动 Pitch/Yaw 经核对是 [-1,1] 归一值而非角度；瞳孔只写 dilation，因 0 的语义与毫米换算未确认。",
+  "usage": "1. 在 Cymple 发送端把目标 IP 设为本机、端口 22999。2. 关闭 VRCFaceTracking 避免抢端口。3. 在「模块」页设为启动并重启引擎。4. 未验证：极化真机方向、瞳孔 0 的语义、Flags 其余位含义；发送端序列化源码未公开，结论靠接收端与第三方实现交叉核对。",
+  "capabilities": [
+    "expression",
+    "eyes"
+  ],
+  "defaultRole": "expression",
+  "requires": {
+    "abi": 2,
+    "minHostVersion": "1.0.8",
+    "os": [
+      "windows"
+    ],
+    "arch": [
+      "x64"
+    ]
+  },
+  "tags": [
+    "cymple",
+    "open-source-hardware",
+    "face-tracking",
+    "eye-tracking",
+    "udp",
+    "untested",
+    "experimental"
+  ],
+  "entry": "cymple.dll",
+  "icon": "module/icon.svg",
+  "iconBranch": "main",
+  "tagPrefix": "v",
+  "assetPattern": "^cymple-.*\\.zip$",
+  "featured": false,
+  "verified": false,
+  "i18n": {
+    "en": {
+      "summary": "Project Cymple face and eye tracking from its fixed-size UDP packet — no VRCFT needed.",
+      "description": "Reads Project Cymple's 292-byte fixed packet on port 22999 (little-endian magic 0xFFFFFFFD, big-endian flags, msgType/payloadSize, then 70 little-endian floats). Magic, msgType, payload size and byte order are all validated and any mismatch rejects the whole packet rather than guessing a decodable interpretation. The mouth and eye domain flags independently decide which channels the frame declares, so an unlit flag never submits data. Eye pitch/yaw turned out to be normalised [-1,1] values, not degrees; pupil writes dilation only, since the meaning of 0 and any millimetre conversion are unconfirmed.",
+      "usage": "1. Point Cymple's sender at this PC on port 22999. 2. Quit VRCFaceTracking (same port). 3. Enable the module and restart the engine. 4. Untested: on-hardware polarity, what pupil 0 means, and the remaining flag bits. The sender's serialiser isn't public, so conclusions come from the receiver and a third-party implementation."
+    }
+  }
+}
