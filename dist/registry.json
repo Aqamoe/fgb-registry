@@ -1,14 +1,14 @@
 {
   "$schema": "registry.schema.json",
   "schemaVersion": 2,
-  "generatedAt": "2026-11-02T09:43:53.758Z",
+  "generatedAt": "2026-11-02T11:34:49.001Z",
   "generator": "fgb-registry/2.0.0",
   "registry": {
     "title": "FaceGaze Bridge 模块库",
     "description": "FaceGaze Bridge 原生模块的公开索引，数据来自各模块自己的 GitHub Release。",
     "homepage": "https://aqamoe.github.io/fgb-registry/"
   },
-  "moduleCount": 4,
+  "moduleCount": 10,
   "modules": [
     {
       "id": "com.picogaze.pico-connect-face",
@@ -50,25 +50,38 @@
       "verified": true,
       "archived": false,
       "stats": {
-        "downloads": 14,
+        "downloads": 1,
         "stars": 0
       },
       "publishedAt": "2026-10-31T08:56:27Z",
-      "updatedAt": "2026-10-31T08:55:30Z",
+      "updatedAt": "2026-11-02T11:10:50Z",
       "latest": {
-        "version": "0.1.0",
+        "version": "0.2.0",
         "channel": "stable",
-        "publishedAt": "2026-10-31T08:56:27Z",
-        "fileName": "pico-connect-face-0.1.0.zip",
-        "downloadUrl": "https://github.com/Aqamoe/FGB-PicoFaceModule/releases/download/v0.1.0/pico-connect-face-0.1.0.zip",
-        "size": 99131,
-        "sha256": "cd7522527cbcd76675a7392d430dabbfdcc1dd33a9b10d74403df195b5f51c43",
+        "publishedAt": "2026-11-02T10:16:15Z",
+        "fileName": "pico-connect-face-0.2.0.zip",
+        "downloadUrl": "https://github.com/Aqamoe/FGB-PicoFaceModule/releases/download/v0.2.0/pico-connect-face-0.2.0.zip",
+        "size": 99102,
+        "sha256": "19fd484800ee75cd12d58c0ebbcfd5d254e448b67cacf1059b9385544bed80f0",
         "abiVersion": 2,
-        "downloads": 14,
-        "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-PicoFaceModule/commits/v0.1.0",
-        "releaseUrl": "https://github.com/Aqamoe/FGB-PicoFaceModule/releases/tag/v0.1.0"
+        "downloads": 1,
+        "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-PicoFaceModule/compare/v0.1.0...v0.2.0",
+        "releaseUrl": "https://github.com/Aqamoe/FGB-PicoFaceModule/releases/tag/v0.2.0"
       },
       "versions": [
+        {
+          "version": "0.2.0",
+          "channel": "stable",
+          "publishedAt": "2026-11-02T10:16:15Z",
+          "fileName": "pico-connect-face-0.2.0.zip",
+          "downloadUrl": "https://github.com/Aqamoe/FGB-PicoFaceModule/releases/download/v0.2.0/pico-connect-face-0.2.0.zip",
+          "size": 99102,
+          "sha256": "19fd484800ee75cd12d58c0ebbcfd5d254e448b67cacf1059b9385544bed80f0",
+          "abiVersion": 2,
+          "downloads": 1,
+          "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-PicoFaceModule/compare/v0.1.0...v0.2.0",
+          "releaseUrl": "https://github.com/Aqamoe/FGB-PicoFaceModule/releases/tag/v0.2.0"
+        },
         {
           "version": "0.1.0",
           "channel": "stable",
@@ -78,7 +91,7 @@
           "size": 99131,
           "sha256": "cd7522527cbcd76675a7392d430dabbfdcc1dd33a9b10d74403df195b5f51c43",
           "abiVersion": 2,
-          "downloads": 14,
+          "downloads": 0,
           "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-PicoFaceModule/commits/v0.1.0",
           "releaseUrl": "https://github.com/Aqamoe/FGB-PicoFaceModule/releases/tag/v0.1.0"
         }
@@ -133,7 +146,7 @@
       "verified": false,
       "archived": false,
       "stats": {
-        "downloads": 0,
+        "downloads": 4,
         "stars": 0
       },
       "publishedAt": "2026-11-02T09:34:11Z",
@@ -147,7 +160,7 @@
         "size": 158352,
         "sha256": "1fe772f1f3096a02d0827766c8db1bcc2f7930702d33f61e19953f5fdfc427b0",
         "abiVersion": 2,
-        "downloads": 0,
+        "downloads": 4,
         "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-iFacialMocapModule/commits/v0.1.0",
         "releaseUrl": "https://github.com/Aqamoe/FGB-iFacialMocapModule/releases/tag/v0.1.0"
       },
@@ -161,7 +174,7 @@
           "size": 158352,
           "sha256": "1fe772f1f3096a02d0827766c8db1bcc2f7930702d33f61e19953f5fdfc427b0",
           "abiVersion": 2,
-          "downloads": 0,
+          "downloads": 4,
           "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-iFacialMocapModule/commits/v0.1.0",
           "releaseUrl": "https://github.com/Aqamoe/FGB-iFacialMocapModule/releases/tag/v0.1.0"
         }
@@ -171,90 +184,6 @@
           "summary": "iFacialMocap (iPhone) over UDP, handshake included — no VRCFT needed.",
           "description": "Reads iFacialMocap's ASCII UDP stream on port 49983 and outputs Unified Expressions shapes, eye openness and per-eye gaze. The source names its shapes mirrored (`*_L` is our right side), so the module normalises that before mapping, and replies with the protocol handshake once a sender appears. 52 ARKit coefficients go through the shared table; real eye angles override the inferred direction when present. **Community-untested.**",
           "usage": "1. Put the iPhone and PC on the same Wi-Fi and point iFacialMocap at this PC's LAN address (port 49983). 2. Quit VRCFaceTracking — same port. 3. Enable iFacialMocap as a startup instance and restart the engine; the card should report the handshake reply. 4. Untested: check which eye's openness moves when you blink your left eye, and file an issue if it's flipped."
-        }
-      }
-    },
-    {
-      "id": "com.fgbbridge.livelink",
-      "name": "LiveLink",
-      "author": {
-        "name": "Aqamoe (光水)",
-        "url": "https://github.com/Aqamoe"
-      },
-      "summary": "Unreal LiveLink Face（iPhone）面捕，直接读 UDP 大端 float，不需要 VRCFT。",
-      "description": "接收 LiveLink Face App 发到本机 11111 端口的数据报，取包尾 244 字节按大端解出 float 序列，映射成 Unified Expressions 表情、睁眼度与逐眼方向。字段名表按上游顺序建立，识别数不符时整帧拒绝并在日志里说明，不会字段错位后静默输出错表情；变长包头、截断包与 NaN 都有明确处理。眼动角度字段存在时用真实角度覆盖方向（置信度 0.85）。头姿已解析但本期不输出（单位与轴向未确认）。**本模块为社区未验证实现**。",
-      "usage": "1. iPhone 上用 Unreal LiveLink Face App，把 PC 的局域网 IP 填进去（端口 11111）。2. 关闭 VRCFaceTracking：它和本模块抢同一个端口。3. 在「模块」页把 LiveLink 设为启动并重启引擎。4. 未验证：头姿暂不输出；请在 issue 里附 iPhone 机型、App 与 Unreal 版本。",
-      "homepage": "https://github.com/Aqamoe/FGB-LiveLinkModule",
-      "repo": "Aqamoe/FGB-LiveLinkModule",
-      "license": "Apache-2.0",
-      "icon": "https://cdn.jsdelivr.net/gh/Aqamoe/FGB-LiveLinkModule@main/module/icon.svg",
-      "tags": [
-        "livelink",
-        "unreal",
-        "iphone",
-        "face-tracking",
-        "udp",
-        "untested",
-        "experimental"
-      ],
-      "capabilities": [
-        "expression",
-        "eyes"
-      ],
-      "defaultRole": "expression",
-      "requires": {
-        "abi": 2,
-        "minHostVersion": "1.0.8",
-        "os": [
-          "windows"
-        ],
-        "arch": [
-          "x64"
-        ]
-      },
-      "channel": "stable",
-      "featured": false,
-      "verified": false,
-      "archived": false,
-      "stats": {
-        "downloads": 0,
-        "stars": 0
-      },
-      "publishedAt": "2026-11-02T09:39:10Z",
-      "updatedAt": "2026-11-02T09:37:20Z",
-      "latest": {
-        "version": "0.1.0",
-        "channel": "stable",
-        "publishedAt": "2026-11-02T09:39:10Z",
-        "fileName": "livelink-0.1.0.zip",
-        "downloadUrl": "https://github.com/Aqamoe/FGB-LiveLinkModule/releases/download/v0.1.0/livelink-0.1.0.zip",
-        "size": 147582,
-        "sha256": "4ea8c6fe18b896cc1178513e72fdca2a309c00bb73f735b2136da2020871fa07",
-        "abiVersion": 2,
-        "downloads": 0,
-        "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-LiveLinkModule/commits/v0.1.0",
-        "releaseUrl": "https://github.com/Aqamoe/FGB-LiveLinkModule/releases/tag/v0.1.0"
-      },
-      "versions": [
-        {
-          "version": "0.1.0",
-          "channel": "stable",
-          "publishedAt": "2026-11-02T09:39:10Z",
-          "fileName": "livelink-0.1.0.zip",
-          "downloadUrl": "https://github.com/Aqamoe/FGB-LiveLinkModule/releases/download/v0.1.0/livelink-0.1.0.zip",
-          "size": 147582,
-          "sha256": "4ea8c6fe18b896cc1178513e72fdca2a309c00bb73f735b2136da2020871fa07",
-          "abiVersion": 2,
-          "downloads": 0,
-          "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-LiveLinkModule/commits/v0.1.0",
-          "releaseUrl": "https://github.com/Aqamoe/FGB-LiveLinkModule/releases/tag/v0.1.0"
-        }
-      ],
-      "i18n": {
-        "en": {
-          "summary": "Unreal LiveLink Face (iPhone) over UDP big-endian floats — no VRCFT needed.",
-          "description": "Reads LiveLink Face packets on port 11111, parses the trailing 244 bytes as big-endian floats and outputs Unified Expressions shapes, eye openness and per-eye gaze. The field table follows the upstream order and rejects a whole frame when the parsed count doesn't match, so misaligned fields never silently become wrong shapes. Variable-length headers, short packets and NaNs are handled explicitly. Real eye angles override the inferred direction when present (confidence 0.85). Head pose is parsed but not emitted yet (units and axes unconfirmed). **Community-untested.**",
-          "usage": "1. In LiveLink Face on your iPhone, point at this PC's LAN address (port 11111). 2. Quit VRCFaceTracking — same port. 3. Enable LiveLink as a startup instance and restart the engine. 4. Untested: head pose is intentionally not emitted; please include iPhone model and App/Unreal versions in issues."
         }
       }
     },
@@ -301,7 +230,7 @@
       "verified": false,
       "archived": false,
       "stats": {
-        "downloads": 0,
+        "downloads": 4,
         "stars": 0
       },
       "publishedAt": "2026-11-02T09:34:05Z",
@@ -315,7 +244,7 @@
         "size": 164162,
         "sha256": "b5674783dafe7020d47e5a5f839bb801007362b01b2ba38282c1b2148db11df9",
         "abiVersion": 2,
-        "downloads": 0,
+        "downloads": 4,
         "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-MeowFaceModule/commits/v0.1.0",
         "releaseUrl": "https://github.com/Aqamoe/FGB-MeowFaceModule/releases/tag/v0.1.0"
       },
@@ -329,7 +258,7 @@
           "size": 164162,
           "sha256": "b5674783dafe7020d47e5a5f839bb801007362b01b2ba38282c1b2148db11df9",
           "abiVersion": 2,
-          "downloads": 0,
+          "downloads": 4,
           "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-MeowFaceModule/commits/v0.1.0",
           "releaseUrl": "https://github.com/Aqamoe/FGB-MeowFaceModule/releases/tag/v0.1.0"
         }
@@ -339,6 +268,597 @@
           "summary": "MeowFace face tracking straight over UDP — no VRCFT needed.",
           "description": "Reads MeowFace's UDP JSON stream on port 12345 and outputs Unified Expressions shapes, eye openness and per-eye gaze. 49 ARKit-style coefficients go through the shared mapping table; MeowFace's own approximations are listed separately. No process injection, no admin rights. **Community-untested** — hardware acceptance is still pending.",
           "usage": "1. Point MeowFace on your phone at this PC's LAN address (port 12345). 2. Quit VRCFaceTracking — it fights this module for the same port. 3. Set MeowFace as a startup instance (expression + eyes) and restart the engine. 4. Untested: please file an issue with phone model, MeowFace version and what you saw, especially left/right eye polarity."
+        }
+      }
+    },
+    {
+      "id": "com.fgbbridge.livelink",
+      "name": "LiveLink",
+      "author": {
+        "name": "Aqamoe (光水)",
+        "url": "https://github.com/Aqamoe"
+      },
+      "summary": "Unreal LiveLink Face（iPhone）面捕，直接读 UDP 大端 float，不需要 VRCFT。",
+      "description": "接收 LiveLink Face App 发到本机 11111 端口的数据报，取包尾 244 字节按大端解出 float 序列，映射成 Unified Expressions 表情、睁眼度与逐眼方向。字段名表按上游顺序建立，识别数不符时整帧拒绝并在日志里说明，不会字段错位后静默输出错表情；变长包头、截断包与 NaN 都有明确处理。眼动角度字段存在时用真实角度覆盖方向（置信度 0.85）。头姿已解析但本期不输出（单位与轴向未确认）。**本模块为社区未验证实现**。",
+      "usage": "1. iPhone 上用 Unreal LiveLink Face App，把 PC 的局域网 IP 填进去（端口 11111）。2. 关闭 VRCFaceTracking：它和本模块抢同一个端口。3. 在「模块」页把 LiveLink 设为启动并重启引擎。4. 未验证：头姿暂不输出；请在 issue 里附 iPhone 机型、App 与 Unreal 版本。",
+      "homepage": "https://github.com/Aqamoe/FGB-LiveLinkModule",
+      "repo": "Aqamoe/FGB-LiveLinkModule",
+      "license": "Apache-2.0",
+      "icon": "https://cdn.jsdelivr.net/gh/Aqamoe/FGB-LiveLinkModule@main/module/icon.svg",
+      "tags": [
+        "livelink",
+        "unreal",
+        "iphone",
+        "face-tracking",
+        "udp",
+        "untested",
+        "experimental"
+      ],
+      "capabilities": [
+        "expression",
+        "eyes"
+      ],
+      "defaultRole": "expression",
+      "requires": {
+        "abi": 2,
+        "minHostVersion": "1.0.8",
+        "os": [
+          "windows"
+        ],
+        "arch": [
+          "x64"
+        ]
+      },
+      "channel": "stable",
+      "featured": false,
+      "verified": false,
+      "archived": false,
+      "stats": {
+        "downloads": 3,
+        "stars": 0
+      },
+      "publishedAt": "2026-11-02T09:39:10Z",
+      "updatedAt": "2026-11-02T09:37:20Z",
+      "latest": {
+        "version": "0.1.0",
+        "channel": "stable",
+        "publishedAt": "2026-11-02T09:39:10Z",
+        "fileName": "livelink-0.1.0.zip",
+        "downloadUrl": "https://github.com/Aqamoe/FGB-LiveLinkModule/releases/download/v0.1.0/livelink-0.1.0.zip",
+        "size": 147582,
+        "sha256": "4ea8c6fe18b896cc1178513e72fdca2a309c00bb73f735b2136da2020871fa07",
+        "abiVersion": 2,
+        "downloads": 3,
+        "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-LiveLinkModule/commits/v0.1.0",
+        "releaseUrl": "https://github.com/Aqamoe/FGB-LiveLinkModule/releases/tag/v0.1.0"
+      },
+      "versions": [
+        {
+          "version": "0.1.0",
+          "channel": "stable",
+          "publishedAt": "2026-11-02T09:39:10Z",
+          "fileName": "livelink-0.1.0.zip",
+          "downloadUrl": "https://github.com/Aqamoe/FGB-LiveLinkModule/releases/download/v0.1.0/livelink-0.1.0.zip",
+          "size": 147582,
+          "sha256": "4ea8c6fe18b896cc1178513e72fdca2a309c00bb73f735b2136da2020871fa07",
+          "abiVersion": 2,
+          "downloads": 3,
+          "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-LiveLinkModule/commits/v0.1.0",
+          "releaseUrl": "https://github.com/Aqamoe/FGB-LiveLinkModule/releases/tag/v0.1.0"
+        }
+      ],
+      "i18n": {
+        "en": {
+          "summary": "Unreal LiveLink Face (iPhone) over UDP big-endian floats — no VRCFT needed.",
+          "description": "Reads LiveLink Face packets on port 11111, parses the trailing 244 bytes as big-endian floats and outputs Unified Expressions shapes, eye openness and per-eye gaze. The field table follows the upstream order and rejects a whole frame when the parsed count doesn't match, so misaligned fields never silently become wrong shapes. Variable-length headers, short packets and NaNs are handled explicitly. Real eye angles override the inferred direction when present (confidence 0.85). Head pose is parsed but not emitted yet (units and axes unconfirmed). **Community-untested.**",
+          "usage": "1. In LiveLink Face on your iPhone, point at this PC's LAN address (port 11111). 2. Quit VRCFaceTracking — same port. 3. Enable LiveLink as a startup instance and restart the engine. 4. Untested: head pose is intentionally not emitted; please include iPhone model and App/Unreal versions in issues."
+        }
+      }
+    },
+    {
+      "id": "com.fgbbridge.alvr",
+      "name": "ALVR",
+      "author": {
+        "name": "Aqamoe (光水)",
+        "url": "https://github.com/Aqamoe"
+      },
+      "summary": "ALVR 串流的 Quest 眼动/面捕，直接读它发出的 UDP 追踪包，不需要 VRCFT。",
+      "description": "接收 ALVR 服务端按 VRCFT 兼容格式发到本机 41463 端口的追踪包：8 字节前缀 + 小端 float 数组（EyesQuat / CombQuat / Face2Fb / FacePico / EyesHtc / LipHtc）。字段长度与含义按 ALVR 发送端源码逐项核对，与老接收端不一致的地方（FacePico 实为 52 项、接收端按 72 读）以发送端为准，多余字节不猜、不伪造。不注入进程，也不需要管理员权限。",
+      "usage": "1. ALVR 服务端设置里把 Eye and face tracking 设为 VRCFaceTracking。2. 关闭 VRCFaceTracking：它和本模块抢同一个 UDP 端口。3. 在「模块」页把 ALVR 设为启动并重启引擎。4. 未验证：真机极化与平滑未逐项比对，异常请附 ALVR 版本与头显型号。",
+      "homepage": "https://github.com/Aqamoe/FGB-ALVRModule",
+      "repo": "Aqamoe/FGB-ALVRModule",
+      "license": "Apache-2.0",
+      "icon": "https://cdn.jsdelivr.net/gh/Aqamoe/FGB-ALVRModule@main/module/icon.svg",
+      "tags": [
+        "alvr",
+        "quest",
+        "openxr",
+        "face-tracking",
+        "udp",
+        "untested",
+        "experimental"
+      ],
+      "capabilities": [
+        "expression",
+        "eyes"
+      ],
+      "defaultRole": "expression",
+      "requires": {
+        "abi": 2,
+        "minHostVersion": "1.0.8",
+        "os": [
+          "windows"
+        ],
+        "arch": [
+          "x64"
+        ]
+      },
+      "channel": "stable",
+      "featured": false,
+      "verified": false,
+      "archived": false,
+      "stats": {
+        "downloads": 2,
+        "stars": 0
+      },
+      "publishedAt": "2026-11-02T11:15:43Z",
+      "updatedAt": "2026-11-02T11:14:32Z",
+      "latest": {
+        "version": "0.1.0",
+        "channel": "stable",
+        "publishedAt": "2026-11-02T11:15:43Z",
+        "fileName": "alvr-0.1.0.zip",
+        "downloadUrl": "https://github.com/Aqamoe/FGB-ALVRModule/releases/download/v0.1.0/alvr-0.1.0.zip",
+        "size": 149816,
+        "sha256": "38424fabaa0294af958669308a156e790a920fc9873c9e175174168aac7e2b60",
+        "abiVersion": 2,
+        "downloads": 2,
+        "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-ALVRModule/commits/v0.1.0",
+        "releaseUrl": "https://github.com/Aqamoe/FGB-ALVRModule/releases/tag/v0.1.0"
+      },
+      "versions": [
+        {
+          "version": "0.1.0",
+          "channel": "stable",
+          "publishedAt": "2026-11-02T11:15:43Z",
+          "fileName": "alvr-0.1.0.zip",
+          "downloadUrl": "https://github.com/Aqamoe/FGB-ALVRModule/releases/download/v0.1.0/alvr-0.1.0.zip",
+          "size": 149816,
+          "sha256": "38424fabaa0294af958669308a156e790a920fc9873c9e175174168aac7e2b60",
+          "abiVersion": 2,
+          "downloads": 2,
+          "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-ALVRModule/commits/v0.1.0",
+          "releaseUrl": "https://github.com/Aqamoe/FGB-ALVRModule/releases/tag/v0.1.0"
+        }
+      ],
+      "i18n": {
+        "en": {
+          "summary": "ALVR eye/face tracking straight over UDP — no VRCFT needed.",
+          "description": "Reads ALVR server's VRCFT-compatible packets on port 41463: an 8-byte ASCII prefix followed by little-endian floats (EyesQuat / CombQuat / Face2Fb / FacePico / EyesHtc / LipHtc). Field lengths were checked against ALVR's sending side, so where the older receiver disagrees (FacePico is 52 values, the receiver reads 72) this follows the sender and never invents the extra bytes. No injection, no admin rights.",
+          "usage": "1. In ALVR's settings set Eye and face tracking to VRCFaceTracking. 2. Quit VRCFaceTracking — it uses the same UDP port. 3. Enable ALVR as a startup instance and restart the engine. 4. Untested: eye polarity and smoothing aren't device-verified; include your ALVR version and headset when reporting issues."
+        }
+      }
+    },
+    {
+      "id": "com.fgbbridge.cymple",
+      "name": "Cymple Face Tracking",
+      "author": {
+        "name": "Aqamoe (光水)",
+        "url": "https://github.com/Aqamoe"
+      },
+      "summary": "Project Cymple 面捕/眼追的定长 UDP 包，直接解析，不需要 VRCFT。",
+      "description": "接收 Project Cymple 发到本机 22999 端口的 292 字节定长包（魔数 0xFFFFFFFD 小端 + 大端 Flags + msgType/payloadSize + 70 个小端 float）。魔数、msgType、payloadSize 与字节序逐项校验，任一不符整包拒收，不做「猜一个能解出来的解释」。嘴/眼两个域位各自决定这一帧声明哪些通道，域位没亮就不提交那一路。眼动 Pitch/Yaw 经核对是 [-1,1] 归一值而非角度；瞳孔只写 dilation，因 0 的语义与毫米换算未确认。",
+      "usage": "1. 在 Cymple 发送端把目标 IP 设为本机、端口 22999。2. 关闭 VRCFaceTracking 避免抢端口。3. 在「模块」页设为启动并重启引擎。4. 未验证：极化真机方向、瞳孔 0 的语义、Flags 其余位含义；发送端序列化源码未公开，结论靠接收端与第三方实现交叉核对。",
+      "homepage": "https://github.com/Aqamoe/FGB-CympleModule",
+      "repo": "Aqamoe/FGB-CympleModule",
+      "license": "Apache-2.0",
+      "icon": "https://cdn.jsdelivr.net/gh/Aqamoe/FGB-CympleModule@main/module/icon.svg",
+      "tags": [
+        "cymple",
+        "open-source-hardware",
+        "face-tracking",
+        "eye-tracking",
+        "udp",
+        "untested",
+        "experimental"
+      ],
+      "capabilities": [
+        "expression",
+        "eyes"
+      ],
+      "defaultRole": "expression",
+      "requires": {
+        "abi": 2,
+        "minHostVersion": "1.0.8",
+        "os": [
+          "windows"
+        ],
+        "arch": [
+          "x64"
+        ]
+      },
+      "channel": "stable",
+      "featured": false,
+      "verified": false,
+      "archived": false,
+      "stats": {
+        "downloads": 2,
+        "stars": 0
+      },
+      "publishedAt": "2026-11-02T10:30:51Z",
+      "updatedAt": "2026-11-02T10:26:42Z",
+      "latest": {
+        "version": "0.1.0",
+        "channel": "stable",
+        "publishedAt": "2026-11-02T10:30:51Z",
+        "fileName": "cymple-0.1.0.zip",
+        "downloadUrl": "https://github.com/Aqamoe/FGB-CympleModule/releases/download/v0.1.0/cymple-0.1.0.zip",
+        "size": 142766,
+        "sha256": "b0578915931f75a4d515e967af3f1dc1b39a86837b5f2ffed8ab297b907b4f58",
+        "abiVersion": 2,
+        "downloads": 2,
+        "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-CympleModule/commits/v0.1.0",
+        "releaseUrl": "https://github.com/Aqamoe/FGB-CympleModule/releases/tag/v0.1.0"
+      },
+      "versions": [
+        {
+          "version": "0.1.0",
+          "channel": "stable",
+          "publishedAt": "2026-11-02T10:30:51Z",
+          "fileName": "cymple-0.1.0.zip",
+          "downloadUrl": "https://github.com/Aqamoe/FGB-CympleModule/releases/download/v0.1.0/cymple-0.1.0.zip",
+          "size": 142766,
+          "sha256": "b0578915931f75a4d515e967af3f1dc1b39a86837b5f2ffed8ab297b907b4f58",
+          "abiVersion": 2,
+          "downloads": 2,
+          "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-CympleModule/commits/v0.1.0",
+          "releaseUrl": "https://github.com/Aqamoe/FGB-CympleModule/releases/tag/v0.1.0"
+        }
+      ],
+      "i18n": {
+        "en": {
+          "summary": "Project Cymple face and eye tracking from its fixed-size UDP packet — no VRCFT needed.",
+          "description": "Reads Project Cymple's 292-byte fixed packet on port 22999 (little-endian magic 0xFFFFFFFD, big-endian flags, msgType/payloadSize, then 70 little-endian floats). Magic, msgType, payload size and byte order are all validated and any mismatch rejects the whole packet rather than guessing a decodable interpretation. The mouth and eye domain flags independently decide which channels the frame declares, so an unlit flag never submits data. Eye pitch/yaw turned out to be normalised [-1,1] values, not degrees; pupil writes dilation only, since the meaning of 0 and any millimetre conversion are unconfirmed.",
+          "usage": "1. Point Cymple's sender at this PC on port 22999. 2. Quit VRCFaceTracking (same port). 3. Enable the module and restart the engine. 4. Untested: on-hardware polarity, what pupil 0 means, and the remaining flag bits. The sender's serialiser isn't public, so conclusions come from the receiver and a third-party implementation."
+        }
+      }
+    },
+    {
+      "id": "com.fgbbridge.etvr",
+      "name": "EyeTrackVR",
+      "author": {
+        "name": "Aqamoe (光水)",
+        "url": "https://github.com/Aqamoe"
+      },
+      "summary": "EyeTrackVR 自制眼追的 OSC 输出，直接进 eyes / gaze 通道，不需要 VRCFT。",
+      "description": "接收 EyeTrackVR 的 OSC 数据（默认监听 8889）。眼动单位是 VRCFT 的归一化 tan 空间（+x 右、+y 上，±1 为标定 FOV 边缘），不是角度；openness 由来源直接给出，不做 1-blink 反推。只声明真正确认能填的通道：表情是模拟值、头姿与视口标定都没有，所以都不声明；某字段这帧没收到就不置属性位，绝不伪造正前方。含与上游参数一致的 1€ 滤波。",
+      "usage": "1. 在 EyeTrackVR 里把 OSC 输出目标设为本机 IP，端口 8889（VRCFT 默认发 9000，需对齐）。2. 关闭 VRCFaceTracking。3. 在「模块」页设为启动，渲染注视角色给 gaze，头像眼睛给 eyes。4. 未验证：±1 对应的真实标定半角、V1 双眼共享 Y 在快速垂直眼动下的表现均需确认。",
+      "homepage": "https://github.com/Aqamoe/FGB-ETVRModule",
+      "repo": "Aqamoe/FGB-ETVRModule",
+      "license": "Apache-2.0",
+      "icon": "https://cdn.jsdelivr.net/gh/Aqamoe/FGB-ETVRModule@main/module/icon.svg",
+      "tags": [
+        "etvr",
+        "eye-tracking",
+        "open-source-hardware",
+        "osc",
+        "udp",
+        "untested",
+        "experimental"
+      ],
+      "capabilities": [
+        "eyes",
+        "gaze"
+      ],
+      "defaultRole": "eyes",
+      "requires": {
+        "abi": 2,
+        "minHostVersion": "1.0.8",
+        "os": [
+          "windows"
+        ],
+        "arch": [
+          "x64"
+        ]
+      },
+      "channel": "stable",
+      "featured": false,
+      "verified": false,
+      "archived": false,
+      "stats": {
+        "downloads": 2,
+        "stars": 0
+      },
+      "publishedAt": "2026-11-02T11:15:58Z",
+      "updatedAt": "2026-11-02T11:14:51Z",
+      "latest": {
+        "version": "0.1.0",
+        "channel": "stable",
+        "publishedAt": "2026-11-02T11:15:58Z",
+        "fileName": "etvr-0.1.0.zip",
+        "downloadUrl": "https://github.com/Aqamoe/FGB-ETVRModule/releases/download/v0.1.0/etvr-0.1.0.zip",
+        "size": 144945,
+        "sha256": "0f956bd0ffa5036799d94a3370af1c88fe0249db0dee207a446bff63889f03ea",
+        "abiVersion": 2,
+        "downloads": 2,
+        "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-ETVRModule/commits/v0.1.0",
+        "releaseUrl": "https://github.com/Aqamoe/FGB-ETVRModule/releases/tag/v0.1.0"
+      },
+      "versions": [
+        {
+          "version": "0.1.0",
+          "channel": "stable",
+          "publishedAt": "2026-11-02T11:15:58Z",
+          "fileName": "etvr-0.1.0.zip",
+          "downloadUrl": "https://github.com/Aqamoe/FGB-ETVRModule/releases/download/v0.1.0/etvr-0.1.0.zip",
+          "size": 144945,
+          "sha256": "0f956bd0ffa5036799d94a3370af1c88fe0249db0dee207a446bff63889f03ea",
+          "abiVersion": 2,
+          "downloads": 2,
+          "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-ETVRModule/commits/v0.1.0",
+          "releaseUrl": "https://github.com/Aqamoe/FGB-ETVRModule/releases/tag/v0.1.0"
+        }
+      ],
+      "i18n": {
+        "en": {
+          "summary": "EyeTrackVR open-source eye tracking over OSC, feeding the eyes and gaze channels.",
+          "description": "Reads EyeTrackVR's OSC stream (listens on 8889 by default). Angles arrive in VRCFT's normalised tan space (+x right, +y up, ±1 at the calibration FOV edge), not degrees, and openness comes from the source directly rather than as 1-blink. Only channels this module can genuinely fill are declared — simulated expressions, head pose and viewport calibration are not. A field absent from a packet leaves its attribute unset instead of faking forward gaze. Includes a 1€ filter matching upstream parameters.",
+          "usage": "1. Point EyeTrackVR's OSC output at this PC on port 8889 (it defaults to 9000, so align them). 2. Quit VRCFaceTracking. 3. Enable the module; assign gaze to the render channel and eyes to the avatar. 4. Untested: what ±1 maps to in your calibration, and V1's shared vertical value under fast eye movement, both need verification."
+        }
+      }
+    },
+    {
+      "id": "com.fgbbridge.foxyface",
+      "name": "FoxyFace",
+      "author": {
+        "name": "Aqamoe (光水)",
+        "url": "https://github.com/Aqamoe"
+      },
+      "summary": "用摄像头面捕的 FoxyFace，直接读它的 UDP JSON 输出，不需要 VRCFT。",
+      "description": "接收 FoxyFace 的 VRCFT 输出（UDP JSON，默认 127.0.0.1:25747）。它的键名就是 Unified Expressions 形状名，模块按名向宿主查下标后直接写入，不硬编码顺序；未知键跳过并计数。能识别 FoxyFace 空闲时发的 PingPacket 心跳，不会把它当成表情数据，也不会误判成断流。Head* 字段单位未确认，本期不接入。",
+      "usage": "1. 在 FoxyFace 的 VRCFT 输出里把目标填 127.0.0.1、端口 25747（它靠监听 57130 广播自动发现，FaceGaze Bridge 不广播，所以要手填）。2. 关闭 VRCFaceTracking 避免抢端口。3. 在「模块」页设为启动并重启引擎。4. 未验证：EyeX/EyeY 的值域上限与极化仍需真机确认。",
+      "homepage": "https://github.com/Aqamoe/FGB-FoxyFaceModule",
+      "repo": "Aqamoe/FGB-FoxyFaceModule",
+      "license": "Apache-2.0",
+      "icon": "https://cdn.jsdelivr.net/gh/Aqamoe/FGB-FoxyFaceModule@main/module/icon.svg",
+      "tags": [
+        "foxyface",
+        "webcam",
+        "face-tracking",
+        "udp",
+        "json",
+        "untested",
+        "experimental"
+      ],
+      "capabilities": [
+        "expression",
+        "eyes"
+      ],
+      "defaultRole": "expression",
+      "requires": {
+        "abi": 2,
+        "minHostVersion": "1.0.8",
+        "os": [
+          "windows"
+        ],
+        "arch": [
+          "x64"
+        ]
+      },
+      "channel": "stable",
+      "featured": false,
+      "verified": false,
+      "archived": false,
+      "stats": {
+        "downloads": 2,
+        "stars": 0
+      },
+      "publishedAt": "2026-11-02T11:15:52Z",
+      "updatedAt": "2026-11-02T11:14:42Z",
+      "latest": {
+        "version": "0.1.0",
+        "channel": "stable",
+        "publishedAt": "2026-11-02T11:15:52Z",
+        "fileName": "foxyface-0.1.0.zip",
+        "downloadUrl": "https://github.com/Aqamoe/FGB-FoxyFaceModule/releases/download/v0.1.0/foxyface-0.1.0.zip",
+        "size": 156130,
+        "sha256": "84c1e08c409599b05d469d67ab37f8bab767a0020280162d5b451bbf67ac4450",
+        "abiVersion": 2,
+        "downloads": 2,
+        "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-FoxyFaceModule/commits/v0.1.0",
+        "releaseUrl": "https://github.com/Aqamoe/FGB-FoxyFaceModule/releases/tag/v0.1.0"
+      },
+      "versions": [
+        {
+          "version": "0.1.0",
+          "channel": "stable",
+          "publishedAt": "2026-11-02T11:15:52Z",
+          "fileName": "foxyface-0.1.0.zip",
+          "downloadUrl": "https://github.com/Aqamoe/FGB-FoxyFaceModule/releases/download/v0.1.0/foxyface-0.1.0.zip",
+          "size": 156130,
+          "sha256": "84c1e08c409599b05d469d67ab37f8bab767a0020280162d5b451bbf67ac4450",
+          "abiVersion": 2,
+          "downloads": 2,
+          "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-FoxyFaceModule/commits/v0.1.0",
+          "releaseUrl": "https://github.com/Aqamoe/FGB-FoxyFaceModule/releases/tag/v0.1.0"
+        }
+      ],
+      "i18n": {
+        "en": {
+          "summary": "FoxyFace webcam tracking over UDP JSON — no VRCFT needed.",
+          "description": "Reads FoxyFace's VRCFT output (UDP JSON, 127.0.0.1:25747 by default). Its keys already are Unified Expressions shape names, so the module resolves them by name instead of hardcoding order, and unknown keys are counted and skipped. FoxyFace's idle PingPacket heartbeat is recognised — it neither becomes expression data nor a false stall. Head* fields are parsed but not emitted because their units are unconfirmed.",
+          "usage": "1. Set FoxyFace's VRCFT target to 127.0.0.1 port 25747 manually — it auto-discovers via a 57130 broadcast listener, and FaceGaze Bridge does not broadcast. 2. Quit VRCFaceTracking (same port). 3. Enable the module and restart the engine. 4. Untested: EyeX/EyeY range and polarity still need hardware checks."
+        }
+      }
+    },
+    {
+      "id": "com.fgbbridge.babble",
+      "name": "Project Babble",
+      "author": {
+        "name": "Aqamoe (光水)",
+        "url": "https://github.com/Aqamoe"
+      },
+      "summary": "Project Babble / Baballonia 摄像头面捕，直接读 OSC，不需要 VRCFT。",
+      "description": "接收 Baballonia 的 OSC over UDP 输出（默认 127.0.0.1:8888），支持单消息与 #bundle 分包。45 条面部地址映射到 Unified Expressions；眼通道是 Baballonia 独有的 PascalCase /LeftEyeX、/LeftEyeY、/LeftEyeLid 等 6 条。归档的 VRCFT-Babble 并不发送这些眼地址，因此本模块以活跃上游 Baballonia 为准，风险已在仓库 README 说明。头姿与瞳孔不提供。",
+      "usage": "1. 在 Baballonia 里启用 VRCFT / OSC 输出，目标填本机地址与端口 8888。2. 关闭 VRCFaceTracking 避免抢端口。3. 在「模块」页设为启动并重启引擎。4. 未验证：眼动地址的极化仅由代码推断，gaze 置信度压到 0.5，请真机确认。",
+      "homepage": "https://github.com/Aqamoe/FGB-BabbleModule",
+      "repo": "Aqamoe/FGB-BabbleModule",
+      "license": "Apache-2.0",
+      "icon": "https://cdn.jsdelivr.net/gh/Aqamoe/FGB-BabbleModule@main/module/icon.svg",
+      "tags": [
+        "babble",
+        "baballonia",
+        "webcam",
+        "face-tracking",
+        "osc",
+        "udp",
+        "untested",
+        "experimental"
+      ],
+      "capabilities": [
+        "expression",
+        "eyes"
+      ],
+      "defaultRole": "expression",
+      "requires": {
+        "abi": 2,
+        "minHostVersion": "1.0.8",
+        "os": [
+          "windows"
+        ],
+        "arch": [
+          "x64"
+        ]
+      },
+      "channel": "stable",
+      "featured": false,
+      "verified": false,
+      "archived": false,
+      "stats": {
+        "downloads": 2,
+        "stars": 0
+      },
+      "publishedAt": "2026-11-02T11:16:19Z",
+      "updatedAt": "2026-11-02T11:15:01Z",
+      "latest": {
+        "version": "0.1.0",
+        "channel": "stable",
+        "publishedAt": "2026-11-02T11:16:19Z",
+        "fileName": "babble-0.1.0.zip",
+        "downloadUrl": "https://github.com/Aqamoe/FGB-BabbleModule/releases/download/v0.1.0/babble-0.1.0.zip",
+        "size": 150526,
+        "sha256": "7d8b144837c35fe8bd93a17d3a2a7fec3f196ca25b639bcb105b3794359d3057",
+        "abiVersion": 2,
+        "downloads": 2,
+        "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-BabbleModule/commits/v0.1.0",
+        "releaseUrl": "https://github.com/Aqamoe/FGB-BabbleModule/releases/tag/v0.1.0"
+      },
+      "versions": [
+        {
+          "version": "0.1.0",
+          "channel": "stable",
+          "publishedAt": "2026-11-02T11:16:19Z",
+          "fileName": "babble-0.1.0.zip",
+          "downloadUrl": "https://github.com/Aqamoe/FGB-BabbleModule/releases/download/v0.1.0/babble-0.1.0.zip",
+          "size": 150526,
+          "sha256": "7d8b144837c35fe8bd93a17d3a2a7fec3f196ca25b639bcb105b3794359d3057",
+          "abiVersion": 2,
+          "downloads": 2,
+          "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-BabbleModule/commits/v0.1.0",
+          "releaseUrl": "https://github.com/Aqamoe/FGB-BabbleModule/releases/tag/v0.1.0"
+        }
+      ],
+      "i18n": {
+        "en": {
+          "summary": "Project Babble / Baballonia webcam tracking over OSC — no VRCFT needed.",
+          "description": "Reads Baballonia's OSC-over-UDP output (127.0.0.1:8888 by default) including #bundle splitting. 45 face addresses map onto Unified Expressions; the eye channel uses Baballonia's own PascalCase addresses (/LeftEyeX, /LeftEyeY, /LeftEyeLid, ...). The archived VRCFT-Babble module never sent those eye addresses, so this follows the active upstream and the risk is documented in the repo README. No head pose, no pupil.",
+          "usage": "1. Enable VRCFT / OSC output in Baballonia, pointed at this PC on port 8888. 2. Quit VRCFaceTracking (same port). 3. Enable the module and restart the engine. 4. Untested: eye address polarity is inferred from code only, confidence capped at 0.5 — please confirm on hardware."
+        }
+      }
+    },
+    {
+      "id": "com.fgbbridge.steamlink",
+      "name": "Steam Link",
+      "author": {
+        "name": "Aqamoe (光水)",
+        "url": "https://github.com/Aqamoe"
+      },
+      "summary": "Steam Link 在 Meta Quest 上的眼动/面捕，直接读它转发的 OSC，不需要 VRCFT。",
+      "description": "接收本机 Steam Link PC 客户端转发的 OSC（UDP 9015，仅绑 127.0.0.1）。56 条 /sl/xrfb/facew 地址映射到 Unified Expressions；EyesClosedL/R 与 LidTightener 给睁眼度；/sl/eyeTrackedGazePoint 是 **3 float 的三维注视点**（不是 2D 屏幕点），归一化成 -Z 前的方向射线，因此从不置 FGB_ATTR_POINT_VIEWPORT。Valve 未公开该协议，字段来自逆向，且「分包」表现为多个各自完整可解析的 bundle，靠跨包逐地址累积重组。",
+      "usage": "1. Steam Link 里启用眼动/面捕并允许 VRCFT 数据格式。2. 关闭 VRCFaceTracking（同端口）。3. 在「模块」页设为启动，渲染注视给 gaze、头像眼睛给 eyes。4. 未验证：注视点的绝对坐标系与单位、facew 值域、facec 语义与 Tongue 扩展均需真机确认。",
+      "homepage": "https://github.com/Aqamoe/FGB-SteamLinkModule",
+      "repo": "Aqamoe/FGB-SteamLinkModule",
+      "license": "Apache-2.0",
+      "icon": "https://cdn.jsdelivr.net/gh/Aqamoe/FGB-SteamLinkModule@main/module/icon.svg",
+      "tags": [
+        "steam-link",
+        "quest",
+        "face-tracking",
+        "eye-tracking",
+        "osc",
+        "udp",
+        "untested",
+        "experimental"
+      ],
+      "capabilities": [
+        "expression",
+        "eyes",
+        "gaze"
+      ],
+      "defaultRole": "expression",
+      "requires": {
+        "abi": 2,
+        "minHostVersion": "1.0.8",
+        "os": [
+          "windows"
+        ],
+        "arch": [
+          "x64"
+        ]
+      },
+      "channel": "stable",
+      "featured": false,
+      "verified": false,
+      "archived": false,
+      "stats": {
+        "downloads": 2,
+        "stars": 0
+      },
+      "publishedAt": "2026-11-02T11:16:11Z",
+      "updatedAt": "2026-11-02T11:15:11Z",
+      "latest": {
+        "version": "0.1.0",
+        "channel": "stable",
+        "publishedAt": "2026-11-02T11:16:11Z",
+        "fileName": "steamlink-0.1.0.zip",
+        "downloadUrl": "https://github.com/Aqamoe/FGB-SteamLinkModule/releases/download/v0.1.0/steamlink-0.1.0.zip",
+        "size": 148390,
+        "sha256": "9dec9a3c7cd59a622449205d4bfc6ee65767d345f124bf68983f6385703fa807",
+        "abiVersion": 2,
+        "downloads": 2,
+        "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-SteamLinkModule/commits/v0.1.0",
+        "releaseUrl": "https://github.com/Aqamoe/FGB-SteamLinkModule/releases/tag/v0.1.0"
+      },
+      "versions": [
+        {
+          "version": "0.1.0",
+          "channel": "stable",
+          "publishedAt": "2026-11-02T11:16:11Z",
+          "fileName": "steamlink-0.1.0.zip",
+          "downloadUrl": "https://github.com/Aqamoe/FGB-SteamLinkModule/releases/download/v0.1.0/steamlink-0.1.0.zip",
+          "size": 148390,
+          "sha256": "9dec9a3c7cd59a622449205d4bfc6ee65767d345f124bf68983f6385703fa807",
+          "abiVersion": 2,
+          "downloads": 2,
+          "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-SteamLinkModule/commits/v0.1.0",
+          "releaseUrl": "https://github.com/Aqamoe/FGB-SteamLinkModule/releases/tag/v0.1.0"
+        }
+      ],
+      "i18n": {
+        "en": {
+          "summary": "Steam Link eye and face tracking on Meta Quest, read straight from its OSC forwarder.",
+          "description": "Reads OSC forwarded by the local Steam Link PC client (UDP 9015, bound to 127.0.0.1 only). 56 /sl/xrfb/facew addresses map onto Unified Expressions; EyesClosedL/R plus LidTightener drive openness; /sl/eyeTrackedGazePoint turns out to be a **3-float 3D gaze point**, not a 2D screen point, so it is normalised into a -Z-forward ray and FGB_ATTR_POINT_VIEWPORT is never set. Valve documents none of this: the fields are reverse-engineered, and 'splitting' arrives as several independently parseable bundles reassembled per address.",
+          "usage": "1. In Steam Link enable eye/face tracking and allow the VRCFT data format. 2. Quit VRCFaceTracking (same port). 3. Enable the module; give gaze to the render channel and eyes to the avatar. 4. Untested: the gaze point's absolute frame and units, the facew value range, facec semantics and the Tongue extension all need hardware verification."
         }
       }
     }
