@@ -1,0 +1,52 @@
+{
+  "id": "com.fgbbridge.virtual-desktop",
+  "name": "Virtual Desktop",
+  "author": {
+    "name": "Aqamoe (光水)",
+    "url": "https://github.com/Aqamoe"
+  },
+  "repo": "Aqamoe/FGB-VirtualDesktopModule",
+  "homepage": "https://github.com/Aqamoe/FGB-VirtualDesktopModule",
+  "license": "Apache-2.0",
+  "summary": "Virtual Desktop 串流的面捕，直接读它写的共享内存 BodyState，不需要 VRCFT。",
+  "description": "读 VirtualDesktop.BodyState 与同名事件（裸名按 .NET OpenFileMapping 实际行为确认，未自造 Local\\ 前缀）。FaceState 360 字节、既无版本号也无计数前缀，故用双快照比对防半更新，映射长度先校验、越界读拒绝且不部分写出。bit0 门控 70 权重→69 个 Unified 形状；眼 valid 时由双眼 Pose 出注视。上游无数据时把瞳孔伪造成 5mm，本模块不写瞳孔。",
+  "usage": "1. VD 串流端 ≥1.30 开启面部转发、头显启用面捕。2. 关闭 VRCFaceTracking。3. 设为启动并重启引擎。4. 未验证：眼 Pose 坐标系、FaceFlags 高位、置信度语义。",
+  "capabilities": [
+    "expression",
+    "eyes",
+    "gaze"
+  ],
+  "defaultRole": "expression",
+  "requires": {
+    "abi": 2,
+    "minHostVersion": "1.0.8",
+    "os": [
+      "windows"
+    ],
+    "arch": [
+      "x64"
+    ]
+  },
+  "tags": [
+    "virtual-desktop",
+    "quest",
+    "face-tracking",
+    "shared-memory",
+    "untested",
+    "experimental"
+  ],
+  "entry": "virtual-desktop.dll",
+  "icon": "module/icon.svg",
+  "iconBranch": "main",
+  "tagPrefix": "v",
+  "assetPattern": "^virtual-desktop-.*\\.zip$",
+  "featured": false,
+  "verified": false,
+  "i18n": {
+    "en": {
+      "summary": "Virtual Desktop face tracking read straight from its BodyState shared memory — no VRCFT.",
+      "description": "Consumes the VirtualDesktop.BodyState mapping and event (bare names confirmed against .NET's OpenFileMapping behaviour, no invented prefix). FaceState is 360 bytes with neither version nor counter, so two-snapshot comparison guards torn reads and lengths are validated before reading. bit0 gates 70 weights onto 69 shapes; per-eye gaze comes from the poses when valid. Pupil is deliberately not written because upstream fakes 5mm.",
+      "usage": "1. VD Streamer 1.30+ with face forwarding on. 2. Quit VRCFaceTracking. 3. Enable the module and restart the engine. 4. Untested: pose frame, high FaceFlags bits, confidence semantics."
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "id": "com.fgbbridge.alxr-local",
+  "name": "ALXR (OpenXR Local)",
+  "author": {
+    "name": "Aqamoe (光水)",
+    "url": "https://github.com/Aqamoe"
+  },
+  "repo": "Aqamoe/FGB-ALXRModule",
+  "homepage": "https://github.com/Aqamoe/FGB-ALXRModule",
+  "license": "Apache-2.0",
+  "summary": "ALXR 本地模式：自建 headless OpenXR 会话读 FB/HTC/EXT 面捕扩展，不需要 VRCFT。",
+  "description": "通过 libalxr 的 C ABI 建无窗口 OpenXR 会话，读当前运行时的面部/眼动扩展。厂商与第三方头文件不入库，只声明最小原型并注明依据版本、运行时动态加载；CI 在无 SDK 环境下靠适配层 stub 构建测试。未确认字段不置属性位。",
+  "usage": "1. 需要可用 OpenXR 运行时与 ALXR 串流端。2. 关闭 VRCFaceTracking。3. 设为启动并重启引擎。4. 未验证：扩展可用性、真机极化。",
+  "capabilities": [
+    "expression",
+    "eyes"
+  ],
+  "defaultRole": "expression",
+  "requires": {
+    "abi": 2,
+    "minHostVersion": "1.0.8",
+    "os": [
+      "windows"
+    ],
+    "arch": [
+      "x64"
+    ]
+  },
+  "tags": [
+    "alxr",
+    "openxr",
+    "quest",
+    "pico",
+    "face-tracking",
+    "untested",
+    "experimental"
+  ],
+  "entry": "alxr-local.dll",
+  "icon": "module/alxr-local/icon.svg",
+  "iconBranch": "main",
+  "tagPrefix": "v",
+  "assetPattern": "^alxr-local-.*\\.zip$",
+  "featured": false,
+  "verified": false,
+  "i18n": {
+    "en": {
+      "summary": "ALXR local mode: a headless OpenXR session reading FB/HTC/EXT face extensions — no VRCFT.",
+      "description": "Builds a windowless OpenXR session through libalxr's C ABI and reads the active runtime's face and eye extensions. No vendor or third-party headers are vendored, only minimal prototypes with their reference version loaded at runtime, and CI builds against an adapter stub where no SDK exists. Unconfirmed fields never set attribute bits.",
+      "usage": "1. Needs a working OpenXR runtime and an ALXR client. 2. Quit VRCFaceTracking. 3. Enable the module and restart the engine. 4. Untested: extension availability, on-hardware polarity."
+    }
+  }
+}

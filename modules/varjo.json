@@ -1,0 +1,51 @@
+{
+  "id": "com.fgbbridge.varjo",
+  "name": "Varjo Eye Tracking",
+  "author": {
+    "name": "Aqamoe (光水)",
+    "url": "https://github.com/Aqamoe"
+  },
+  "repo": "Aqamoe/FGB-VarjoModule",
+  "homepage": "https://github.com/Aqamoe/FGB-VarjoModule",
+  "license": "Apache-2.0",
+  "summary": "Varjo 头显的设备级眼追，运行时加载 VarjoLib，不需要 VRCFT。",
+  "description": "经 Varjo 原生 C API 读注视与睁眼度/瞳孔。厂商头文件不入库，只按 SDK 4.16.0 声明用到的最小原型并运行时动态加载 VarjoLib.dll（varjo.dll 是 2.x 旧名）；官方注明 GetGazeData 需要 Varjo Base Pro，拿不到时自动降级为只出注视；左手系 +Z 前翻成 ABI 的 -Z 前。",
+  "usage": "1. 装 Varjo Base 并完成眼动校准。2. 关闭 VRCFaceTracking。3. 设为启动，gaze 给渲染、eyes 给头像。4. 未验证：真机极化与无 Pro 时的失败形态。",
+  "capabilities": [
+    "eyes",
+    "gaze"
+  ],
+  "defaultRole": "eyes",
+  "requires": {
+    "abi": 2,
+    "minHostVersion": "1.0.8",
+    "os": [
+      "windows"
+    ],
+    "arch": [
+      "x64"
+    ]
+  },
+  "tags": [
+    "varjo",
+    "eye-tracking",
+    "pro-hmd",
+    "native-sdk",
+    "untested",
+    "experimental"
+  ],
+  "entry": "varjo-eyetracking.dll",
+  "icon": "module/icon.svg",
+  "iconBranch": "main",
+  "tagPrefix": "v",
+  "assetPattern": "^varjo-eyetracking-.*\\.zip$",
+  "featured": false,
+  "verified": false,
+  "i18n": {
+    "en": {
+      "summary": "Device-level eye tracking for Varjo headsets, loading VarjoLib at runtime — no VRCFT.",
+      "description": "Uses Varjo's native C API for gaze, openness and pupil. No vendor headers are vendored: only minimal prototypes against SDK 4.16.0, loaded at runtime (varjo.dll is the legacy name). GetGazeData is Pro-only per the docs, so the module degrades to gaze-only when unavailable, and Varjo's left-handed +Z frame is flipped to -Z forward.",
+      "usage": "1. Install Varjo Base and calibrate. 2. Quit VRCFaceTracking. 3. Enable the module; gaze to rendering, eyes to the avatar. 4. Untested: polarity and the failure mode without Pro."
+    }
+  }
+}

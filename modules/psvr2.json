@@ -1,0 +1,51 @@
+{
+  "id": "com.fgbbridge.psvr2",
+  "name": "PlayStation VR2",
+  "author": {
+    "name": "Aqamoe (光水)",
+    "url": "https://github.com/Aqamoe"
+  },
+  "repo": "Aqamoe/FGB-PSVR2Module",
+  "homepage": "https://github.com/Aqamoe/FGB-PSVR2Module",
+  "license": "Apache-2.0",
+  "summary": "PS VR2 眼动，走本地 TCP 3364 向 PSVR2 Toolkit 取数，不需要 VRCFT。",
+  "description": "线格式按上游 C# 的 Marshal.SizeOf 实测还原：帧头 8 字节（u16 类型 + 2 字节填充 + i32 长度），握手与结果同样含填充，眼追回包 v2=76 / v1=66 字节。上游无断线重连（掉线后一直返回旧帧），本模块加 0.5s→10s 退避重连与限频告警。gazeDirNorm 的 z 极化未确认，按 Unity +Z 前映射并带 fail-safe：不指向 -Z 半空间就丢弃。",
+  "usage": "1. 装 PSVR2 驱动与 PlayStation VR2 Toolkit 的 DriverEx 并启用眼动。2. 关闭 VRCFaceTracking。3. 设为启动并重启引擎。4. 未验证：极化、DriverEx 并发、丢追踪时的回包形态。",
+  "capabilities": [
+    "eyes",
+    "gaze"
+  ],
+  "defaultRole": "eyes",
+  "requires": {
+    "abi": 2,
+    "minHostVersion": "1.0.8",
+    "os": [
+      "windows"
+    ],
+    "arch": [
+      "x64"
+    ]
+  },
+  "tags": [
+    "psvr2",
+    "playstation",
+    "eye-tracking",
+    "tcp",
+    "untested",
+    "experimental"
+  ],
+  "entry": "psvr2.dll",
+  "icon": "module/icon.svg",
+  "iconBranch": "main",
+  "tagPrefix": "v",
+  "assetPattern": "^psvr2-.*\\.zip$",
+  "featured": false,
+  "verified": false,
+  "i18n": {
+    "en": {
+      "summary": "PlayStation VR2 eye tracking over the local TCP 3364 toolkit bridge — no VRCFT.",
+      "description": "Wire format restored from the upstream C# Marshal.SizeOf: 8-byte headers (u16 type, 2 padding, i32 length), padded handshake and result payloads, eye replies 76 bytes on v2 and 66 on v1. Upstream never reconnects and keeps serving stale frames, so this adds 0.5s→10s backoff with throttled warnings. The z polarity is unconfirmed: mapped as Unity +Z-forward with a fail-safe that drops rays outside the -Z half-space.",
+      "usage": "1. Install the PSVR2 driver plus Toolkit DriverEx and enable eye tracking. 2. Quit VRCFaceTracking. 3. Enable the module and restart the engine. 4. Untested: polarity, concurrent connections, packets when tracking is lost."
+    }
+  }
+}

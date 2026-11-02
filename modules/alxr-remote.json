@@ -1,0 +1,53 @@
+{
+  "id": "com.fgbbridge.alxr-remote",
+  "name": "ALXR (OpenXR Remote)",
+  "author": {
+    "name": "Aqamoe (光水)",
+    "url": "https://github.com/Aqamoe"
+  },
+  "repo": "Aqamoe/FGB-ALXRModule",
+  "homepage": "https://github.com/Aqamoe/FGB-ALXRModule",
+  "license": "Apache-2.0",
+  "summary": "ALXR 远程模式：TCP 连串流客户端收 ALXRFacialEyePacket，不需要 VRCFT。",
+  "description": "连接客户端 TCP 49192，解析 Pack=1 的 ALXRFacialEyePacket（字节头 + 70 个 float + 两个 XrPosef）。字段顺序、字节序与 pose 布局按上游一手核对，未确认项在 docs/protocol.md 标注；无效帧不置属性位，断线重连带退避与限频告警。与 Local 同仓库、两个独立产物与清单。",
+  "usage": "1. 串流端启用 ALXR 并允许面部数据。2. 关闭 VRCFaceTracking。3. 设为启动并重启引擎。4. 未验证：真机极化、部分权重语义。",
+  "capabilities": [
+    "expression",
+    "eyes"
+  ],
+  "defaultRole": "expression",
+  "requires": {
+    "abi": 2,
+    "minHostVersion": "1.0.8",
+    "os": [
+      "windows"
+    ],
+    "arch": [
+      "x64"
+    ]
+  },
+  "tags": [
+    "alxr",
+    "openxr",
+    "quest",
+    "pico",
+    "tcp",
+    "face-tracking",
+    "untested",
+    "experimental"
+  ],
+  "entry": "alxr-remote.dll",
+  "icon": "module/alxr-remote/icon.svg",
+  "iconBranch": "main",
+  "tagPrefix": "v",
+  "assetPattern": "^alxr-remote-.*\\.zip$",
+  "featured": false,
+  "verified": false,
+  "i18n": {
+    "en": {
+      "summary": "ALXR remote mode: connects to the streaming client over TCP and parses ALXRFacialEyePacket — no VRCFT.",
+      "description": "Connects to the client's TCP 49192 and parses Pack=1 ALXRFacialEyePacket (byte header, 70 floats, two XrPosef). Order, byte order and pose layout were checked first-hand upstream, with unconfirmed items flagged; invalid frames set no attribute bits and reconnection uses backoff. Ships alongside Local as two independent products in one repository.",
+      "usage": "1. Enable ALXR on the streaming side and allow face data. 2. Quit VRCFaceTracking. 3. Enable the module and restart the engine. 4. Untested: polarity, some weight semantics."
+    }
+  }
+}
