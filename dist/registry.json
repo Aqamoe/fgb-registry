@@ -1,7 +1,7 @@
 {
   "$schema": "registry.schema.json",
   "schemaVersion": 2,
-  "generatedAt": "2026-11-02T14:43:23.971Z",
+  "generatedAt": "2026-11-02T21:46:53.454Z",
   "generator": "fgb-registry/2.0.0",
   "registry": {
     "title": "FaceGaze Bridge 模块库",
@@ -358,6 +358,90 @@
       }
     },
     {
+      "id": "com.fgbbridge.virtual-desktop",
+      "name": "Virtual Desktop",
+      "author": {
+        "name": "Aqamoe (光水)",
+        "url": "https://github.com/Aqamoe"
+      },
+      "summary": "Virtual Desktop 串流的面捕，直接读它写的共享内存 BodyState，不需要 VRCFT。",
+      "description": "读 VirtualDesktop.BodyState 与同名事件（裸名按 .NET OpenFileMapping 实际行为确认，未自造 Local\\ 前缀）。FaceState 360 字节、既无版本号也无计数前缀，故用双快照比对防半更新，映射长度先校验、越界读拒绝且不部分写出。bit0 门控 70 权重→69 个 Unified 形状；眼 valid 时由双眼 Pose 出注视。上游无数据时把瞳孔伪造成 5mm，本模块不写瞳孔。",
+      "usage": "1. VD 串流端 ≥1.30 开启面部转发、头显启用面捕。2. 关闭 VRCFaceTracking。3. 设为启动并重启引擎。4. 未验证：眼 Pose 坐标系、FaceFlags 高位、置信度语义。",
+      "homepage": "https://github.com/Aqamoe/FGB-VirtualDesktopModule",
+      "repo": "Aqamoe/FGB-VirtualDesktopModule",
+      "license": "Apache-2.0",
+      "icon": "https://cdn.jsdelivr.net/gh/Aqamoe/FGB-VirtualDesktopModule@main/module/icon.svg",
+      "tags": [
+        "virtual-desktop",
+        "quest",
+        "face-tracking",
+        "shared-memory",
+        "untested",
+        "experimental"
+      ],
+      "capabilities": [
+        "expression",
+        "eyes",
+        "gaze"
+      ],
+      "defaultRole": "expression",
+      "requires": {
+        "abi": 2,
+        "minHostVersion": "1.0.8",
+        "os": [
+          "windows"
+        ],
+        "arch": [
+          "x64"
+        ]
+      },
+      "channel": "stable",
+      "featured": false,
+      "verified": false,
+      "archived": false,
+      "stats": {
+        "downloads": 4,
+        "stars": 0
+      },
+      "publishedAt": "2026-11-02T12:34:44Z",
+      "updatedAt": "2026-11-02T12:33:41Z",
+      "latest": {
+        "version": "0.1.0",
+        "channel": "stable",
+        "publishedAt": "2026-11-02T12:34:44Z",
+        "fileName": "virtual-desktop-0.1.0.zip",
+        "downloadUrl": "https://github.com/Aqamoe/FGB-VirtualDesktopModule/releases/download/v0.1.0/virtual-desktop-0.1.0.zip",
+        "size": 88636,
+        "sha256": "e3720768c389352f7b484477cfa6a57073f390dd42825cfe79067ceec75eb5e5",
+        "abiVersion": 2,
+        "downloads": 4,
+        "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-VirtualDesktopModule/commits/v0.1.0",
+        "releaseUrl": "https://github.com/Aqamoe/FGB-VirtualDesktopModule/releases/tag/v0.1.0"
+      },
+      "versions": [
+        {
+          "version": "0.1.0",
+          "channel": "stable",
+          "publishedAt": "2026-11-02T12:34:44Z",
+          "fileName": "virtual-desktop-0.1.0.zip",
+          "downloadUrl": "https://github.com/Aqamoe/FGB-VirtualDesktopModule/releases/download/v0.1.0/virtual-desktop-0.1.0.zip",
+          "size": 88636,
+          "sha256": "e3720768c389352f7b484477cfa6a57073f390dd42825cfe79067ceec75eb5e5",
+          "abiVersion": 2,
+          "downloads": 4,
+          "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-VirtualDesktopModule/commits/v0.1.0",
+          "releaseUrl": "https://github.com/Aqamoe/FGB-VirtualDesktopModule/releases/tag/v0.1.0"
+        }
+      ],
+      "i18n": {
+        "en": {
+          "summary": "Virtual Desktop face tracking read straight from its BodyState shared memory — no VRCFT.",
+          "description": "Consumes the VirtualDesktop.BodyState mapping and event (bare names confirmed against .NET's OpenFileMapping behaviour, no invented prefix). FaceState is 360 bytes with neither version nor counter, so two-snapshot comparison guards torn reads and lengths are validated before reading. bit0 gates 70 weights onto 69 shapes; per-eye gaze comes from the poses when valid. Pupil is deliberately not written because upstream fakes 5mm.",
+          "usage": "1. VD Streamer 1.30+ with face forwarding on. 2. Quit VRCFaceTracking. 3. Enable the module and restart the engine. 4. Untested: pose frame, high FaceFlags bits, confidence semantics."
+        }
+      }
+    },
+    {
       "id": "com.fgbbridge.alvr",
       "name": "ALVR",
       "author": {
@@ -438,6 +522,258 @@
           "summary": "ALVR eye/face tracking straight over UDP — no VRCFT needed.",
           "description": "Reads ALVR server's VRCFT-compatible packets on port 41463: an 8-byte ASCII prefix followed by little-endian floats (EyesQuat / CombQuat / Face2Fb / FacePico / EyesHtc / LipHtc). Field lengths were checked against ALVR's sending side, so where the older receiver disagrees (FacePico is 52 values, the receiver reads 72) this follows the sender and never invents the extra bytes. No injection, no admin rights.",
           "usage": "1. In ALVR's settings set Eye and face tracking to VRCFaceTracking. 2. Quit VRCFaceTracking — it uses the same UDP port. 3. Enable ALVR as a startup instance and restart the engine. 4. Untested: eye polarity and smoothing aren't device-verified; include your ALVR version and headset when reporting issues."
+        }
+      }
+    },
+    {
+      "id": "com.fgbbridge.alxr-local",
+      "name": "ALXR (OpenXR Local)",
+      "author": {
+        "name": "Aqamoe (光水)",
+        "url": "https://github.com/Aqamoe"
+      },
+      "summary": "ALXR 本地模式：自建 headless OpenXR 会话读 FB/HTC/EXT 面捕扩展，不需要 VRCFT。",
+      "description": "通过 libalxr 的 C ABI 建无窗口 OpenXR 会话，读当前运行时的面部/眼动扩展。厂商与第三方头文件不入库，只声明最小原型并注明依据版本、运行时动态加载；CI 在无 SDK 环境下靠适配层 stub 构建测试。未确认字段不置属性位。",
+      "usage": "1. 需要可用 OpenXR 运行时与 ALXR 串流端。2. 关闭 VRCFaceTracking。3. 设为启动并重启引擎。4. 未验证：扩展可用性、真机极化。",
+      "homepage": "https://github.com/Aqamoe/FGB-ALXRModule",
+      "repo": "Aqamoe/FGB-ALXRModule",
+      "license": "Apache-2.0",
+      "icon": "https://cdn.jsdelivr.net/gh/Aqamoe/FGB-ALXRModule@main/module/alxr-local/icon.svg",
+      "tags": [
+        "alxr",
+        "openxr",
+        "quest",
+        "pico",
+        "face-tracking",
+        "untested",
+        "experimental"
+      ],
+      "capabilities": [
+        "expression",
+        "eyes"
+      ],
+      "defaultRole": "expression",
+      "requires": {
+        "abi": 2,
+        "minHostVersion": "1.0.8",
+        "os": [
+          "windows"
+        ],
+        "arch": [
+          "x64"
+        ]
+      },
+      "channel": "stable",
+      "featured": false,
+      "verified": false,
+      "archived": false,
+      "stats": {
+        "downloads": 3,
+        "stars": 0
+      },
+      "publishedAt": "2026-11-02T13:03:50Z",
+      "updatedAt": "2026-11-02T13:02:33Z",
+      "latest": {
+        "version": "0.1.0",
+        "channel": "stable",
+        "publishedAt": "2026-11-02T13:03:50Z",
+        "fileName": "alxr-local-0.1.0.zip",
+        "downloadUrl": "https://github.com/Aqamoe/FGB-ALXRModule/releases/download/v0.1.0/alxr-local-0.1.0.zip",
+        "size": 148866,
+        "sha256": "bee2e0be0f90a06ff9c475c358781d5327f5dfd11eb4c312469844f953383366",
+        "abiVersion": 2,
+        "downloads": 3,
+        "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-ALXRModule/commits/v0.1.0",
+        "releaseUrl": "https://github.com/Aqamoe/FGB-ALXRModule/releases/tag/v0.1.0"
+      },
+      "versions": [
+        {
+          "version": "0.1.0",
+          "channel": "stable",
+          "publishedAt": "2026-11-02T13:03:50Z",
+          "fileName": "alxr-local-0.1.0.zip",
+          "downloadUrl": "https://github.com/Aqamoe/FGB-ALXRModule/releases/download/v0.1.0/alxr-local-0.1.0.zip",
+          "size": 148866,
+          "sha256": "bee2e0be0f90a06ff9c475c358781d5327f5dfd11eb4c312469844f953383366",
+          "abiVersion": 2,
+          "downloads": 3,
+          "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-ALXRModule/commits/v0.1.0",
+          "releaseUrl": "https://github.com/Aqamoe/FGB-ALXRModule/releases/tag/v0.1.0"
+        }
+      ],
+      "i18n": {
+        "en": {
+          "summary": "ALXR local mode: a headless OpenXR session reading FB/HTC/EXT face extensions — no VRCFT.",
+          "description": "Builds a windowless OpenXR session through libalxr's C ABI and reads the active runtime's face and eye extensions. No vendor or third-party headers are vendored, only minimal prototypes with their reference version loaded at runtime, and CI builds against an adapter stub where no SDK exists. Unconfirmed fields never set attribute bits.",
+          "usage": "1. Needs a working OpenXR runtime and an ALXR client. 2. Quit VRCFaceTracking. 3. Enable the module and restart the engine. 4. Untested: extension availability, on-hardware polarity."
+        }
+      }
+    },
+    {
+      "id": "com.fgbbridge.alxr-remote",
+      "name": "ALXR (OpenXR Remote)",
+      "author": {
+        "name": "Aqamoe (光水)",
+        "url": "https://github.com/Aqamoe"
+      },
+      "summary": "ALXR 远程模式：TCP 连串流客户端收 ALXRFacialEyePacket，不需要 VRCFT。",
+      "description": "连接客户端 TCP 49192，解析 Pack=1 的 ALXRFacialEyePacket（字节头 + 70 个 float + 两个 XrPosef）。字段顺序、字节序与 pose 布局按上游一手核对，未确认项在 docs/protocol.md 标注；无效帧不置属性位，断线重连带退避与限频告警。与 Local 同仓库、两个独立产物与清单。",
+      "usage": "1. 串流端启用 ALXR 并允许面部数据。2. 关闭 VRCFaceTracking。3. 设为启动并重启引擎。4. 未验证：真机极化、部分权重语义。",
+      "homepage": "https://github.com/Aqamoe/FGB-ALXRModule",
+      "repo": "Aqamoe/FGB-ALXRModule",
+      "license": "Apache-2.0",
+      "icon": "https://cdn.jsdelivr.net/gh/Aqamoe/FGB-ALXRModule@main/module/alxr-remote/icon.svg",
+      "tags": [
+        "alxr",
+        "openxr",
+        "quest",
+        "pico",
+        "tcp",
+        "face-tracking",
+        "untested",
+        "experimental"
+      ],
+      "capabilities": [
+        "expression",
+        "eyes"
+      ],
+      "defaultRole": "expression",
+      "requires": {
+        "abi": 2,
+        "minHostVersion": "1.0.8",
+        "os": [
+          "windows"
+        ],
+        "arch": [
+          "x64"
+        ]
+      },
+      "channel": "stable",
+      "featured": false,
+      "verified": false,
+      "archived": false,
+      "stats": {
+        "downloads": 3,
+        "stars": 0
+      },
+      "publishedAt": "2026-11-02T13:03:50Z",
+      "updatedAt": "2026-11-02T13:02:33Z",
+      "latest": {
+        "version": "0.1.0",
+        "channel": "stable",
+        "publishedAt": "2026-11-02T13:03:50Z",
+        "fileName": "alxr-remote-0.1.0.zip",
+        "downloadUrl": "https://github.com/Aqamoe/FGB-ALXRModule/releases/download/v0.1.0/alxr-remote-0.1.0.zip",
+        "size": 150898,
+        "sha256": "5b7066516f09f6cb19396b41238f4fd275fe3792f8fa70f4dd36d678f0bc0742",
+        "abiVersion": 2,
+        "downloads": 3,
+        "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-ALXRModule/commits/v0.1.0",
+        "releaseUrl": "https://github.com/Aqamoe/FGB-ALXRModule/releases/tag/v0.1.0"
+      },
+      "versions": [
+        {
+          "version": "0.1.0",
+          "channel": "stable",
+          "publishedAt": "2026-11-02T13:03:50Z",
+          "fileName": "alxr-remote-0.1.0.zip",
+          "downloadUrl": "https://github.com/Aqamoe/FGB-ALXRModule/releases/download/v0.1.0/alxr-remote-0.1.0.zip",
+          "size": 150898,
+          "sha256": "5b7066516f09f6cb19396b41238f4fd275fe3792f8fa70f4dd36d678f0bc0742",
+          "abiVersion": 2,
+          "downloads": 3,
+          "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-ALXRModule/commits/v0.1.0",
+          "releaseUrl": "https://github.com/Aqamoe/FGB-ALXRModule/releases/tag/v0.1.0"
+        }
+      ],
+      "i18n": {
+        "en": {
+          "summary": "ALXR remote mode: connects to the streaming client over TCP and parses ALXRFacialEyePacket — no VRCFT.",
+          "description": "Connects to the client's TCP 49192 and parses Pack=1 ALXRFacialEyePacket (byte header, 70 floats, two XrPosef). Order, byte order and pose layout were checked first-hand upstream, with unconfirmed items flagged; invalid frames set no attribute bits and reconnection uses backoff. Ships alongside Local as two independent products in one repository.",
+          "usage": "1. Enable ALXR on the streaming side and allow face data. 2. Quit VRCFaceTracking. 3. Enable the module and restart the engine. 4. Untested: polarity, some weight semantics."
+        }
+      }
+    },
+    {
+      "id": "com.fgbbridge.beyond",
+      "name": "Bigscreen Beyond",
+      "author": {
+        "name": "Aqamoe (光水)",
+        "url": "https://github.com/Aqamoe"
+      },
+      "summary": "Bigscreen Beyond 眼追，读官方眼动应用写的 VRCFT 兼容共享内存，不需要 VRCFT。",
+      "description": "结构按 pack 8 共 64 字节：9 个 float 的双眼/合成方向、Confidence、int64 时间戳、int32 IsValid、左右闭眼量。该格式无官方文档、属社区逆向，字段语义与各实现间分歧都写进 docs/protocol.md 并逐项标注。IsValid≠1 时零输出、绝不伪造 (0,0,-1)；置信度不参与「写不写」的裁决，只有 IsValid 参与。",
+      "usage": "1. 装 Bigscreen 官方眼追应用并勾选 VRCFT 接收。2. 关闭 VRCFaceTracking。3. 设为启动，gaze 给渲染、eyes 给头像。4. 未验证：z 符号、时间戳基准、Confidence 量程。",
+      "homepage": "https://github.com/Aqamoe/FGB-BeyondModule",
+      "repo": "Aqamoe/FGB-BeyondModule",
+      "license": "Apache-2.0",
+      "icon": "https://cdn.jsdelivr.net/gh/Aqamoe/FGB-BeyondModule@main/module/icon.svg",
+      "tags": [
+        "bigscreen",
+        "beyond",
+        "eye-tracking",
+        "shared-memory",
+        "untested",
+        "experimental"
+      ],
+      "capabilities": [
+        "eyes",
+        "gaze"
+      ],
+      "defaultRole": "eyes",
+      "requires": {
+        "abi": 2,
+        "minHostVersion": "1.0.8",
+        "os": [
+          "windows"
+        ],
+        "arch": [
+          "x64"
+        ]
+      },
+      "channel": "stable",
+      "featured": false,
+      "verified": false,
+      "archived": false,
+      "stats": {
+        "downloads": 3,
+        "stars": 0
+      },
+      "publishedAt": "2026-11-02T12:35:19Z",
+      "updatedAt": "2026-11-02T12:33:52Z",
+      "latest": {
+        "version": "0.1.0",
+        "channel": "stable",
+        "publishedAt": "2026-11-02T12:35:19Z",
+        "fileName": "beyond-0.1.0.zip",
+        "downloadUrl": "https://github.com/Aqamoe/FGB-BeyondModule/releases/download/v0.1.0/beyond-0.1.0.zip",
+        "size": 155511,
+        "sha256": "75fabba9e7982716bb95cd0699b629b7050fc1911a863db9d22cda22957d0e8c",
+        "abiVersion": 2,
+        "downloads": 3,
+        "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-BeyondModule/commits/v0.1.0",
+        "releaseUrl": "https://github.com/Aqamoe/FGB-BeyondModule/releases/tag/v0.1.0"
+      },
+      "versions": [
+        {
+          "version": "0.1.0",
+          "channel": "stable",
+          "publishedAt": "2026-11-02T12:35:19Z",
+          "fileName": "beyond-0.1.0.zip",
+          "downloadUrl": "https://github.com/Aqamoe/FGB-BeyondModule/releases/download/v0.1.0/beyond-0.1.0.zip",
+          "size": 155511,
+          "sha256": "75fabba9e7982716bb95cd0699b629b7050fc1911a863db9d22cda22957d0e8c",
+          "abiVersion": 2,
+          "downloads": 3,
+          "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-BeyondModule/commits/v0.1.0",
+          "releaseUrl": "https://github.com/Aqamoe/FGB-BeyondModule/releases/tag/v0.1.0"
+        }
+      ],
+      "i18n": {
+        "en": {
+          "summary": "Bigscreen Beyond eye tracking via the VRCFT-compatible memory its official app writes — no VRCFT.",
+          "description": "A 64-byte pack-8 layout: nine floats of direction, confidence, int64 timestamp, int32 IsValid and per-eye closure. There is no official spec — this is community reverse engineering, so meanings and disagreements between implementations are recorded per item. Nothing is emitted unless IsValid is 1, and only IsValid decides emission, never confidence.",
+          "usage": "1. Install Bigscreen's eye-tracking app and tick the VRCFT receiver. 2. Quit VRCFaceTracking. 3. Enable the module. 4. Untested: z sign, timestamp clock base, confidence range."
         }
       }
     },
@@ -778,6 +1114,89 @@
       }
     },
     {
+      "id": "com.fgbbridge.psvr2",
+      "name": "PlayStation VR2",
+      "author": {
+        "name": "Aqamoe (光水)",
+        "url": "https://github.com/Aqamoe"
+      },
+      "summary": "PS VR2 眼动，走本地 TCP 3364 向 PSVR2 Toolkit 取数，不需要 VRCFT。",
+      "description": "线格式按上游 C# 的 Marshal.SizeOf 实测还原：帧头 8 字节（u16 类型 + 2 字节填充 + i32 长度），握手与结果同样含填充，眼追回包 v2=76 / v1=66 字节。上游无断线重连（掉线后一直返回旧帧），本模块加 0.5s→10s 退避重连与限频告警。gazeDirNorm 的 z 极化未确认，按 Unity +Z 前映射并带 fail-safe：不指向 -Z 半空间就丢弃。",
+      "usage": "1. 装 PSVR2 驱动与 PlayStation VR2 Toolkit 的 DriverEx 并启用眼动。2. 关闭 VRCFaceTracking。3. 设为启动并重启引擎。4. 未验证：极化、DriverEx 并发、丢追踪时的回包形态。",
+      "homepage": "https://github.com/Aqamoe/FGB-PSVR2Module",
+      "repo": "Aqamoe/FGB-PSVR2Module",
+      "license": "Apache-2.0",
+      "icon": "https://cdn.jsdelivr.net/gh/Aqamoe/FGB-PSVR2Module@main/module/icon.svg",
+      "tags": [
+        "psvr2",
+        "playstation",
+        "eye-tracking",
+        "tcp",
+        "untested",
+        "experimental"
+      ],
+      "capabilities": [
+        "eyes",
+        "gaze"
+      ],
+      "defaultRole": "eyes",
+      "requires": {
+        "abi": 2,
+        "minHostVersion": "1.0.8",
+        "os": [
+          "windows"
+        ],
+        "arch": [
+          "x64"
+        ]
+      },
+      "channel": "stable",
+      "featured": false,
+      "verified": false,
+      "archived": false,
+      "stats": {
+        "downloads": 3,
+        "stars": 0
+      },
+      "publishedAt": "2026-11-02T12:34:46Z",
+      "updatedAt": "2026-11-02T12:33:29Z",
+      "latest": {
+        "version": "0.1.0",
+        "channel": "stable",
+        "publishedAt": "2026-11-02T12:34:46Z",
+        "fileName": "psvr2-0.1.0.zip",
+        "downloadUrl": "https://github.com/Aqamoe/FGB-PSVR2Module/releases/download/v0.1.0/psvr2-0.1.0.zip",
+        "size": 148905,
+        "sha256": "ccbeb3be28a644d117bd00d1e0949c8ad5de7913944f9ef55ebe8c44f2dce3bf",
+        "abiVersion": 2,
+        "downloads": 3,
+        "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-PSVR2Module/commits/v0.1.0",
+        "releaseUrl": "https://github.com/Aqamoe/FGB-PSVR2Module/releases/tag/v0.1.0"
+      },
+      "versions": [
+        {
+          "version": "0.1.0",
+          "channel": "stable",
+          "publishedAt": "2026-11-02T12:34:46Z",
+          "fileName": "psvr2-0.1.0.zip",
+          "downloadUrl": "https://github.com/Aqamoe/FGB-PSVR2Module/releases/download/v0.1.0/psvr2-0.1.0.zip",
+          "size": 148905,
+          "sha256": "ccbeb3be28a644d117bd00d1e0949c8ad5de7913944f9ef55ebe8c44f2dce3bf",
+          "abiVersion": 2,
+          "downloads": 3,
+          "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-PSVR2Module/commits/v0.1.0",
+          "releaseUrl": "https://github.com/Aqamoe/FGB-PSVR2Module/releases/tag/v0.1.0"
+        }
+      ],
+      "i18n": {
+        "en": {
+          "summary": "PlayStation VR2 eye tracking over the local TCP 3364 toolkit bridge — no VRCFT.",
+          "description": "Wire format restored from the upstream C# Marshal.SizeOf: 8-byte headers (u16 type, 2 padding, i32 length), padded handshake and result payloads, eye replies 76 bytes on v2 and 66 on v1. Upstream never reconnects and keeps serving stale frames, so this adds 0.5s→10s backoff with throttled warnings. The z polarity is unconfirmed: mapped as Unity +Z-forward with a fail-safe that drops rays outside the -Z half-space.",
+          "usage": "1. Install the PSVR2 driver plus Toolkit DriverEx and enable eye tracking. 2. Quit VRCFaceTracking. 3. Enable the module and restart the engine. 4. Untested: polarity, concurrent connections, packets when tracking is lost."
+        }
+      }
+    },
+    {
       "id": "com.fgbbridge.babble",
       "name": "Project Babble",
       "author": {
@@ -863,425 +1282,6 @@
       }
     },
     {
-      "id": "com.fgbbridge.virtual-desktop",
-      "name": "Virtual Desktop",
-      "author": {
-        "name": "Aqamoe (光水)",
-        "url": "https://github.com/Aqamoe"
-      },
-      "summary": "Virtual Desktop 串流的面捕，直接读它写的共享内存 BodyState，不需要 VRCFT。",
-      "description": "读 VirtualDesktop.BodyState 与同名事件（裸名按 .NET OpenFileMapping 实际行为确认，未自造 Local\\ 前缀）。FaceState 360 字节、既无版本号也无计数前缀，故用双快照比对防半更新，映射长度先校验、越界读拒绝且不部分写出。bit0 门控 70 权重→69 个 Unified 形状；眼 valid 时由双眼 Pose 出注视。上游无数据时把瞳孔伪造成 5mm，本模块不写瞳孔。",
-      "usage": "1. VD 串流端 ≥1.30 开启面部转发、头显启用面捕。2. 关闭 VRCFaceTracking。3. 设为启动并重启引擎。4. 未验证：眼 Pose 坐标系、FaceFlags 高位、置信度语义。",
-      "homepage": "https://github.com/Aqamoe/FGB-VirtualDesktopModule",
-      "repo": "Aqamoe/FGB-VirtualDesktopModule",
-      "license": "Apache-2.0",
-      "icon": "https://cdn.jsdelivr.net/gh/Aqamoe/FGB-VirtualDesktopModule@main/module/icon.svg",
-      "tags": [
-        "virtual-desktop",
-        "quest",
-        "face-tracking",
-        "shared-memory",
-        "untested",
-        "experimental"
-      ],
-      "capabilities": [
-        "expression",
-        "eyes",
-        "gaze"
-      ],
-      "defaultRole": "expression",
-      "requires": {
-        "abi": 2,
-        "minHostVersion": "1.0.8",
-        "os": [
-          "windows"
-        ],
-        "arch": [
-          "x64"
-        ]
-      },
-      "channel": "stable",
-      "featured": false,
-      "verified": false,
-      "archived": false,
-      "stats": {
-        "downloads": 2,
-        "stars": 0
-      },
-      "publishedAt": "2026-11-02T12:34:44Z",
-      "updatedAt": "2026-11-02T12:33:41Z",
-      "latest": {
-        "version": "0.1.0",
-        "channel": "stable",
-        "publishedAt": "2026-11-02T12:34:44Z",
-        "fileName": "virtual-desktop-0.1.0.zip",
-        "downloadUrl": "https://github.com/Aqamoe/FGB-VirtualDesktopModule/releases/download/v0.1.0/virtual-desktop-0.1.0.zip",
-        "size": 88636,
-        "sha256": "e3720768c389352f7b484477cfa6a57073f390dd42825cfe79067ceec75eb5e5",
-        "abiVersion": 2,
-        "downloads": 2,
-        "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-VirtualDesktopModule/commits/v0.1.0",
-        "releaseUrl": "https://github.com/Aqamoe/FGB-VirtualDesktopModule/releases/tag/v0.1.0"
-      },
-      "versions": [
-        {
-          "version": "0.1.0",
-          "channel": "stable",
-          "publishedAt": "2026-11-02T12:34:44Z",
-          "fileName": "virtual-desktop-0.1.0.zip",
-          "downloadUrl": "https://github.com/Aqamoe/FGB-VirtualDesktopModule/releases/download/v0.1.0/virtual-desktop-0.1.0.zip",
-          "size": 88636,
-          "sha256": "e3720768c389352f7b484477cfa6a57073f390dd42825cfe79067ceec75eb5e5",
-          "abiVersion": 2,
-          "downloads": 2,
-          "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-VirtualDesktopModule/commits/v0.1.0",
-          "releaseUrl": "https://github.com/Aqamoe/FGB-VirtualDesktopModule/releases/tag/v0.1.0"
-        }
-      ],
-      "i18n": {
-        "en": {
-          "summary": "Virtual Desktop face tracking read straight from its BodyState shared memory — no VRCFT.",
-          "description": "Consumes the VirtualDesktop.BodyState mapping and event (bare names confirmed against .NET's OpenFileMapping behaviour, no invented prefix). FaceState is 360 bytes with neither version nor counter, so two-snapshot comparison guards torn reads and lengths are validated before reading. bit0 gates 70 weights onto 69 shapes; per-eye gaze comes from the poses when valid. Pupil is deliberately not written because upstream fakes 5mm.",
-          "usage": "1. VD Streamer 1.30+ with face forwarding on. 2. Quit VRCFaceTracking. 3. Enable the module and restart the engine. 4. Untested: pose frame, high FaceFlags bits, confidence semantics."
-        }
-      }
-    },
-    {
-      "id": "com.fgbbridge.alxr-local",
-      "name": "ALXR (OpenXR Local)",
-      "author": {
-        "name": "Aqamoe (光水)",
-        "url": "https://github.com/Aqamoe"
-      },
-      "summary": "ALXR 本地模式：自建 headless OpenXR 会话读 FB/HTC/EXT 面捕扩展，不需要 VRCFT。",
-      "description": "通过 libalxr 的 C ABI 建无窗口 OpenXR 会话，读当前运行时的面部/眼动扩展。厂商与第三方头文件不入库，只声明最小原型并注明依据版本、运行时动态加载；CI 在无 SDK 环境下靠适配层 stub 构建测试。未确认字段不置属性位。",
-      "usage": "1. 需要可用 OpenXR 运行时与 ALXR 串流端。2. 关闭 VRCFaceTracking。3. 设为启动并重启引擎。4. 未验证：扩展可用性、真机极化。",
-      "homepage": "https://github.com/Aqamoe/FGB-ALXRModule",
-      "repo": "Aqamoe/FGB-ALXRModule",
-      "license": "Apache-2.0",
-      "icon": "https://cdn.jsdelivr.net/gh/Aqamoe/FGB-ALXRModule@main/module/alxr-local/icon.svg",
-      "tags": [
-        "alxr",
-        "openxr",
-        "quest",
-        "pico",
-        "face-tracking",
-        "untested",
-        "experimental"
-      ],
-      "capabilities": [
-        "expression",
-        "eyes"
-      ],
-      "defaultRole": "expression",
-      "requires": {
-        "abi": 2,
-        "minHostVersion": "1.0.8",
-        "os": [
-          "windows"
-        ],
-        "arch": [
-          "x64"
-        ]
-      },
-      "channel": "stable",
-      "featured": false,
-      "verified": false,
-      "archived": false,
-      "stats": {
-        "downloads": 1,
-        "stars": 0
-      },
-      "publishedAt": "2026-11-02T13:03:50Z",
-      "updatedAt": "2026-11-02T13:02:33Z",
-      "latest": {
-        "version": "0.1.0",
-        "channel": "stable",
-        "publishedAt": "2026-11-02T13:03:50Z",
-        "fileName": "alxr-local-0.1.0.zip",
-        "downloadUrl": "https://github.com/Aqamoe/FGB-ALXRModule/releases/download/v0.1.0/alxr-local-0.1.0.zip",
-        "size": 148866,
-        "sha256": "bee2e0be0f90a06ff9c475c358781d5327f5dfd11eb4c312469844f953383366",
-        "abiVersion": 2,
-        "downloads": 1,
-        "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-ALXRModule/commits/v0.1.0",
-        "releaseUrl": "https://github.com/Aqamoe/FGB-ALXRModule/releases/tag/v0.1.0"
-      },
-      "versions": [
-        {
-          "version": "0.1.0",
-          "channel": "stable",
-          "publishedAt": "2026-11-02T13:03:50Z",
-          "fileName": "alxr-local-0.1.0.zip",
-          "downloadUrl": "https://github.com/Aqamoe/FGB-ALXRModule/releases/download/v0.1.0/alxr-local-0.1.0.zip",
-          "size": 148866,
-          "sha256": "bee2e0be0f90a06ff9c475c358781d5327f5dfd11eb4c312469844f953383366",
-          "abiVersion": 2,
-          "downloads": 1,
-          "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-ALXRModule/commits/v0.1.0",
-          "releaseUrl": "https://github.com/Aqamoe/FGB-ALXRModule/releases/tag/v0.1.0"
-        }
-      ],
-      "i18n": {
-        "en": {
-          "summary": "ALXR local mode: a headless OpenXR session reading FB/HTC/EXT face extensions — no VRCFT.",
-          "description": "Builds a windowless OpenXR session through libalxr's C ABI and reads the active runtime's face and eye extensions. No vendor or third-party headers are vendored, only minimal prototypes with their reference version loaded at runtime, and CI builds against an adapter stub where no SDK exists. Unconfirmed fields never set attribute bits.",
-          "usage": "1. Needs a working OpenXR runtime and an ALXR client. 2. Quit VRCFaceTracking. 3. Enable the module and restart the engine. 4. Untested: extension availability, on-hardware polarity."
-        }
-      }
-    },
-    {
-      "id": "com.fgbbridge.alxr-remote",
-      "name": "ALXR (OpenXR Remote)",
-      "author": {
-        "name": "Aqamoe (光水)",
-        "url": "https://github.com/Aqamoe"
-      },
-      "summary": "ALXR 远程模式：TCP 连串流客户端收 ALXRFacialEyePacket，不需要 VRCFT。",
-      "description": "连接客户端 TCP 49192，解析 Pack=1 的 ALXRFacialEyePacket（字节头 + 70 个 float + 两个 XrPosef）。字段顺序、字节序与 pose 布局按上游一手核对，未确认项在 docs/protocol.md 标注；无效帧不置属性位，断线重连带退避与限频告警。与 Local 同仓库、两个独立产物与清单。",
-      "usage": "1. 串流端启用 ALXR 并允许面部数据。2. 关闭 VRCFaceTracking。3. 设为启动并重启引擎。4. 未验证：真机极化、部分权重语义。",
-      "homepage": "https://github.com/Aqamoe/FGB-ALXRModule",
-      "repo": "Aqamoe/FGB-ALXRModule",
-      "license": "Apache-2.0",
-      "icon": "https://cdn.jsdelivr.net/gh/Aqamoe/FGB-ALXRModule@main/module/alxr-remote/icon.svg",
-      "tags": [
-        "alxr",
-        "openxr",
-        "quest",
-        "pico",
-        "tcp",
-        "face-tracking",
-        "untested",
-        "experimental"
-      ],
-      "capabilities": [
-        "expression",
-        "eyes"
-      ],
-      "defaultRole": "expression",
-      "requires": {
-        "abi": 2,
-        "minHostVersion": "1.0.8",
-        "os": [
-          "windows"
-        ],
-        "arch": [
-          "x64"
-        ]
-      },
-      "channel": "stable",
-      "featured": false,
-      "verified": false,
-      "archived": false,
-      "stats": {
-        "downloads": 1,
-        "stars": 0
-      },
-      "publishedAt": "2026-11-02T13:03:50Z",
-      "updatedAt": "2026-11-02T13:02:33Z",
-      "latest": {
-        "version": "0.1.0",
-        "channel": "stable",
-        "publishedAt": "2026-11-02T13:03:50Z",
-        "fileName": "alxr-remote-0.1.0.zip",
-        "downloadUrl": "https://github.com/Aqamoe/FGB-ALXRModule/releases/download/v0.1.0/alxr-remote-0.1.0.zip",
-        "size": 150898,
-        "sha256": "5b7066516f09f6cb19396b41238f4fd275fe3792f8fa70f4dd36d678f0bc0742",
-        "abiVersion": 2,
-        "downloads": 1,
-        "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-ALXRModule/commits/v0.1.0",
-        "releaseUrl": "https://github.com/Aqamoe/FGB-ALXRModule/releases/tag/v0.1.0"
-      },
-      "versions": [
-        {
-          "version": "0.1.0",
-          "channel": "stable",
-          "publishedAt": "2026-11-02T13:03:50Z",
-          "fileName": "alxr-remote-0.1.0.zip",
-          "downloadUrl": "https://github.com/Aqamoe/FGB-ALXRModule/releases/download/v0.1.0/alxr-remote-0.1.0.zip",
-          "size": 150898,
-          "sha256": "5b7066516f09f6cb19396b41238f4fd275fe3792f8fa70f4dd36d678f0bc0742",
-          "abiVersion": 2,
-          "downloads": 1,
-          "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-ALXRModule/commits/v0.1.0",
-          "releaseUrl": "https://github.com/Aqamoe/FGB-ALXRModule/releases/tag/v0.1.0"
-        }
-      ],
-      "i18n": {
-        "en": {
-          "summary": "ALXR remote mode: connects to the streaming client over TCP and parses ALXRFacialEyePacket — no VRCFT.",
-          "description": "Connects to the client's TCP 49192 and parses Pack=1 ALXRFacialEyePacket (byte header, 70 floats, two XrPosef). Order, byte order and pose layout were checked first-hand upstream, with unconfirmed items flagged; invalid frames set no attribute bits and reconnection uses backoff. Ships alongside Local as two independent products in one repository.",
-          "usage": "1. Enable ALXR on the streaming side and allow face data. 2. Quit VRCFaceTracking. 3. Enable the module and restart the engine. 4. Untested: polarity, some weight semantics."
-        }
-      }
-    },
-    {
-      "id": "com.fgbbridge.beyond",
-      "name": "Bigscreen Beyond",
-      "author": {
-        "name": "Aqamoe (光水)",
-        "url": "https://github.com/Aqamoe"
-      },
-      "summary": "Bigscreen Beyond 眼追，读官方眼动应用写的 VRCFT 兼容共享内存，不需要 VRCFT。",
-      "description": "结构按 pack 8 共 64 字节：9 个 float 的双眼/合成方向、Confidence、int64 时间戳、int32 IsValid、左右闭眼量。该格式无官方文档、属社区逆向，字段语义与各实现间分歧都写进 docs/protocol.md 并逐项标注。IsValid≠1 时零输出、绝不伪造 (0,0,-1)；置信度不参与「写不写」的裁决，只有 IsValid 参与。",
-      "usage": "1. 装 Bigscreen 官方眼追应用并勾选 VRCFT 接收。2. 关闭 VRCFaceTracking。3. 设为启动，gaze 给渲染、eyes 给头像。4. 未验证：z 符号、时间戳基准、Confidence 量程。",
-      "homepage": "https://github.com/Aqamoe/FGB-BeyondModule",
-      "repo": "Aqamoe/FGB-BeyondModule",
-      "license": "Apache-2.0",
-      "icon": "https://cdn.jsdelivr.net/gh/Aqamoe/FGB-BeyondModule@main/module/icon.svg",
-      "tags": [
-        "bigscreen",
-        "beyond",
-        "eye-tracking",
-        "shared-memory",
-        "untested",
-        "experimental"
-      ],
-      "capabilities": [
-        "eyes",
-        "gaze"
-      ],
-      "defaultRole": "eyes",
-      "requires": {
-        "abi": 2,
-        "minHostVersion": "1.0.8",
-        "os": [
-          "windows"
-        ],
-        "arch": [
-          "x64"
-        ]
-      },
-      "channel": "stable",
-      "featured": false,
-      "verified": false,
-      "archived": false,
-      "stats": {
-        "downloads": 1,
-        "stars": 0
-      },
-      "publishedAt": "2026-11-02T12:35:19Z",
-      "updatedAt": "2026-11-02T12:33:52Z",
-      "latest": {
-        "version": "0.1.0",
-        "channel": "stable",
-        "publishedAt": "2026-11-02T12:35:19Z",
-        "fileName": "beyond-0.1.0.zip",
-        "downloadUrl": "https://github.com/Aqamoe/FGB-BeyondModule/releases/download/v0.1.0/beyond-0.1.0.zip",
-        "size": 155511,
-        "sha256": "75fabba9e7982716bb95cd0699b629b7050fc1911a863db9d22cda22957d0e8c",
-        "abiVersion": 2,
-        "downloads": 1,
-        "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-BeyondModule/commits/v0.1.0",
-        "releaseUrl": "https://github.com/Aqamoe/FGB-BeyondModule/releases/tag/v0.1.0"
-      },
-      "versions": [
-        {
-          "version": "0.1.0",
-          "channel": "stable",
-          "publishedAt": "2026-11-02T12:35:19Z",
-          "fileName": "beyond-0.1.0.zip",
-          "downloadUrl": "https://github.com/Aqamoe/FGB-BeyondModule/releases/download/v0.1.0/beyond-0.1.0.zip",
-          "size": 155511,
-          "sha256": "75fabba9e7982716bb95cd0699b629b7050fc1911a863db9d22cda22957d0e8c",
-          "abiVersion": 2,
-          "downloads": 1,
-          "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-BeyondModule/commits/v0.1.0",
-          "releaseUrl": "https://github.com/Aqamoe/FGB-BeyondModule/releases/tag/v0.1.0"
-        }
-      ],
-      "i18n": {
-        "en": {
-          "summary": "Bigscreen Beyond eye tracking via the VRCFT-compatible memory its official app writes — no VRCFT.",
-          "description": "A 64-byte pack-8 layout: nine floats of direction, confidence, int64 timestamp, int32 IsValid and per-eye closure. There is no official spec — this is community reverse engineering, so meanings and disagreements between implementations are recorded per item. Nothing is emitted unless IsValid is 1, and only IsValid decides emission, never confidence.",
-          "usage": "1. Install Bigscreen's eye-tracking app and tick the VRCFT receiver. 2. Quit VRCFaceTracking. 3. Enable the module. 4. Untested: z sign, timestamp clock base, confidence range."
-        }
-      }
-    },
-    {
-      "id": "com.fgbbridge.psvr2",
-      "name": "PlayStation VR2",
-      "author": {
-        "name": "Aqamoe (光水)",
-        "url": "https://github.com/Aqamoe"
-      },
-      "summary": "PS VR2 眼动，走本地 TCP 3364 向 PSVR2 Toolkit 取数，不需要 VRCFT。",
-      "description": "线格式按上游 C# 的 Marshal.SizeOf 实测还原：帧头 8 字节（u16 类型 + 2 字节填充 + i32 长度），握手与结果同样含填充，眼追回包 v2=76 / v1=66 字节。上游无断线重连（掉线后一直返回旧帧），本模块加 0.5s→10s 退避重连与限频告警。gazeDirNorm 的 z 极化未确认，按 Unity +Z 前映射并带 fail-safe：不指向 -Z 半空间就丢弃。",
-      "usage": "1. 装 PSVR2 驱动与 PlayStation VR2 Toolkit 的 DriverEx 并启用眼动。2. 关闭 VRCFaceTracking。3. 设为启动并重启引擎。4. 未验证：极化、DriverEx 并发、丢追踪时的回包形态。",
-      "homepage": "https://github.com/Aqamoe/FGB-PSVR2Module",
-      "repo": "Aqamoe/FGB-PSVR2Module",
-      "license": "Apache-2.0",
-      "icon": "https://cdn.jsdelivr.net/gh/Aqamoe/FGB-PSVR2Module@main/module/icon.svg",
-      "tags": [
-        "psvr2",
-        "playstation",
-        "eye-tracking",
-        "tcp",
-        "untested",
-        "experimental"
-      ],
-      "capabilities": [
-        "eyes",
-        "gaze"
-      ],
-      "defaultRole": "eyes",
-      "requires": {
-        "abi": 2,
-        "minHostVersion": "1.0.8",
-        "os": [
-          "windows"
-        ],
-        "arch": [
-          "x64"
-        ]
-      },
-      "channel": "stable",
-      "featured": false,
-      "verified": false,
-      "archived": false,
-      "stats": {
-        "downloads": 1,
-        "stars": 0
-      },
-      "publishedAt": "2026-11-02T12:34:46Z",
-      "updatedAt": "2026-11-02T12:33:29Z",
-      "latest": {
-        "version": "0.1.0",
-        "channel": "stable",
-        "publishedAt": "2026-11-02T12:34:46Z",
-        "fileName": "psvr2-0.1.0.zip",
-        "downloadUrl": "https://github.com/Aqamoe/FGB-PSVR2Module/releases/download/v0.1.0/psvr2-0.1.0.zip",
-        "size": 148905,
-        "sha256": "ccbeb3be28a644d117bd00d1e0949c8ad5de7913944f9ef55ebe8c44f2dce3bf",
-        "abiVersion": 2,
-        "downloads": 1,
-        "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-PSVR2Module/commits/v0.1.0",
-        "releaseUrl": "https://github.com/Aqamoe/FGB-PSVR2Module/releases/tag/v0.1.0"
-      },
-      "versions": [
-        {
-          "version": "0.1.0",
-          "channel": "stable",
-          "publishedAt": "2026-11-02T12:34:46Z",
-          "fileName": "psvr2-0.1.0.zip",
-          "downloadUrl": "https://github.com/Aqamoe/FGB-PSVR2Module/releases/download/v0.1.0/psvr2-0.1.0.zip",
-          "size": 148905,
-          "sha256": "ccbeb3be28a644d117bd00d1e0949c8ad5de7913944f9ef55ebe8c44f2dce3bf",
-          "abiVersion": 2,
-          "downloads": 1,
-          "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-PSVR2Module/commits/v0.1.0",
-          "releaseUrl": "https://github.com/Aqamoe/FGB-PSVR2Module/releases/tag/v0.1.0"
-        }
-      ],
-      "i18n": {
-        "en": {
-          "summary": "PlayStation VR2 eye tracking over the local TCP 3364 toolkit bridge — no VRCFT.",
-          "description": "Wire format restored from the upstream C# Marshal.SizeOf: 8-byte headers (u16 type, 2 padding, i32 length), padded handshake and result payloads, eye replies 76 bytes on v2 and 66 on v1. Upstream never reconnects and keeps serving stale frames, so this adds 0.5s→10s backoff with throttled warnings. The z polarity is unconfirmed: mapped as Unity +Z-forward with a fail-safe that drops rays outside the -Z half-space.",
-          "usage": "1. Install the PSVR2 driver plus Toolkit DriverEx and enable eye tracking. 2. Quit VRCFaceTracking. 3. Enable the module and restart the engine. 4. Untested: polarity, concurrent connections, packets when tracking is lost."
-        }
-      }
-    },
-    {
       "id": "com.fgbbridge.varjo",
       "name": "Varjo Eye Tracking",
       "author": {
@@ -1323,7 +1323,7 @@
       "verified": false,
       "archived": false,
       "stats": {
-        "downloads": 1,
+        "downloads": 3,
         "stars": 0
       },
       "publishedAt": "2026-11-02T12:34:21Z",
@@ -1337,7 +1337,7 @@
         "size": 143060,
         "sha256": "a301c556c92efe1c0f6dac425eff9cd7a89a2cd0c163957e945d351e17792b10",
         "abiVersion": 2,
-        "downloads": 1,
+        "downloads": 3,
         "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-VarjoModule/commits/v0.1.0",
         "releaseUrl": "https://github.com/Aqamoe/FGB-VarjoModule/releases/tag/v0.1.0"
       },
@@ -1351,7 +1351,7 @@
           "size": 143060,
           "sha256": "a301c556c92efe1c0f6dac425eff9cd7a89a2cd0c163957e945d351e17792b10",
           "abiVersion": 2,
-          "downloads": 1,
+          "downloads": 3,
           "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-VarjoModule/commits/v0.1.0",
           "releaseUrl": "https://github.com/Aqamoe/FGB-VarjoModule/releases/tag/v0.1.0"
         }
