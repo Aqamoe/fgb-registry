@@ -1,7 +1,7 @@
 {
   "$schema": "registry.schema.json",
   "schemaVersion": 2,
-  "generatedAt": "2026-11-02T21:46:53.454Z",
+  "generatedAt": "2026-11-03T19:36:14.645Z",
   "generator": "fgb-registry/2.0.0",
   "registry": {
     "title": "FaceGaze Bridge 模块库",
@@ -50,7 +50,7 @@
       "verified": true,
       "archived": false,
       "stats": {
-        "downloads": 3,
+        "downloads": 4,
         "stars": 0
       },
       "publishedAt": "2026-10-31T08:56:27Z",
@@ -64,7 +64,7 @@
         "size": 99102,
         "sha256": "19fd484800ee75cd12d58c0ebbcfd5d254e448b67cacf1059b9385544bed80f0",
         "abiVersion": 2,
-        "downloads": 3,
+        "downloads": 4,
         "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-PicoFaceModule/compare/v0.1.0...v0.2.0",
         "releaseUrl": "https://github.com/Aqamoe/FGB-PicoFaceModule/releases/tag/v0.2.0"
       },
@@ -78,7 +78,7 @@
           "size": 99102,
           "sha256": "19fd484800ee75cd12d58c0ebbcfd5d254e448b67cacf1059b9385544bed80f0",
           "abiVersion": 2,
-          "downloads": 3,
+          "downloads": 4,
           "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-PicoFaceModule/compare/v0.1.0...v0.2.0",
           "releaseUrl": "https://github.com/Aqamoe/FGB-PicoFaceModule/releases/tag/v0.2.0"
         },
@@ -101,6 +101,92 @@
           "summary": "PICO 4 Pro/Enterprise face tracking straight from PICO Connect over UDP — no VRCFT needed.",
           "description": "Reads the UDP face-tracking stream that PICO Connect already sends, and outputs Unified Expressions shapes plus eye openness and per-eye gaze. 52 ARKit coefficients map to 58 shapes. No process injection, no admin rights.",
           "usage": "1. In PICO Connect's settings.json set faceTrackingMode to 1 and faceTrackingTransferProtocol to 2 (use 1 for the legacy VRCFT protocol), then restart PICO Connect. 2. Quit VRCFaceTracking — it fights this module for the same UDP port. 3. Set the module as active on the Modules page and restart the engine; the card should turn active once the headset is connected."
+        }
+      }
+    },
+    {
+      "id": "com.fgbbridge.steamlink",
+      "name": "Steam Link",
+      "author": {
+        "name": "Aqamoe (光水)",
+        "url": "https://github.com/Aqamoe"
+      },
+      "summary": "Steam Link 在 Meta Quest 上的眼动/面捕，直接读它转发的 OSC，不需要 VRCFT。",
+      "description": "接收本机 Steam Link PC 客户端转发的 OSC（UDP 9015，仅绑 127.0.0.1）。56 条 /sl/xrfb/facew 地址映射到 Unified Expressions；EyesClosedL/R 与 LidTightener 给睁眼度；/sl/eyeTrackedGazePoint 是 **3 float 的三维注视点**（不是 2D 屏幕点），归一化成 -Z 前的方向射线，因此从不置 FGB_ATTR_POINT_VIEWPORT。Valve 未公开该协议，字段来自逆向，且「分包」表现为多个各自完整可解析的 bundle，靠跨包逐地址累积重组。",
+      "usage": "1. Steam Link 里启用眼动/面捕并允许 VRCFT 数据格式。2. 关闭 VRCFaceTracking（同端口）。3. 在「模块」页设为启动，渲染注视给 gaze、头像眼睛给 eyes。4. 未验证：注视点的绝对坐标系与单位、facew 值域、facec 语义与 Tongue 扩展均需真机确认。",
+      "homepage": "https://github.com/Aqamoe/FGB-SteamLinkModule",
+      "repo": "Aqamoe/FGB-SteamLinkModule",
+      "license": "Apache-2.0",
+      "icon": "https://cdn.jsdelivr.net/gh/Aqamoe/FGB-SteamLinkModule@main/module/icon.svg",
+      "tags": [
+        "steam-link",
+        "quest",
+        "face-tracking",
+        "eye-tracking",
+        "osc",
+        "udp",
+        "untested",
+        "experimental"
+      ],
+      "capabilities": [
+        "expression",
+        "eyes",
+        "gaze"
+      ],
+      "defaultRole": "expression",
+      "requires": {
+        "abi": 2,
+        "minHostVersion": "1.0.8",
+        "os": [
+          "windows"
+        ],
+        "arch": [
+          "x64"
+        ]
+      },
+      "channel": "stable",
+      "featured": false,
+      "verified": false,
+      "archived": false,
+      "stats": {
+        "downloads": 5,
+        "stars": 0
+      },
+      "publishedAt": "2026-11-02T11:16:11Z",
+      "updatedAt": "2026-11-02T11:15:11Z",
+      "latest": {
+        "version": "0.1.0",
+        "channel": "stable",
+        "publishedAt": "2026-11-02T11:16:11Z",
+        "fileName": "steamlink-0.1.0.zip",
+        "downloadUrl": "https://github.com/Aqamoe/FGB-SteamLinkModule/releases/download/v0.1.0/steamlink-0.1.0.zip",
+        "size": 148390,
+        "sha256": "9dec9a3c7cd59a622449205d4bfc6ee65767d345f124bf68983f6385703fa807",
+        "abiVersion": 2,
+        "downloads": 5,
+        "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-SteamLinkModule/commits/v0.1.0",
+        "releaseUrl": "https://github.com/Aqamoe/FGB-SteamLinkModule/releases/tag/v0.1.0"
+      },
+      "versions": [
+        {
+          "version": "0.1.0",
+          "channel": "stable",
+          "publishedAt": "2026-11-02T11:16:11Z",
+          "fileName": "steamlink-0.1.0.zip",
+          "downloadUrl": "https://github.com/Aqamoe/FGB-SteamLinkModule/releases/download/v0.1.0/steamlink-0.1.0.zip",
+          "size": 148390,
+          "sha256": "9dec9a3c7cd59a622449205d4bfc6ee65767d345f124bf68983f6385703fa807",
+          "abiVersion": 2,
+          "downloads": 5,
+          "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-SteamLinkModule/commits/v0.1.0",
+          "releaseUrl": "https://github.com/Aqamoe/FGB-SteamLinkModule/releases/tag/v0.1.0"
+        }
+      ],
+      "i18n": {
+        "en": {
+          "summary": "Steam Link eye and face tracking on Meta Quest, read straight from its OSC forwarder.",
+          "description": "Reads OSC forwarded by the local Steam Link PC client (UDP 9015, bound to 127.0.0.1 only). 56 /sl/xrfb/facew addresses map onto Unified Expressions; EyesClosedL/R plus LidTightener drive openness; /sl/eyeTrackedGazePoint turns out to be a **3-float 3D gaze point**, not a 2D screen point, so it is normalised into a -Z-forward ray and FGB_ATTR_POINT_VIEWPORT is never set. Valve documents none of this: the fields are reverse-engineered, and 'splitting' arrives as several independently parseable bundles reassembled per address.",
+          "usage": "1. In Steam Link enable eye/face tracking and allow the VRCFT data format. 2. Quit VRCFaceTracking (same port). 3. Enable the module; give gaze to the render channel and eyes to the avatar. 4. Untested: the gaze point's absolute frame and units, the facew value range, facec semantics and the Tongue extension all need hardware verification."
         }
       }
     },
@@ -268,92 +354,6 @@
           "summary": "MeowFace face tracking straight over UDP — no VRCFT needed.",
           "description": "Reads MeowFace's UDP JSON stream on port 12345 and outputs Unified Expressions shapes, eye openness and per-eye gaze. 49 ARKit-style coefficients go through the shared mapping table; MeowFace's own approximations are listed separately. No process injection, no admin rights. **Community-untested** — hardware acceptance is still pending.",
           "usage": "1. Point MeowFace on your phone at this PC's LAN address (port 12345). 2. Quit VRCFaceTracking — it fights this module for the same port. 3. Set MeowFace as a startup instance (expression + eyes) and restart the engine. 4. Untested: please file an issue with phone model, MeowFace version and what you saw, especially left/right eye polarity."
-        }
-      }
-    },
-    {
-      "id": "com.fgbbridge.steamlink",
-      "name": "Steam Link",
-      "author": {
-        "name": "Aqamoe (光水)",
-        "url": "https://github.com/Aqamoe"
-      },
-      "summary": "Steam Link 在 Meta Quest 上的眼动/面捕，直接读它转发的 OSC，不需要 VRCFT。",
-      "description": "接收本机 Steam Link PC 客户端转发的 OSC（UDP 9015，仅绑 127.0.0.1）。56 条 /sl/xrfb/facew 地址映射到 Unified Expressions；EyesClosedL/R 与 LidTightener 给睁眼度；/sl/eyeTrackedGazePoint 是 **3 float 的三维注视点**（不是 2D 屏幕点），归一化成 -Z 前的方向射线，因此从不置 FGB_ATTR_POINT_VIEWPORT。Valve 未公开该协议，字段来自逆向，且「分包」表现为多个各自完整可解析的 bundle，靠跨包逐地址累积重组。",
-      "usage": "1. Steam Link 里启用眼动/面捕并允许 VRCFT 数据格式。2. 关闭 VRCFaceTracking（同端口）。3. 在「模块」页设为启动，渲染注视给 gaze、头像眼睛给 eyes。4. 未验证：注视点的绝对坐标系与单位、facew 值域、facec 语义与 Tongue 扩展均需真机确认。",
-      "homepage": "https://github.com/Aqamoe/FGB-SteamLinkModule",
-      "repo": "Aqamoe/FGB-SteamLinkModule",
-      "license": "Apache-2.0",
-      "icon": "https://cdn.jsdelivr.net/gh/Aqamoe/FGB-SteamLinkModule@main/module/icon.svg",
-      "tags": [
-        "steam-link",
-        "quest",
-        "face-tracking",
-        "eye-tracking",
-        "osc",
-        "udp",
-        "untested",
-        "experimental"
-      ],
-      "capabilities": [
-        "expression",
-        "eyes",
-        "gaze"
-      ],
-      "defaultRole": "expression",
-      "requires": {
-        "abi": 2,
-        "minHostVersion": "1.0.8",
-        "os": [
-          "windows"
-        ],
-        "arch": [
-          "x64"
-        ]
-      },
-      "channel": "stable",
-      "featured": false,
-      "verified": false,
-      "archived": false,
-      "stats": {
-        "downloads": 4,
-        "stars": 0
-      },
-      "publishedAt": "2026-11-02T11:16:11Z",
-      "updatedAt": "2026-11-02T11:15:11Z",
-      "latest": {
-        "version": "0.1.0",
-        "channel": "stable",
-        "publishedAt": "2026-11-02T11:16:11Z",
-        "fileName": "steamlink-0.1.0.zip",
-        "downloadUrl": "https://github.com/Aqamoe/FGB-SteamLinkModule/releases/download/v0.1.0/steamlink-0.1.0.zip",
-        "size": 148390,
-        "sha256": "9dec9a3c7cd59a622449205d4bfc6ee65767d345f124bf68983f6385703fa807",
-        "abiVersion": 2,
-        "downloads": 4,
-        "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-SteamLinkModule/commits/v0.1.0",
-        "releaseUrl": "https://github.com/Aqamoe/FGB-SteamLinkModule/releases/tag/v0.1.0"
-      },
-      "versions": [
-        {
-          "version": "0.1.0",
-          "channel": "stable",
-          "publishedAt": "2026-11-02T11:16:11Z",
-          "fileName": "steamlink-0.1.0.zip",
-          "downloadUrl": "https://github.com/Aqamoe/FGB-SteamLinkModule/releases/download/v0.1.0/steamlink-0.1.0.zip",
-          "size": 148390,
-          "sha256": "9dec9a3c7cd59a622449205d4bfc6ee65767d345f124bf68983f6385703fa807",
-          "abiVersion": 2,
-          "downloads": 4,
-          "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-SteamLinkModule/commits/v0.1.0",
-          "releaseUrl": "https://github.com/Aqamoe/FGB-SteamLinkModule/releases/tag/v0.1.0"
-        }
-      ],
-      "i18n": {
-        "en": {
-          "summary": "Steam Link eye and face tracking on Meta Quest, read straight from its OSC forwarder.",
-          "description": "Reads OSC forwarded by the local Steam Link PC client (UDP 9015, bound to 127.0.0.1 only). 56 /sl/xrfb/facew addresses map onto Unified Expressions; EyesClosedL/R plus LidTightener drive openness; /sl/eyeTrackedGazePoint turns out to be a **3-float 3D gaze point**, not a 2D screen point, so it is normalised into a -Z-forward ray and FGB_ATTR_POINT_VIEWPORT is never set. Valve documents none of this: the fields are reverse-engineered, and 'splitting' arrives as several independently parseable bundles reassembled per address.",
-          "usage": "1. In Steam Link enable eye/face tracking and allow the VRCFT data format. 2. Quit VRCFaceTracking (same port). 3. Enable the module; give gaze to the render channel and eyes to the avatar. 4. Untested: the gaze point's absolute frame and units, the facew value range, facec semantics and the Tongue extension all need hardware verification."
         }
       }
     },
