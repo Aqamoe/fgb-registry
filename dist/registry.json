@@ -1,7 +1,7 @@
 {
   "$schema": "registry.schema.json",
   "schemaVersion": 2,
-  "generatedAt": "2026-11-03T19:36:14.645Z",
+  "generatedAt": "2026-11-04T19:52:24.940Z",
   "generator": "fgb-registry/2.0.0",
   "registry": {
     "title": "FaceGaze Bridge 模块库",
@@ -50,7 +50,7 @@
       "verified": true,
       "archived": false,
       "stats": {
-        "downloads": 4,
+        "downloads": 5,
         "stars": 0
       },
       "publishedAt": "2026-10-31T08:56:27Z",
@@ -64,7 +64,7 @@
         "size": 99102,
         "sha256": "19fd484800ee75cd12d58c0ebbcfd5d254e448b67cacf1059b9385544bed80f0",
         "abiVersion": 2,
-        "downloads": 4,
+        "downloads": 5,
         "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-PicoFaceModule/compare/v0.1.0...v0.2.0",
         "releaseUrl": "https://github.com/Aqamoe/FGB-PicoFaceModule/releases/tag/v0.2.0"
       },
@@ -78,7 +78,7 @@
           "size": 99102,
           "sha256": "19fd484800ee75cd12d58c0ebbcfd5d254e448b67cacf1059b9385544bed80f0",
           "abiVersion": 2,
-          "downloads": 4,
+          "downloads": 5,
           "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-PicoFaceModule/compare/v0.1.0...v0.2.0",
           "releaseUrl": "https://github.com/Aqamoe/FGB-PicoFaceModule/releases/tag/v0.2.0"
         },
