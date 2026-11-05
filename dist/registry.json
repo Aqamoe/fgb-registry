@@ -1,7 +1,7 @@
 {
   "$schema": "registry.schema.json",
   "schemaVersion": 2,
-  "generatedAt": "2026-11-04T19:52:24.940Z",
+  "generatedAt": "2026-11-05T15:44:40.829Z",
   "generator": "fgb-registry/2.0.0",
   "registry": {
     "title": "FaceGaze Bridge 模块库",
@@ -153,21 +153,34 @@
         "stars": 0
       },
       "publishedAt": "2026-11-02T11:16:11Z",
-      "updatedAt": "2026-11-02T11:15:11Z",
+      "updatedAt": "2026-11-05T15:40:59Z",
       "latest": {
-        "version": "0.1.0",
+        "version": "0.1.1",
         "channel": "stable",
-        "publishedAt": "2026-11-02T11:16:11Z",
-        "fileName": "steamlink-0.1.0.zip",
-        "downloadUrl": "https://github.com/Aqamoe/FGB-SteamLinkModule/releases/download/v0.1.0/steamlink-0.1.0.zip",
-        "size": 148390,
-        "sha256": "9dec9a3c7cd59a622449205d4bfc6ee65767d345f124bf68983f6385703fa807",
+        "publishedAt": "2026-11-05T15:42:15Z",
+        "fileName": "steamlink-0.1.1.zip",
+        "downloadUrl": "https://github.com/Aqamoe/FGB-SteamLinkModule/releases/download/v0.1.1/steamlink-0.1.1.zip",
+        "size": 148545,
+        "sha256": "fc3ad1016a80d87d877d20b8d5d8677e40675553626a2b3aa7ba25e05b63e4d8",
         "abiVersion": 2,
-        "downloads": 5,
-        "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-SteamLinkModule/commits/v0.1.0",
-        "releaseUrl": "https://github.com/Aqamoe/FGB-SteamLinkModule/releases/tag/v0.1.0"
+        "downloads": 0,
+        "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-SteamLinkModule/compare/v0.1.0...v0.1.1",
+        "releaseUrl": "https://github.com/Aqamoe/FGB-SteamLinkModule/releases/tag/v0.1.1"
       },
       "versions": [
+        {
+          "version": "0.1.1",
+          "channel": "stable",
+          "publishedAt": "2026-11-05T15:42:15Z",
+          "fileName": "steamlink-0.1.1.zip",
+          "downloadUrl": "https://github.com/Aqamoe/FGB-SteamLinkModule/releases/download/v0.1.1/steamlink-0.1.1.zip",
+          "size": 148545,
+          "sha256": "fc3ad1016a80d87d877d20b8d5d8677e40675553626a2b3aa7ba25e05b63e4d8",
+          "abiVersion": 2,
+          "downloads": 0,
+          "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-SteamLinkModule/compare/v0.1.0...v0.1.1",
+          "releaseUrl": "https://github.com/Aqamoe/FGB-SteamLinkModule/releases/tag/v0.1.1"
+        },
         {
           "version": "0.1.0",
           "channel": "stable",
