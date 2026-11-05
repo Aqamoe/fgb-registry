@@ -1,7 +1,7 @@
 {
   "$schema": "registry.schema.json",
   "schemaVersion": 2,
-  "generatedAt": "2026-11-05T15:44:40.829Z",
+  "generatedAt": "2026-11-05T20:05:07.364Z",
   "generator": "fgb-registry/2.0.0",
   "registry": {
     "title": "FaceGaze Bridge 模块库",
@@ -149,7 +149,7 @@
       "verified": false,
       "archived": false,
       "stats": {
-        "downloads": 5,
+        "downloads": 8,
         "stars": 0
       },
       "publishedAt": "2026-11-02T11:16:11Z",
@@ -163,7 +163,7 @@
         "size": 148545,
         "sha256": "fc3ad1016a80d87d877d20b8d5d8677e40675553626a2b3aa7ba25e05b63e4d8",
         "abiVersion": 2,
-        "downloads": 0,
+        "downloads": 3,
         "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-SteamLinkModule/compare/v0.1.0...v0.1.1",
         "releaseUrl": "https://github.com/Aqamoe/FGB-SteamLinkModule/releases/tag/v0.1.1"
       },
@@ -177,7 +177,7 @@
           "size": 148545,
           "sha256": "fc3ad1016a80d87d877d20b8d5d8677e40675553626a2b3aa7ba25e05b63e4d8",
           "abiVersion": 2,
-          "downloads": 0,
+          "downloads": 3,
           "notes": "**Full Changelog**: https://github.com/Aqamoe/FGB-SteamLinkModule/compare/v0.1.0...v0.1.1",
           "releaseUrl": "https://github.com/Aqamoe/FGB-SteamLinkModule/releases/tag/v0.1.1"
         },
